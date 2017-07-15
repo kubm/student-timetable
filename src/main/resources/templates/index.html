@@ -1,18 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html"/>
     <title>Student Timetable</title>
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen" />
 
-    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
-            th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
-    <script src="http://cdn.jsdelivr.net/webjars/tether/1.4.0/js/tether.min.js"
-            th:src="@{/webjars/tether/1.4.0/js/tether.min.js}"></script>
-    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js"
-            th:src="@{/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js}"></script>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
 </head>
 <body>
 <div class="container">
@@ -21,6 +12,83 @@
         <h1>Hello</h1>
 
         <h2>Student!</h2>
+    </div>
+    <div th:if="${not #lists.isEmpty(przedmioty)}">
+        <h2>Lista przedmiotów</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nazwa</th>
+                    <th>Kolor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="przedmiot : ${przedmioty}" >
+                    <th scope="row" th:text="${przedmiot.id}">Id</th>
+                    <td th:text="${przedmiot.nazwa}">Nazwa</td>
+                    <td th:text="${przedmiot.kolor}">Kolor</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${not #lists.isEmpty(zajecia)}">
+        <h2>Lista zajec</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Typ Zajec</th>
+                    <th>Dzień tyg.</th>
+                    <th>Przedmiot</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="zajecia : ${zajecia}">
+                    <th scope="row" th:text="${zajecia.id}">Id</th>
+                    <td th:text="${zajecia.typZajec.nazwa}">Typ Zajec</td>
+                    <td th:text="${zajecia.dzien_tygodnia}">Dzień tygodnia</td>
+                    <td th:text="${zajecia.przedmiot.nazwa}">Przedmiot</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${not #lists.isEmpty(typyZajec)}">
+        <h2>Lista typów zajęć</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nazwa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="typZajec : ${typyZajec}">
+                    <th scope="row" th:text="${typZajec.id}">Id</th>
+                    <td th:text="${typZajec.nazwa}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${not #lists.isEmpty(przedmioty)}">
+        <div th:each="przedmiot : ${przedmioty}">
+            <h2 th:text="${przedmiot.nazwa}">Nazwa Przedmiotu</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Rodzaj Zajec</th>
+                    <th>Dzien tygodnia</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="zajecia : ${przedmiot.zajecia}">
+                    <th scope="row" th:text="${zajecia.typZajec.nazwa}">Typ Zajec</th>
+                    <td th:text="${zajecia.dzien_tygodnia}">Dzień tygodnia</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 </body>

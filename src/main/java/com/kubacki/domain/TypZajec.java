@@ -4,18 +4,18 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * Created by KUBACM on 2017-07-15.
+ * Created by KUBACM on 2017-07-16.
  */
 @Entity
-public class Przedmiot implements DomainObject{
+public class TypZajec implements DomainObject{
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String nazwa;
-    private String kolor;
 
-    @OneToMany(mappedBy = "przedmiot")
+    @OneToMany(mappedBy = "typZajec")
     Set<Zajecia> zajecia;
 
     @Override
@@ -36,23 +36,14 @@ public class Przedmiot implements DomainObject{
         this.nazwa = nazwa;
     }
 
-    public String getKolor() {
-        return kolor;
-    }
-
-    public void setKolor(String kolor) {
-        this.kolor = kolor;
-    }
-
-    public Set<Zajecia> getZajecia() {
+    public Set<Zajecia> getZajecia(){
         return zajecia;
     }
 
-
     public void addZajecia(Zajecia zajecia){
         this.zajecia.add(zajecia);
-        if(zajecia.getPrzedmiot() != this){
-            zajecia.setPrzedmiot(this);
+        if(zajecia.getTypZajec() != this){
+            zajecia.setTypZajec(this);
         }
     }
 }
