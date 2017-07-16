@@ -7,7 +7,7 @@ import java.util.Set;
  * Created by KUBACM on 2017-07-16.
  */
 @Entity
-public class TypZajec implements DomainObject{
+public class LessonType implements DomainObject{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,8 +15,10 @@ public class TypZajec implements DomainObject{
 
     private String nazwa;
 
-    @OneToMany(mappedBy = "typZajec")
-    Set<Zajecia> zajecia;
+    @OneToMany(mappedBy = "lessonType")
+    private Set<Lesson> lesson;
+
+    //-------------- Getters & Setters ---------------------------//
 
     @Override
     public Integer getId() {
@@ -36,14 +38,14 @@ public class TypZajec implements DomainObject{
         this.nazwa = nazwa;
     }
 
-    public Set<Zajecia> getZajecia(){
-        return zajecia;
+    public Set<Lesson> getLesson(){
+        return lesson;
     }
 
-    public void addZajecia(Zajecia zajecia){
-        this.zajecia.add(zajecia);
-        if(zajecia.getTypZajec() != this){
-            zajecia.setTypZajec(this);
+    public void addLesson(Lesson lesson){
+        this.lesson.add(lesson);
+        if(lesson.getLessonType() != this){
+            lesson.setLessonType(this);
         }
     }
 }

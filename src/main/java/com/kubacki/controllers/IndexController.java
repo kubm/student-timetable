@@ -1,11 +1,7 @@
 package com.kubacki.controllers;
 
-import com.kubacki.domain.Przedmiot;
-import com.kubacki.domain.TypZajec;
-import com.kubacki.domain.Zajecia;
-import com.kubacki.services.PrzedmiotService;
-import com.kubacki.services.TypZajecService;
-import com.kubacki.services.ZajeciaService;
+import com.kubacki.domain.*;
+import com.kubacki.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,46 +15,78 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class IndexController {
 
 
-    private PrzedmiotService przedmiotService;
-    private ZajeciaService zajeciaService;
-    private TypZajecService typZajecService;
+    private SubjectService subjectService;
+    private LessonService lessonService;
+    private LessonTypeService lessonTypeService;
+    private HomeworkService homeworkService;
+    private NoteService noteService;
+    private TeacherService teacherService;
 
     @Autowired
-    public void setPrzedmiotService(PrzedmiotService przedmiotService){
-        this.przedmiotService = przedmiotService;
+    public void setSubjectService(SubjectService subjectService){
+        this.subjectService = subjectService;
     }
 
     @Autowired
-    public void setZajeciaService(ZajeciaService zajeciaService){
-        this.zajeciaService = zajeciaService;
+    public void setLessonService(LessonService lessonService){
+        this.lessonService = lessonService;
     }
 
     @Autowired
-    public void setTypZajecService(TypZajecService typZajecService){
-        this.typZajecService = typZajecService;
+    public void setLessonTypeService(LessonTypeService lessonTypeService){
+        this.lessonTypeService = lessonTypeService;
+    }
+
+    @Autowired
+    public void setHomeworkService(HomeworkService homeworkService){
+        this.homeworkService = homeworkService;
+    }
+
+    @Autowired
+    public void setNoteService(NoteService noteService){
+        this.noteService = noteService;
+    }
+
+    @Autowired
+    public void setTeacherService(TeacherService teacherService){
+        this.teacherService = teacherService;
     }
 
     @RequestMapping("/")
-    String index(Model model)
+    public String index(Model model)
     {
-        model.addAttribute("przedmioty", przedmiotService.listAll());
-        model.addAttribute("zajecia", zajeciaService.listAll());
-        model.addAttribute("typyZajec", typZajecService.listAll());
+        model.addAttribute("subjects", subjectService.listAll());
+        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        model.addAttribute("homeworks", homeworkService.listAll());
+        model.addAttribute("notes", noteService.listAll());
+        model.addAttribute("teachers", teacherService.listAll());
         return "index";
     }
 
-    @RequestMapping(value = "przedmiot", method = RequestMethod.POST)
-    public String savePrzedmiot(Przedmiot przedmiot){
-        przedmiotService.saveOrUpdate(przedmiot);
+    @RequestMapping(value = "subject", method = RequestMethod.POST)
+    public String saveSubject(Subject subject){
+        subjectService.saveOrUpdate(subject);
         return "redirect:/";
     }
 
-    @RequestMapping(value = "zajecia", method = RequestMethod.POST)
-    public String saveZajecia(Zajecia zajecia){
-        zajeciaService.saveOrUpdate(zajecia);
+    @RequestMapping(value = "lesson", method = RequestMethod.POST)
+    public String saveLesson(Lesson lesson){
+        lessonService.saveOrUpdate(lesson);
         return "redirect:/";
     }
 
+    @RequestMapping(value = "homework", method = RequestMethod.POST)
+    public String saveHomework(Homework homework){
+        homeworkService.saveOrUpdate(homework);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "note", method = RequestMethod.POST)
+    public String saveNote(Note note){
+        noteService.saveOrUpdate(note);
+        return "redirect:/";
+    }
 
 
 

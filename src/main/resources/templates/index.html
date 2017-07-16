@@ -24,15 +24,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="przedmiot : ${przedmioty}" >
-                    <th scope="row" th:text="${przedmiot.id}">Id</th>
-                    <td th:text="${przedmiot.nazwa}">Nazwa</td>
-                    <td th:text="${przedmiot.kolor}">Kolor</td>
+                <tr th:each="subject : ${przedmioty}" >
+                    <th scope="row" th:text="${subject.id}">Id</th>
+                    <td th:text="${subject.name}">Nazwa</td>
+                    <td th:text="${subject.colour}">Kolor</td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <div th:if="${not #lists.isEmpty(zajecia)}">
+    <div th:if="${not #lists.isEmpty(lesson)}">
         <h2>Lista zajec</h2>
         <table class="table">
             <thead>
@@ -44,11 +44,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="zajecia : ${zajecia}">
-                    <th scope="row" th:text="${zajecia.id}">Id</th>
-                    <td th:text="${zajecia.typZajec.nazwa}">Typ Zajec</td>
-                    <td th:text="${zajecia.dzien_tygodnia}">Dzień tygodnia</td>
-                    <td th:text="${zajecia.przedmiot.nazwa}">Przedmiot</td>
+                <tr th:each="lesson : ${lesson}">
+                    <th scope="row" th:text="${lesson.id}">Id</th>
+                    <td th:text="${lesson.lessonType.name}">Typ Zajec</td>
+                    <td th:text="${lesson.dzien_tygodnia}">Dzień tygodnia</td>
+                    <td th:text="${lesson.subject.name}">Przedmiot</td>
                 </tr>
             </tbody>
         </table>
@@ -63,16 +63,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="typZajec : ${typyZajec}">
-                    <th scope="row" th:text="${typZajec.id}">Id</th>
-                    <td th:text="${typZajec.nazwa}"></td>
+                <tr th:each="lessonType : ${typyZajec}">
+                    <th scope="row" th:text="${lessonType.id}">Id</th>
+                    <td th:text="${lessonType.name}"></td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div th:if="${not #lists.isEmpty(przedmioty)}">
-        <div th:each="przedmiot : ${przedmioty}">
-            <h2 th:text="${przedmiot.nazwa}">Nazwa Przedmiotu</h2>
+        <div th:each="subject : ${przedmioty}">
+            <h2 th:text="${subject.name}">Nazwa Przedmiotu</h2>
             <table class="table">
                 <thead>
                 <tr>
@@ -82,9 +82,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="zajecia : ${przedmiot.zajecia}">
-                    <th scope="row" th:text="${zajecia.typZajec.nazwa}">Typ Zajec</th>
-                    <td th:text="${zajecia.dzien_tygodnia}">Dzień tygodnia</td>
+                <tr th:each="lesson : ${subject.lesson}">
+                    <th scope="row" th:text="${lesson.lessonType.name}">Typ Zajec</th>
+                    <td th:text="${lesson.dzien_tygodnia}">Dzień tygodnia</td>
                 </tr>
                 </tbody>
             </table>

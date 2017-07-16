@@ -1,11 +1,12 @@
 package com.kubacki.loaders;
 
-import com.kubacki.domain.Przedmiot;
-import com.kubacki.domain.TypZajec;
-import com.kubacki.domain.Zajecia;
-import com.kubacki.repositories.PrzedmiotRepository;
-import com.kubacki.repositories.TypZajecRepository;
-import com.kubacki.repositories.ZajeciaRepository;
+import com.kubacki.domain.Lesson;
+import com.kubacki.domain.LessonType;
+import com.kubacki.domain.Subject;
+import com.kubacki.repositories.HomeworkRepository;
+import com.kubacki.repositories.SubjectRepository;
+import com.kubacki.repositories.LessonTypeRepository;
+import com.kubacki.repositories.LessonRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -18,63 +19,69 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
-    private ZajeciaRepository zajeciaRepository;
-    private PrzedmiotRepository przedmiotRepository;
-    private TypZajecRepository typZajecRepository;
+    private LessonRepository lessonRepository;
+    private SubjectRepository subjectRepository;
+    private LessonTypeRepository lessonTypeRepository;
+    private HomeworkRepository homeworkRepository;
 
     private Logger log = Logger.getLogger(DataLoader.class);
 
     @Autowired
-    public void setZajeciaRepository(ZajeciaRepository zajeciaRepository){
-        this.zajeciaRepository = zajeciaRepository;
+    public void setLessonRepository(LessonRepository lessonRepository){
+        this.lessonRepository = lessonRepository;
     }
 
     @Autowired
-    public void setPrzedmiotRepository(PrzedmiotRepository przedmiotRepository){
-        this.przedmiotRepository = przedmiotRepository;
+    public void setSubjectRepository(SubjectRepository subjectRepository){
+        this.subjectRepository = subjectRepository;
     }
 
     @Autowired
-    public void setTypZajecRepository(TypZajecRepository typZajecRepository){
-        this.typZajecRepository = typZajecRepository;
+    public void setLessonTypeRepository(LessonTypeRepository lessonTypeRepository){
+        this.lessonTypeRepository = lessonTypeRepository;
+    }
+
+    @Autowired
+    public void setHomeworkRepository(HomeworkRepository homeworkRepository) {
+        this.homeworkRepository = homeworkRepository;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
-        TypZajec lectures = new TypZajec();
+        LessonType lectures = new LessonType();
         lectures.setNazwa("wykłady");
-        typZajecRepository.save(lectures);
+        lessonTypeRepository.save(lectures);
         log.info("Saved lectures");
 
-        TypZajec cwiczenia = new TypZajec();
+        LessonType cwiczenia = new LessonType();
         cwiczenia.setNazwa("ćwiczenia");
-        typZajecRepository.save(cwiczenia);
+        lessonTypeRepository.save(cwiczenia);
         log.info("Saved cwiczenia");
 
-        TypZajec labs = new TypZajec();
+        LessonType labs = new LessonType();
         labs.setNazwa("laboratoria");
-        typZajecRepository.save(labs);
+        lessonTypeRepository.save(labs);
         log.info("Saved labs");
 
 
-        Przedmiot analiza = new Przedmiot();
-        analiza.setNazwa("Analiza Matematyczna");
-        analiza.setKolor("pommegranate");
-        przedmiotRepository.save(analiza);
+        Subject analiza = new Subject();
+        analiza.setName("Analiza Matematyczna");
+        analiza.setColour("pommegranate");
+        subjectRepository.save(analiza);
         log.info("Saved Analiza Matematyczna");
 
-        Zajecia cwiczenia_a = new Zajecia();
-        cwiczenia_a.setPrzedmiot(analiza);
+        Lesson cwiczenia_a = new Lesson();
+        cwiczenia_a.setSubject(analiza);
         cwiczenia_a.setDzien_tygodnia("Wtorek");
-        cwiczenia_a.setTypZajec(cwiczenia);
-        zajeciaRepository.save(cwiczenia_a);
+        cwiczenia_a.setLessonType(cwiczenia);
+        lessonRepository.save(cwiczenia_a);
         log.info("Saved cwiczenia");
 
-        Zajecia wyklad_a = new Zajecia();
-        wyklad_a.setPrzedmiot(analiza);
+        Lesson wyklad_a = new Lesson();
+        wyklad_a.setSubject(analiza);
         wyklad_a.setDzien_tygodnia("Poniedziałek");
-        wyklad_a.setTypZajec(lectures);
-        zajeciaRepository.save(wyklad_a);
+        wyklad_a.setLessonType(lectures);
+        lessonRepository.save(wyklad_a);
         log.info("Saved wyklad");
     }
 }
