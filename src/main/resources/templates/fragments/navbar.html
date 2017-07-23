@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Type" content="text/html"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+
+    <!-- Bootstrap CSS -->
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen" />
+    <link href="../../static/css/colors.css"
+          th:href="@{css/colors.css}" rel="stylesheet"/>
+    <link href="../../static/css/dashboard.css"
+          th:href="@{css/dashboard.css}" rel="stylesheet"/>
+    <link href="../../static/css/font-awesome.min.css"
+          th:href="@{css/font-awesome.min.css}" rel="stylesheet" type="text/css"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
+            th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/tether/1.4.0/js/tether.min.js"
+            th:src="@{/webjars/tether/1.4.0/js/tether.min.js}"></script>
+    <script src="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js}"></script>
+</head>
+<body th:fragment="nav">
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" >
+        <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand text-muted" href="#">Student timetable</a>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <!--<li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Settings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+              </li>-->
+            </ul>
+
+            <div class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profil
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Ustawienia</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Wyloguj</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</body>
+</html>

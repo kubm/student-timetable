@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
+<head>
     <meta charset="UTF-8" http-equiv="Content-Type" content="text/html"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -24,6 +24,27 @@
             th:src="@{/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-
+<!-- Sidebar -->
+<div class="row" th:fragment="sidebar">
+    <nav class="col-sm-3 col-md-2 hidden-xs-down sidebar">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html" th:href="@{/}" th:classappend="|${#httpServletRequest.requestURI=='/'? 'active': ''} ${#httpServletRequest.requestURI!='/'? 'text-muted' : ''}|"><i class="fa fa-dashboard fa-fw"></i> Widok główny</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" th:href="@{/subjects}" th:classappend="|${#httpServletRequest.requestURI=='/subjects'? 'active': ''} ${#httpServletRequest.requestURI!='/subjects'? 'text-muted' : ''}|"><i class="fa fa-book fa-fw"></i><span class="sr-only"></span> Przedmioty</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-muted" href="#"><i class="fa fa-calendar-check-o fa-fw"></i> Zaliczenia</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-muted" href="#"><i class="fa fa-calendar fa-fw"></i> Kalendarz</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-muted" href="#"><i class="fa fa-map-marker fa-fw"></i> Sale</a>
+            </li>
+        </ul>
+    </nav>
+</div>
 </body>
 </html>

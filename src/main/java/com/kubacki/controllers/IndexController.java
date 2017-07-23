@@ -52,6 +52,12 @@ public class IndexController {
         this.teacherService = teacherService;
     }
 
+    @RequestMapping("/subjects")
+    public String subjects(Model model){
+
+        return "subjects";
+    }
+
     @RequestMapping("/")
     public String index(Model model)
     {
