@@ -54,7 +54,9 @@ public class IndexController {
 
     @RequestMapping("/subjects")
     public String subjects(Model model){
-
+        model.addAttribute("subjects", subjectService.listAll());
+        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("lessonTypes", lessonTypeService.listAll());
         return "subjects";
     }
 

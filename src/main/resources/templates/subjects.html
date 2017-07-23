@@ -7,7 +7,34 @@
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
-
+    <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" th:with="colnum=0" >
+        <h1><i class="fa fa-book fa-fw"></i> Wszystkie przedmioty</h1>
+        <div class="row">
+            <div class="col-lg-6 col-md-12" th:each="subject : ${subjects}">
+                <div class="card" th:classappend="'card-outline-'+${subject.colour}">
+                    <div class="card-block text-white" th:classappend="'card-'+${subject.colour}">
+                        <span class="h4" th:text="${subject.name}"></span>
+                        <span class="float-right">
+                            <a href="#"><i class="fa fa-pencil text-white" aria-hidden="true"></i> </a>
+                            <i>&nbsp;</i>
+                            <a href="#"><i class="fa fa-trash-o text-white" aria-hidden="true"></i> </a>
+                        </span>
+                    </div>
+                    <ul class="list-group list-group-flush" th:classappend="'text-'+${subject.colour}">
+                        <li class="list-group-item justify-content-between" th:each="lesson : ${subject.lessons}">
+                            <th:block th:text="${subject.name}+' - '"></th:block>
+                            <span class="float-right">
+                                <a href="#"><i class="fa fa-pencil" th:classappend="'text-'+${subject.colour}" aria-hidden="true"></i> </a>
+                                <i>&nbsp;</i>
+                                <a href="#"><i class="fa fa-trash-o" th:classappend="'text-'+${subject.colour}" aria-hidden="true"></i> </a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h1 th:text="${colnum}"></h1>
+    </main>
 </div>
 </body>
 </html>
