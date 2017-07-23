@@ -5,8 +5,10 @@ import com.kubacki.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 /**
  * Created by KUBACM on 2017-07-15.
@@ -52,11 +54,14 @@ public class IndexController {
         this.teacherService = teacherService;
     }
 
+
     @RequestMapping("/subjects")
     public String subjects(Model model){
         model.addAttribute("subjects", subjectService.listAll());
         model.addAttribute("lessons", lessonService.listAll());
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        model.addAttribute("teachers", teacherService.listAll());
+        model.addAttribute("lesson", new Lesson());
         return "subjects";
     }
 
@@ -81,7 +86,7 @@ public class IndexController {
     @RequestMapping(value = "lesson", method = RequestMethod.POST)
     public String saveLesson(Lesson lesson){
         lessonService.saveOrUpdate(lesson);
-        return "redirect:/";
+        return "redirect:/subjects";
     }
 
     @RequestMapping(value = "homework", method = RequestMethod.POST)
@@ -96,6 +101,10 @@ public class IndexController {
         return "redirect:/";
     }
 
-
+    @RequestMapping("lesson/delete/{id}")
+    public String deleteLesson(@PathVariable Integer id){
+        lessonService.delete(id);
+        return "redirect:/subjects";
+    }
 
 }
