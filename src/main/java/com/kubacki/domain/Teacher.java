@@ -1,5 +1,7 @@
 package com.kubacki.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class Teacher implements DomainObject{
     private String phone;
 
     @OneToMany(mappedBy = "teacher")
+    @JsonManagedReference
     private Set<Lesson> lessons;
 
     //-------------- Getters & Setters ---------------------------//

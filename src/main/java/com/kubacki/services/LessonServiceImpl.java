@@ -17,6 +17,7 @@ public class LessonServiceImpl implements LessonService {
 
     private LessonRepository lessonRepository;
 
+
     @Autowired
     public void setLessonRepository(LessonRepository lessonRepository){
         this.lessonRepository = lessonRepository;
@@ -51,5 +52,6 @@ public class LessonServiceImpl implements LessonService {
     public Iterable<Lesson> listAll(){
         return lessonRepository.findAll();
     }
+
 
 }

@@ -18,7 +18,7 @@
                             <span class="float-right">
                             <a href="#"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
                             <i>&nbsp;</i>
-                            <a href="#"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
+                            <a href="#" th:href="${'/subject/delete/'+subject.id}"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
                         </span>
                         </div>
                         <ul class="list-group list-group-flush" th:classappend="'text-'+${subject.colour}">
@@ -67,6 +67,16 @@
                                             th:value="${teacher.id}"
                                             th:text="${teacher.name}+' '+${teacher.surname}"></option>
                                 </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label th:attr="for='start_date_'+${subject.id}">Data rozpoczęcia</label>
+                                    <input class="form-control" type="date" th:attr="id='start_date_'+${subject.id}" th:field="*{start_date}"/>
+                                </div>
+                                <div class="col-6">
+                                    <label th:attr="for='start_time_'+${subject.id}">Godzina rozpoczęcia</label>
+                                    <input class="form-control" type="time" th:attr="id='start_time_'+${subject.id}" th:field="*{start_hour}"/>
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">

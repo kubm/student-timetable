@@ -2,9 +2,12 @@ package com.kubacki.domain;
 
 
 
-import groovy.util.Eval;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,66 +22,86 @@ public class Lesson implements DomainObject{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String dzien_tygodnia;
-
-    @Column(name = "START_DATE", columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date start_date;
-
-    @Column(name = "END_DATE", columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date end_date;
+    private String weekDay;
+    private String start_date;
+    private String end_date;
+    private String start_hour;
+    private String end_hour;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
+    @JsonBackReference
     private LessonType lessonType;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
+    @JsonBackReference
     private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
+    @JsonBackReference
     private Teacher teacher;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
+    @JsonBackReference
     private Room room;
 
     @OneToMany(mappedBy = "lesson")
+    @JsonManagedReference
     private Set<Homework> homeworks;
 
     @OneToMany(mappedBy = "lesson")
+    @JsonManagedReference
     private Set<Note> notes;
 
     @OneToMany(mappedBy = "lesson")
+    @JsonManagedReference
     private Set<Evaluation> evaluations;
 
 
 
     //-------------- Getters & Setters ---------------------------//
 
-    public String getDzien_tygodnia() {
-        return dzien_tygodnia;
+
+    public String getStart_hour() {
+        return start_hour;
     }
 
-    public void setDzien_tygodnia(String dzien_tygodnia) {
-        this.dzien_tygodnia = dzien_tygodnia;
+    public void setStart_hour(String start_hour) {
+        this.start_hour = start_hour;
     }
 
-    public Date getStart_date() {
+    public String getEnd_hour() {
+        return end_hour;
+    }
+
+    public void setEnd_hour(String end_hour) {
+        this.end_hour = end_hour;
+    }
+
+    public String getWeekDay() {
+        return weekDay;
+    }
+
+    public void setWeekDay(String weekDay) {
+        this.weekDay = weekDay;
+    }
+
+    public String getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(Date start_date) {
+    public void setStart_date(String start_date) {
         this.start_date = start_date;
     }
 
-    public Date getEnd_date() {
+    public String getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(Date end_date) {
+    public void setEnd_date(String end_date) {
         this.end_date = end_date;
     }
 

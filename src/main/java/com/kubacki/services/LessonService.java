@@ -1,6 +1,7 @@
 package com.kubacki.services;
 
 import com.kubacki.domain.Lesson;
+import com.kubacki.domain.LessonList;
 import com.kubacki.domain.Subject;
 import com.kubacki.domain.LessonType;
 

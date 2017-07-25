@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 
 /**
@@ -23,6 +26,12 @@ public class IndexController {
     private HomeworkService homeworkService;
     private NoteService noteService;
     private TeacherService teacherService;
+    private LessonPrinterService lessonPrinterService;
+
+    @Autowired
+    public void setLessonPrinterService(LessonPrinterService lessonPrinterService){
+        this.lessonPrinterService = lessonPrinterService;
+    }
 
     @Autowired
     public void setSubjectService(SubjectService subjectService){
@@ -62,7 +71,14 @@ public class IndexController {
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
         model.addAttribute("teachers", teacherService.listAll());
         model.addAttribute("lesson", new Lesson());
+
         return "subjects";
+    }
+
+    @RequestMapping(value="/lessonsJSON",method=RequestMethod.GET, produces = "application/json")
+    @ResponseBody
+    List<LessonList> lessonsList(){
+        return lessonPrinterService.findByQuery();
     }
 
     @RequestMapping("/")
@@ -104,6 +120,12 @@ public class IndexController {
     @RequestMapping("lesson/delete/{id}")
     public String deleteLesson(@PathVariable Integer id){
         lessonService.delete(id);
+        return "redirect:/subjects";
+    }
+
+    @RequestMapping("subject/delete/{id}")
+    public String deleteSubject(@PathVariable Integer id){
+        subjectService.delete(id);
         return "redirect:/subjects";
     }
 

@@ -169,7 +169,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson cwiczenia_a = new Lesson();
         cwiczenia_a.setSubject(analiza);
-        cwiczenia_a.setDzien_tygodnia("wtorek");
+        cwiczenia_a.setWeekDay("wtorek");
         cwiczenia_a.setLessonType(cwiczenia);
         cwiczenia_a.setTeacher(hkwiecien);
         lessonRepository.save(cwiczenia_a);
@@ -177,7 +177,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson wyklad_a = new Lesson();
         wyklad_a.setSubject(analiza);
-        wyklad_a.setDzien_tygodnia("poniedziałek");
+        wyklad_a.setWeekDay("poniedziałek");
         wyklad_a.setLessonType(lectures);
         wyklad_a.setTeacher(apietrzak);
         lessonRepository.save(wyklad_a);
@@ -185,7 +185,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson cwiczenia_alg = new Lesson();
         cwiczenia_alg.setSubject(algorytmy);
-        cwiczenia_alg.setDzien_tygodnia("poniedzialek");
+        cwiczenia_alg.setWeekDay("poniedzialek");
         cwiczenia_alg.setLessonType(cwiczenia);
         cwiczenia_alg.setTeacher(jkowalska);
         lessonRepository.save(cwiczenia_alg);
@@ -194,14 +194,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson wyklad_alg = new Lesson();
         wyklad_alg.setSubject(algorytmy);
         wyklad_alg.setLessonType(lectures);
-        wyklad_alg.setDzien_tygodnia("środa");
+        wyklad_alg.setWeekDay("środa");
         wyklad_alg.setTeacher(jstepien);
         lessonRepository.save(wyklad_alg);
         log.info("Saved Wykład Algorytmy");
 
         Lesson lab_fizyka = new Lesson();
         lab_fizyka.setLessonType(labs);
-        lab_fizyka.setDzien_tygodnia("czwartek");
+        lab_fizyka.setWeekDay("czwartek");
         lab_fizyka.setSubject(fizyka);
         lab_fizyka.setTeacher(mmarian);
         lessonRepository.save(lab_fizyka);
@@ -209,14 +209,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson wyklad_dysk = new Lesson();
         wyklad_dysk.setSubject(dyskretna);
-        wyklad_dysk.setDzien_tygodnia("środa");
+        wyklad_dysk.setWeekDay("środa");
         wyklad_dysk.setLessonType(lectures);
         wyklad_dysk.setTeacher(kwojcik);
         lessonRepository.save(wyklad_dysk);
         log.info("Saved Wykład Dysrketna");
 
         Lesson cwiczenia_dysk = new Lesson();
-        cwiczenia_dysk.setDzien_tygodnia("czwartek");
+        cwiczenia_dysk.setWeekDay("czwartek");
         cwiczenia_dysk.setSubject(dyskretna);
         cwiczenia_dysk.setLessonType(cwiczenia);
         cwiczenia_dysk.setTeacher(hkwiecien);
@@ -226,7 +226,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson wyklad_bhp = new Lesson();
         wyklad_bhp.setLessonType(lectures);
         wyklad_bhp.setSubject(bhp);
-        wyklad_bhp.setDzien_tygodnia("piątek");
+        wyklad_bhp.setWeekDay("piątek");
         wyklad_bhp.setTeacher(pnowak);
         lessonRepository.save(wyklad_bhp);
         log.info("Saved Wyklad BHP");
