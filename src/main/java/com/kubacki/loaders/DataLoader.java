@@ -8,11 +8,17 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by KUBACM on 2017-07-15.
  */
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
+
+    DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     private LessonRepository lessonRepository;
     private SubjectRepository subjectRepository;
@@ -169,23 +175,47 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson cwiczenia_a = new Lesson();
         cwiczenia_a.setSubject(analiza);
-        cwiczenia_a.setWeekDay("wtorek");
+        try {
+            cwiczenia_a.setStart_date(format.parse("2017-01-03"));
+            cwiczenia_a.setEnd_date(format.parse("2017-06-20"));
+            //cwiczenia_a.setMyWeekDay(format.parse("2017-01-03"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cwiczenia_a.setStart_hour("08:15");
+        cwiczenia_a.setEnd_hour("09:45");
         cwiczenia_a.setLessonType(cwiczenia);
         cwiczenia_a.setTeacher(hkwiecien);
         lessonRepository.save(cwiczenia_a);
-        log.info("Saved cwiczenia");
+        log.info("Saved cwiczenia analiza");
 
         Lesson wyklad_a = new Lesson();
         wyklad_a.setSubject(analiza);
-        wyklad_a.setWeekDay("poniedziałek");
+        try {
+            wyklad_a.setStart_date(format.parse("2017-01-02"));
+            wyklad_a.setEnd_date(format.parse("2017-06-19"));
+            //wyklad_a.setMyWeekDay(format.parse("2017-01-02"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        wyklad_a.setStart_hour("09:15");
+        wyklad_a.setEnd_hour("10:45");
         wyklad_a.setLessonType(lectures);
         wyklad_a.setTeacher(apietrzak);
         lessonRepository.save(wyklad_a);
-        log.info("Saved wyklad");
+        log.info("Saved wyklad analiza");
 
         Lesson cwiczenia_alg = new Lesson();
         cwiczenia_alg.setSubject(algorytmy);
-        cwiczenia_alg.setWeekDay("poniedzialek");
+        try {
+            cwiczenia_alg.setStart_date(format.parse("2017-01-04"));
+            cwiczenia_alg.setEnd_date(format.parse("2017-06-21"));
+            //cwiczenia_alg.setMyWeekDay(format.parse("2017-01-04"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        cwiczenia_alg.setStart_hour("08:15");
+        cwiczenia_alg.setEnd_hour("09:45");
         cwiczenia_alg.setLessonType(cwiczenia);
         cwiczenia_alg.setTeacher(jkowalska);
         lessonRepository.save(cwiczenia_alg);
@@ -194,14 +224,30 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson wyklad_alg = new Lesson();
         wyklad_alg.setSubject(algorytmy);
         wyklad_alg.setLessonType(lectures);
-        wyklad_alg.setWeekDay("środa");
+        try{
+            wyklad_alg.setStart_date(format.parse("2017-01-05"));
+            wyklad_alg.setEnd_date(format.parse("2017-06-22"));
+           //wyklad_alg.setMyWeekDay(format.parse("2017-01-05"));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        wyklad_alg.setStart_hour("12:15");
+        wyklad_alg.setEnd_hour("13:45");
         wyklad_alg.setTeacher(jstepien);
         lessonRepository.save(wyklad_alg);
         log.info("Saved Wykład Algorytmy");
 
         Lesson lab_fizyka = new Lesson();
         lab_fizyka.setLessonType(labs);
-        lab_fizyka.setWeekDay("czwartek");
+        try{
+            lab_fizyka.setStart_date(format.parse("2017-01-05"));
+            lab_fizyka.setEnd_date(format.parse("2017-06-22"));
+            //lab_fizyka.setMyWeekDay(format.parse("2017-01-05"));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        lab_fizyka.setStart_hour("08:15");
+        lab_fizyka.setEnd_hour("09:45");
         lab_fizyka.setSubject(fizyka);
         lab_fizyka.setTeacher(mmarian);
         lessonRepository.save(lab_fizyka);
@@ -209,14 +255,30 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson wyklad_dysk = new Lesson();
         wyklad_dysk.setSubject(dyskretna);
-        wyklad_dysk.setWeekDay("środa");
+        try{
+            wyklad_dysk.setStart_date(format.parse("2017-01-04"));
+            wyklad_dysk.setEnd_date(format.parse("2017-06-21"));
+            //wyklad_dysk.setMyWeekDay(format.parse("2017-01-04"));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        wyklad_dysk.setStart_hour("09:15");
+        wyklad_dysk.setEnd_hour("10:45");
         wyklad_dysk.setLessonType(lectures);
         wyklad_dysk.setTeacher(kwojcik);
         lessonRepository.save(wyklad_dysk);
         log.info("Saved Wykład Dysrketna");
 
         Lesson cwiczenia_dysk = new Lesson();
-        cwiczenia_dysk.setWeekDay("czwartek");
+        try{
+            cwiczenia_dysk.setStart_date(format.parse("2017-01-05"));
+            cwiczenia_dysk.setEnd_date(format.parse("2017-06-22"));
+            //cwiczenia_dysk.setMyWeekDay(format.parse("2017-01-05"));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        cwiczenia_dysk.setStart_hour("14:15");
+        cwiczenia_dysk.setEnd_hour("15:45");
         cwiczenia_dysk.setSubject(dyskretna);
         cwiczenia_dysk.setLessonType(cwiczenia);
         cwiczenia_dysk.setTeacher(hkwiecien);
@@ -226,7 +288,15 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson wyklad_bhp = new Lesson();
         wyklad_bhp.setLessonType(lectures);
         wyklad_bhp.setSubject(bhp);
-        wyklad_bhp.setWeekDay("piątek");
+        try{
+            wyklad_bhp.setStart_date(format.parse("2017-01-06"));
+            wyklad_bhp.setEnd_date(format.parse("2017-06-23"));
+            //wyklad_bhp.setMyWeekDay(format.parse("2017-01-06"));
+        } catch (ParseException e){
+            e.printStackTrace();
+        }
+        wyklad_bhp.setStart_hour("08:15");
+        wyklad_bhp.setEnd_hour("09:45");
         wyklad_bhp.setTeacher(pnowak);
         lessonRepository.save(wyklad_bhp);
         log.info("Saved Wyklad BHP");

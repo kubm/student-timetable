@@ -22,4 +22,5 @@ public class LessonPrinterServiceImpl implements LessonPrinterService{
     public List<LessonList> findByQuery(){
         return lessonPrinterRepository.findLessonsQuery();
     }
+
 }

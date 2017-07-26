@@ -4,10 +4,13 @@ package com.kubacki.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.Formula;
+import org.springframework.data.annotation.Persistent;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
@@ -22,9 +25,21 @@ public class Lesson implements DomainObject{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String weekDay;
-    private String start_date;
-    private String end_date;
+    @Column(name = "weekday")
+    //@Formula("(select dayofweek(l.start_date) from Lesson l where l.id = id)")
+    //@Persistent
+    private Integer weekDay;
+
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date start_date;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date end_date;
+
+
     private String start_hour;
     private String end_hour;
 
@@ -64,6 +79,11 @@ public class Lesson implements DomainObject{
 
     //-------------- Getters & Setters ---------------------------//
 
+    public void calculateDayOfWeek(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(start_date);
+        this.weekDay = c.get(Calendar.DAY_OF_WEEK);
+    }
 
     public String getStart_hour() {
         return start_hour;
@@ -81,27 +101,42 @@ public class Lesson implements DomainObject{
         this.end_hour = end_hour;
     }
 
-    public String getWeekDay() {
+    public Integer getWeekDay() {
         return weekDay;
     }
 
-    public void setWeekDay(String weekDay) {
+    public void setWeekDay(Integer weekDay){
         this.weekDay = weekDay;
     }
 
-    public String getStart_date() {
+    public void setWeekDay(Date start_date) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(start_date);
+        this.weekDay = c.get(Calendar.DAY_OF_WEEK);
+    }
+
+
+    public void setWeekDay(){
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.start_date);
+        this.weekDay = c.get(Calendar.DAY_OF_WEEK);
+    }
+
+    public Date getStart_date() {
         return start_date;
     }
 
-    public void setStart_date(String start_date) {
+    public void setStart_date(Date start_date) {
+
         this.start_date = start_date;
+        calculateDayOfWeek();
     }
 
-    public String getEnd_date() {
+    public Date getEnd_date() {
         return end_date;
     }
 
-    public void setEnd_date(String end_date) {
+    public void setEnd_date(Date end_date) {
         this.end_date = end_date;
     }
 
