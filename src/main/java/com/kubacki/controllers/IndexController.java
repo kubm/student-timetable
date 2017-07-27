@@ -27,6 +27,12 @@ public class IndexController {
     private NoteService noteService;
     private TeacherService teacherService;
     private LessonPrinterService lessonPrinterService;
+    private RoomService roomService;
+
+    @Autowired
+    public void setRoomService(RoomService roomService){
+        this.roomService = roomService;
+    }
 
     @Autowired
     public void setLessonPrinterService(LessonPrinterService lessonPrinterService){
@@ -71,6 +77,7 @@ public class IndexController {
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
         model.addAttribute("teachers", teacherService.listAll());
         model.addAttribute("lesson", new Lesson());
+        model.addAttribute("rooms", roomService.listAll());
 
         return "subjects";
     }
@@ -97,6 +104,15 @@ public class IndexController {
     public String saveSubject(Subject subject){
         subjectService.saveOrUpdate(subject);
         return "redirect:/";
+    }
+
+    @RequestMapping("lesson/edit/{id}")
+    public String editLesson(@PathVariable Integer id, Model model){
+        model.addAttribute("lesson", lessonService.getById(id));
+        model.addAttribute("teachers", teacherService.listAll());
+        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        return "lessonform";
     }
 
     @RequestMapping(value = "lesson", method = RequestMethod.POST)
@@ -128,5 +144,7 @@ public class IndexController {
         subjectService.delete(id);
         return "redirect:/subjects";
     }
+
+
 
 }

@@ -26,8 +26,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
     private HomeworkRepository homeworkRepository;
     private EvalTypeRepository evalTypeRepository;
     private TeacherRepository teacherRepository;
+    private RoomRepository roomRepository;
 
     private Logger log = Logger.getLogger(DataLoader.class);
+
+    @Autowired
+    public void setRoomRepository(RoomRepository roomRepository){
+        this.roomRepository = roomRepository;
+    }
 
     @Autowired
     public void setTeacherRepository(TeacherRepository teacherRepository) {
@@ -62,6 +68,52 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
+
+        //--------- Sale ---------------//
+
+        Room e1 = new Room();
+        e1.setRoomNumber("E1");
+        e1.setBuilding("A2");
+        roomRepository.save(e1);
+
+        Room e2 = new Room();
+        e2.setBuilding("A2");
+        e2.setRoomNumber("E2");
+        roomRepository.save(e2);
+
+        Room e5 = new Room();
+        e5.setRoomNumber("E5");
+        e5.setBuilding("A2");
+        roomRepository.save(e5);
+
+        Room e6 = new Room();
+        e6.setRoomNumber("E6");
+        e6.setBuilding("A2");
+        roomRepository.save(e6);
+
+        Room e101 = new Room();
+        e101.setRoomNumber("E101");
+        e101.setBuilding("A2");
+        roomRepository.save(e101);
+
+        Room e102 = new Room();
+        e102.setRoomNumber("E102");
+        e102.setBuilding("A2");
+        roomRepository.save(e102);
+
+        Room e105 = new Room();
+        e105.setRoomNumber("E105");
+        e105.setBuilding("A2");
+        roomRepository.save(e105);
+
+        Room e106 = new Room();
+        e106.setRoomNumber("E106");
+        e106.setBuilding("A2");
+        roomRepository.save(e106);
+
+
+
+
 
         //--------- Wykładowcy ---------//
         Teacher mmarian = new Teacher();
@@ -186,6 +238,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         cwiczenia_a.setEnd_hour("09:45");
         cwiczenia_a.setLessonType(cwiczenia);
         cwiczenia_a.setTeacher(hkwiecien);
+        cwiczenia_a.setRoom(e105);
         lessonRepository.save(cwiczenia_a);
         log.info("Saved cwiczenia analiza");
 
@@ -202,6 +255,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         wyklad_a.setEnd_hour("10:45");
         wyklad_a.setLessonType(lectures);
         wyklad_a.setTeacher(apietrzak);
+        wyklad_a.setRoom(e2);
         lessonRepository.save(wyklad_a);
         log.info("Saved wyklad analiza");
 
@@ -218,6 +272,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         cwiczenia_alg.setEnd_hour("09:45");
         cwiczenia_alg.setLessonType(cwiczenia);
         cwiczenia_alg.setTeacher(jkowalska);
+        cwiczenia_alg.setRoom(e106);
         lessonRepository.save(cwiczenia_alg);
         log.info("Saved Cwiczenia Algorytmy");
 
@@ -234,6 +289,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         wyklad_alg.setStart_hour("12:15");
         wyklad_alg.setEnd_hour("13:45");
         wyklad_alg.setTeacher(jstepien);
+        wyklad_alg.setRoom(e1);
         lessonRepository.save(wyklad_alg);
         log.info("Saved Wykład Algorytmy");
 
@@ -250,6 +306,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         lab_fizyka.setEnd_hour("09:45");
         lab_fizyka.setSubject(fizyka);
         lab_fizyka.setTeacher(mmarian);
+        lab_fizyka.setRoom(e101);
         lessonRepository.save(lab_fizyka);
         log.info("Saved Labs Fizyka");
 
@@ -266,6 +323,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         wyklad_dysk.setEnd_hour("10:45");
         wyklad_dysk.setLessonType(lectures);
         wyklad_dysk.setTeacher(kwojcik);
+        wyklad_dysk.setRoom(e1);
         lessonRepository.save(wyklad_dysk);
         log.info("Saved Wykład Dysrketna");
 
@@ -282,6 +340,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         cwiczenia_dysk.setSubject(dyskretna);
         cwiczenia_dysk.setLessonType(cwiczenia);
         cwiczenia_dysk.setTeacher(hkwiecien);
+        cwiczenia_dysk.setRoom(e101);
         lessonRepository.save(cwiczenia_dysk);
         log.info("Saved cwiczenia dyskretna");
 
@@ -298,8 +357,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         wyklad_bhp.setStart_hour("08:15");
         wyklad_bhp.setEnd_hour("09:45");
         wyklad_bhp.setTeacher(pnowak);
+        wyklad_bhp.setRoom(e102);
         lessonRepository.save(wyklad_bhp);
         log.info("Saved Wyklad BHP");
+
 
 
 

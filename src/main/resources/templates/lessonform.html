@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
+            <h1><i class="fa fa-pencil fa-fw"></i><th:block th:text="'Edycja zajęć: '+${lesson.subject.name}+' - '+${lesson.lessonType.nazwa}"></th:block></h1>
+            <div class="row" >
+                <form th:object="${lesson}" th:action="@{/lesson}" method="post">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="hidden" th:value="${lesson.subject.id}" th:attr="name='subject'"/>
+                            <div class="form-group">
+                                <label th:attr="for='type-select'+${lesson.id}">Rodzaj zajęć</label>
+                                <select class="form-control" th:attr="id='type-select'+${lesson.id}" th:field="*{lessonType}" >
+                                    <option th:each="lessonType : ${lessonTypes}"
+                                            th:value="${lessonType.id}"
+                                            th:text="${lessonType.nazwa}">Wireframe</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label th:attr="for='teacher-select'+${lesson.id}">Wykładowca</label>
+                                <select class="form-control" th:attr="id='teacher-select'+${lesson.id}" th:field="*{teacher}" >
+                                    <option th:each="teacher : ${teachers}"
+                                            th:value="${teacher.id}"
+                                            th:text="${teacher.name}+' '+${teacher.surname}">Wireframe</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label th:attr="for='room-select'+${lesson.id}">Sala</label>
+                                <select class="form-control" th:attr="id='room-select'+${lesson.id}" th:field="*{room}">
+                                    <option th:each="room : ${rooms}"
+                                            th:value="${room.id}"
+                                            th:text="${room.roomNumber}+'/'+${room.building}"></option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <label th:attr="for='start_date_'+${lesson.id}">Data rozpoczęcia</label>
+                                    <input class="form-control" type="date" th:attr="id='start_date_'+${lesson.id}" th:field="*{start_date}"/>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label th:attr="for='start_time_'+${lesson.id}">Godzina rozpoczęcia</label>
+                                    <input class="form-control" type="time" th:attr="id='start_time_'+${lesson.id}" th:field="*{start_hour}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 form-group">
+                                    <label th:attr="for='end_date_'+${lesson.id}">Data zakończenia</label>
+                                    <input class="form-control" type="date" th:attr="id='end_date_'+${lesson.id}" th:field="*{end_date}"/>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <label th:attr="for='end_time_'+${lesson.id}">Godzina zakończenia</label>
+                                    <input class="form-control" type="time" th:attr="id='end_time_'+${lesson.id}" th:field="*{end_hour}"/>
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-between">
+                                <div class="col-sm-10 ">
+                                    <a th:href="@{/subjects}" href="#" class="btn btn-danger">Anuluj</a>
+                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+        <!-- Modal -->
+
+    </div>
+</div>
+</body>
+</html>

@@ -25,7 +25,7 @@ public class Lesson implements DomainObject{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "weekday")
+    @Column(name = "weekDay")
     //@Formula("(select dayofweek(l.start_date) from Lesson l where l.id = id)")
     //@Persistent
     private Integer weekDay;
