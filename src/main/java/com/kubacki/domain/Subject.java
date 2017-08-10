@@ -15,11 +15,15 @@ public class Subject implements DomainObject{
     private Integer id;
 
     private String name;
-    private String colour;
+    //private String colour;
 
     @OneToMany(mappedBy = "subject")
     @JsonManagedReference
     private Set<Lesson> lessons;
+
+    @ManyToOne
+    @JoinColumn(name = "colour_id")
+    private Colour colour;
 
     //-------------- Getters & Setters ---------------------------//
 
@@ -41,13 +45,21 @@ public class Subject implements DomainObject{
         this.name = name;
     }
 
-    public String getColour() {
+    public Colour getColour() {
+        return colour;
+    }
+
+    public void setColour(Colour colour) {
+        this.colour = colour;
+    }
+
+    /*public String getColour() {
         return colour;
     }
 
     public void setColour(String colour) {
         this.colour = colour;
-    }
+    }*/
 
     public Set<Lesson> getLessons() {
         return lessons;

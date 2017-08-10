@@ -27,8 +27,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
     private EvalTypeRepository evalTypeRepository;
     private TeacherRepository teacherRepository;
     private RoomRepository roomRepository;
+    private ColourRepository colourRepository;
 
     private Logger log = Logger.getLogger(DataLoader.class);
+
+    @Autowired
+    public void setColourRepository(ColourRepository colourRepository) {
+        this.colourRepository = colourRepository;
+    }
 
     @Autowired
     public void setRoomRepository(RoomRepository roomRepository){
@@ -68,6 +74,57 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
+
+        //--------- Kolory -------------//
+        Colour pomegranate = new Colour();
+        pomegranate.setName("pomegranate");
+        colourRepository.save(pomegranate);
+
+        Colour amaranth = new Colour();
+        amaranth.setName("amaranth");
+        colourRepository.save(amaranth);
+
+        Colour seance = new Colour();
+        seance.setName("seance");
+        colourRepository.save(seance);
+
+        Colour purpleheart = new Colour();
+        purpleheart.setName("purpleheart");
+        colourRepository.save(purpleheart);
+
+        Colour sanmarino = new Colour();
+        sanmarino.setName("sanmarino");
+        colourRepository.save(sanmarino);
+
+        Colour dodgerblue = new Colour();
+        dodgerblue.setName("dodgerblue");
+        colourRepository.save(dodgerblue);
+
+        Colour seagull = new Colour();
+        seagull.setName("seagull");
+        colourRepository.save(seagull);
+
+        Colour sushi = new Colour();
+        sushi.setName("sushi");
+        colourRepository.save(sushi);
+
+        Colour amber = new Colour();
+        amber.setName("amber");
+        colourRepository.save(amber);
+
+        Colour pizazz = new Colour();
+        pizazz.setName("pizazz");
+        colourRepository.save(pizazz);
+
+        Colour deepOrange = new Colour();
+        deepOrange.setName("deep-orange");
+        colourRepository.save(deepOrange);
+
+        Colour persiangreen = new Colour();
+        persiangreen.setName("persiangreen");
+        colourRepository.save(persiangreen);
+
+
 
         //--------- Sale ---------------//
 
@@ -195,31 +252,31 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         //----------- Przedmioty ---------//
         Subject analiza = new Subject();
         analiza.setName("Analiza Matematyczna");
-        analiza.setColour("pomegranate");
+        analiza.setColour(pomegranate);
         subjectRepository.save(analiza);
         log.info("Saved Analiza Matematyczna");
 
         Subject algorytmy = new Subject();
         algorytmy.setName("Algorytmy i struktury danych");
-        algorytmy.setColour("amaranth");
+        algorytmy.setColour(amaranth);
         subjectRepository.save(algorytmy);
         log.info("Saved Algorytmy");
 
         Subject fizyka = new Subject();
         fizyka.setName("Fizyka");
-        fizyka.setColour("seance");
+        fizyka.setColour(seance);
         subjectRepository.save(fizyka);
         log.info("Saved Fizyka");
 
         Subject dyskretna = new Subject();
         dyskretna.setName("Matematyka Dyskretna");
-        dyskretna.setColour("sanmarino");
+        dyskretna.setColour(sanmarino);
         subjectRepository.save(dyskretna);
         log.info("Saved Matematyka Dyskretna");
 
         Subject bhp = new Subject();
         bhp.setName("BHP");
-        bhp.setColour("sushi");
+        bhp.setColour(sushi);
         subjectRepository.save(bhp);
         log.info("Saved BHP");
 

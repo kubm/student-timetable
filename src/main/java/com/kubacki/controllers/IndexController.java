@@ -28,6 +28,13 @@ public class IndexController {
     private TeacherService teacherService;
     private LessonPrinterService lessonPrinterService;
     private RoomService roomService;
+    private ColourService colourService;
+
+
+    @Autowired
+    public void setColourService(ColourService colourService) {
+        this.colourService = colourService;
+    }
 
     @Autowired
     public void setRoomService(RoomService roomService){
@@ -73,11 +80,13 @@ public class IndexController {
     @RequestMapping("/subjects")
     public String subjects(Model model){
         model.addAttribute("subjects", subjectService.listAll());
+        model.addAttribute("subject", new Subject());
         model.addAttribute("lessons", lessonService.listAll());
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
         model.addAttribute("teachers", teacherService.listAll());
         model.addAttribute("lesson", new Lesson());
         model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("colours",colourService.listAll());
 
         return "subjects";
     }
@@ -100,10 +109,17 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("subject/edit/{id}")
+    public String editSubject(@PathVariable Integer id, Model model){
+        model.addAttribute("subject", subjectService.getById(id));
+        model.addAttribute("colours",colourService.listAll());
+        return "subjectform";
+    }
+
     @RequestMapping(value = "subject", method = RequestMethod.POST)
     public String saveSubject(Subject subject){
         subjectService.saveOrUpdate(subject);
-        return "redirect:/";
+        return "redirect:/subjects";
     }
 
     @RequestMapping("lesson/edit/{id}")
