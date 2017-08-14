@@ -14,4 +14,6 @@ public interface LessonService extends CRUDService<Lesson>{
 
     List<Lesson> findBySubject(Subject subject);
     List<Lesson> findByLessonType(LessonType lessonType);
+    List<Lesson> findAllByOrderByWeekDayAsc();
+    List<Lesson> findByWeekDay(Integer weekDay);
 }

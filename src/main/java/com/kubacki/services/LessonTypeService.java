@@ -8,4 +8,5 @@ import com.kubacki.domain.LessonType;
 public interface LessonTypeService extends CRUDService<LessonType>{
 
     LessonType findByNazwa(String nazwa);
+
 }

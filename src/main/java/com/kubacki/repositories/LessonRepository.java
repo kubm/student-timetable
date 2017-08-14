@@ -16,5 +16,7 @@ import java.util.List;
 public interface LessonRepository extends CrudRepository<Lesson,Integer>, JpaRepository<Lesson,Integer>{
     List<Lesson> findBySubject(Subject subject);
     List<Lesson> findByLessonType(LessonType lessonType);
+    List<Lesson> findAllByOrderByWeekDayAsc();
+    List<Lesson> findByWeekDay(Integer weekDay);
 
 }

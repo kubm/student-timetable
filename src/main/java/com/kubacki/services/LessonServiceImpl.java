@@ -53,6 +53,13 @@ public class LessonServiceImpl implements LessonService {
         return lessonRepository.findAll();
     }
 
+    @Override
+    public List<Lesson> findAllByOrderByWeekDayAsc() {
+        return lessonRepository.findAllByOrderByWeekDayAsc();
+    }
 
-
+    @Override
+    public List<Lesson> findByWeekDay(Integer weekDay) {
+        return lessonRepository.findByWeekDay(weekDay);
+    }
 }

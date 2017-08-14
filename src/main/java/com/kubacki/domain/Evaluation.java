@@ -1,5 +1,7 @@
 package com.kubacki.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -26,9 +28,12 @@ public class Evaluation implements DomainObject{
     private EvalType evaluationType;
 
 
-    @Column(name = "DZIEN", columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private Date dzien;
+
+    private String hour;
+
     private Integer ocena;
 
     //-------------- Getters & Setters ---------------------------//
@@ -66,6 +71,14 @@ public class Evaluation implements DomainObject{
 
     public void setDzien(Date dzien) {
         this.dzien = dzien;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
     }
 
     public Integer getOcena() {

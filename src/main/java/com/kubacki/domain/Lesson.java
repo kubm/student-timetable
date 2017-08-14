@@ -2,14 +2,9 @@ package com.kubacki.domain;
 
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.hibernate.annotations.Formula;
-import org.springframework.data.annotation.Persistent;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
@@ -19,7 +14,7 @@ import java.util.Set;
  * Created by KUBACM on 2017-07-15.
  */
 @Entity
-public class Lesson implements DomainObject{
+public class Lesson implements DomainObject, Comparable<Lesson>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -45,37 +40,34 @@ public class Lesson implements DomainObject{
 
     @ManyToOne
     @JoinColumn(name = "type_id")
-    @JsonBackReference
     private LessonType lessonType;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
-    @JsonBackReference
     private Subject subject;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
-    @JsonBackReference
     private Teacher teacher;
 
     @ManyToOne
     @JoinColumn(name = "room_id")
-    @JsonBackReference
     private Room room;
 
     @OneToMany(mappedBy = "lesson")
-    @JsonManagedReference
     private Set<Homework> homeworks;
 
     @OneToMany(mappedBy = "lesson")
-    @JsonManagedReference
     private Set<Note> notes;
 
     @OneToMany(mappedBy = "lesson")
-    @JsonManagedReference
     private Set<Evaluation> evaluations;
 
 
+    @Override
+    public int compareTo(Lesson o) {
+        return Integer.compare(this.weekDay,o.weekDay);
+    }
 
     //-------------- Getters & Setters ---------------------------//
 

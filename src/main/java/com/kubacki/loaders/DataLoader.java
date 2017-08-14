@@ -28,8 +28,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
     private TeacherRepository teacherRepository;
     private RoomRepository roomRepository;
     private ColourRepository colourRepository;
+    private EvaluationRepository evaluationRepository;
 
     private Logger log = Logger.getLogger(DataLoader.class);
+
+    @Autowired
+    public void setEvaluationRepository(EvaluationRepository evaluationRepository) {
+        this.evaluationRepository = evaluationRepository;
+    }
 
     @Autowired
     public void setColourRepository(ColourRepository colourRepository) {
@@ -418,8 +424,42 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         lessonRepository.save(wyklad_bhp);
         log.info("Saved Wyklad BHP");
 
+        //--------- Zaliczenia ----------//
+        Evaluation analiza_eg = new Evaluation();
+        analiza_eg.setEvaluationType(egzamin);
+        analiza_eg.setLesson(wyklad_a);
+        analiza_eg.setRoom(e1);
+        try{
+            analiza_eg.setDzien(format.parse("2017-09-04"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        analiza_eg.setHour("08:15");
+        evaluationRepository.save(analiza_eg);
 
+        Evaluation algorytmy_kol = new Evaluation();
+        algorytmy_kol.setEvaluationType(kolokwium);
+        algorytmy_kol.setLesson(cwiczenia_alg);
+        algorytmy_kol.setRoom(e101);
+        try{
+            algorytmy_kol.setDzien(format.parse("2017-09-05"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        algorytmy_kol.setHour("08:15");
+        evaluationRepository.save(algorytmy_kol);
 
+        Evaluation dyskretna_egz = new Evaluation();
+        dyskretna_egz.setEvaluationType(egzamin);
+        dyskretna_egz.setLesson(wyklad_dysk);
+        dyskretna_egz.setRoom(e2);
+        try{
+            dyskretna_egz.setDzien(format.parse("2017-09-06"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        dyskretna_egz.setHour("10:15");
+        evaluationRepository.save(dyskretna_egz);
 
 
     }

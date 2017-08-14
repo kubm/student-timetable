@@ -5,6 +5,8 @@ import com.kubacki.repositories.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by KUBACM on 2017-07-16.
  */
@@ -36,5 +38,10 @@ public class EvaluationServiceImpl implements EvaluationService{
     @Override
     public void delete(Integer id) {
         evaluationRepository.delete(id);
+    }
+
+    @Override
+    public List<Evaluation> listAllOrderedByDate() {
+        return evaluationRepository.findAllByOrderByDzienAsc();
     }
 }

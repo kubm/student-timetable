@@ -13,7 +13,7 @@ public class Note implements DomainObject{
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "note_id")
+    @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
     private String text;

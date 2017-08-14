@@ -23,4 +23,8 @@ public class LessonPrinterServiceImpl implements LessonPrinterService{
         return lessonPrinterRepository.findLessonsQuery();
     }
 
+    @Override
+    public Integer numOfMinutes(Integer weekDay) {
+        return lessonPrinterRepository.numOfMinutes(weekDay);
+    }
 }

@@ -6,8 +6,64 @@
 
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
-<div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <h1><i class="fa fa-calendar fa-fw"></i>Nadchodzące Wydarzenia </h1>
+            <div class="row">
+                <!-- TODO: lista nadchodzących wydarzeń -->
+            </div>
 
+            <div class="row top-buffer">
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-clock-o fa-fw"></i>Plan na dziś
+                        </div>
+                        <ul class="list-group justify-content-between border" style="padding: 15px 15px 15px;">
+                            <li class="list-group-item justify-content-between" th:each="lesson : ${todayLessons}">
+                                <th:block th:text="${lesson.subject.name}+' - '+${lesson.lessonType.nazwa}"></th:block><i th:text="${lesson.start_hour}"></i>
+                            </li>
+                        </ul>
+                        <div class="card-block" style="padding-top:0px;padding-bottom: 15px;">
+                            <a href="#" th:href="@{/subjects}" class="btn btn-secondary btn-block">Wszystkie przedmioty</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-clock-o fa-fw"></i>Obłożenie tygodnia
+                        </div>
+                        <div class="card-block">
+                            <div class="progress">
+                                <div class="progress-bar bg-success" role="progressbar" th:attr="style='width: '+${lessonsMonday}+'%', aria-valuenow=${lessonsMonday}" aria-valuemin="0" aria-valuemax="100">Poniedziałek</div>
+                            </div>
+                            <div class="row top-buffer_small"></div>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" th:attr="style='width: '+${lessonsTuesday}+'%', aria-valuenow=${lessonsTuesday}" aria-valuemin="0" aria-valuemax="100">Wtorek</div>
+                            </div>
+                            <div class="row top-buffer_small"></div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" role="progressbar" th:attr="style='width: '+${lessonsWednesday}+'%', aria-valuenow=${lessonsWednesday}" aria-valuemin="0" aria-valuemax="100">Środa</div>
+                            </div>
+                            <div class="row top-buffer_small"></div>
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar" th:attr="style='width: '+${lessonsThursday}+'%', aria-valuenow=${lessonsThursday}" aria-valuemin="0" aria-valuemax="100">Czwartek</div>
+                            </div>
+                            <div class="row top-buffer_small"></div>
+                            <div class="progress">
+                                <div class="progress-bar bg-seance" role="progressbar" th:attr="style='width: '+${lessonsFriday}+'%', aria-valuenow=${lessonsFriday}" aria-valuemin="0" aria-valuemax="100">Piątek</div>
+                            </div>
+                            <div class="row top-buffer_small"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </div>
 </body>
 </html>

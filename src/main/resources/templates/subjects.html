@@ -18,12 +18,11 @@
                             <span class="float-right">
                             <a href="#" th:href="${'/subject/edit/'+subject.id}"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
                             <i>&nbsp;</i>
-                                <!-- TODO: usuwanie najpierw wszystkich zajęć wewn. przedmiotu a dopiero potem przedmiotu -->
                             <a href="#" th:href="${'/subject/delete/'+subject.id}"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
                         </span>
                         </div>
                         <ul class="list-group list-group-flush" th:classappend="'text-'+${subject.colour.name}">
-                            <li class="list-group-item justify-content-between" th:each="lesson : ${subject.lessons}" th:switch="${lesson.weekDay}">
+                            <li class="list-group-item justify-content-between" th:each="lesson : ${#lists.sort(subject.lessons, lesson.weekDay)}" th:switch="${lesson.weekDay}">
                                 <span class="float-left"><th:block th:text="${subject.name}+' - '+${lesson.lessonType.nazwa}"></th:block>
                                     <small class="text-muted" th:case="2" th:text="'&nbsp;Poniedziałek - '+${lesson.start_hour}+'/'+${lesson.teacher.name}+' '+${lesson.teacher.surname}+'/'+${lesson.room.roomNumber}+' ('+${lesson.room.building}+')'"></small>
                                     <small class="text-muted" th:case="3" th:text="'&nbsp;Wtorek - '+${lesson.start_hour}+'/'+${lesson.teacher.name}+' '+${lesson.teacher.surname}+'/'+${lesson.room.roomNumber}+' ('+${lesson.room.building}+')'"></small>
@@ -33,6 +32,8 @@
                                     <small class="text-muted" th:case="*" th:text="'WTF? - '+${lesson.start_hour}+'/'+${lesson.teacher.name}+' '+${lesson.teacher.surname}+'/'+${lesson.room.roomNumber}+' ('+${lesson.room.building}+')'"></small>
                                 </span>
                                 <span class="float-right">
+                                    <a href="#" th:href="${'/notes/subject/'+lesson.id}"><i class="fa fa-sticky-note-o" aria-hidden="true" th:classappend="'text-'+${subject.colour.name}"></i></a>
+                                    <i>&nbsp;</i>
                                     <a href="#" th:href="${'/lesson/edit/'+lesson.id}"><i class="fa fa-pencil" th:classappend="'text-'+${subject.colour.name}" aria-hidden="true"></i></a>
                                     <i>&nbsp;</i>
                                     <a href="#" th:href="${'/lesson/delete/'+lesson.id}"><i class="fa fa-trash-o" th:classappend="'text-'+${subject.colour.name}" aria-hidden="true"></i></a>

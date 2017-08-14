@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface LessonPrinterService {
     public List<LessonList> findByQuery();
+    public Integer numOfMinutes(Integer weekDay);
 }

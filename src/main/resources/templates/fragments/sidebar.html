@@ -35,7 +35,7 @@
                 <a class="nav-link" href="#" th:href="@{/subjects}" th:classappend="|${#httpServletRequest.requestURI=='/subjects'? 'active': ''} ${#httpServletRequest.requestURI!='/subjects'? 'text-muted' : ''}|"><i class="fa fa-book fa-fw"></i><span class="sr-only"></span> Przedmioty</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted" href="#"><i class="fa fa-calendar-check-o fa-fw"></i> Zaliczenia</a>
+                <a class="nav-link" href="#" th:href="@{/evals}" th:classappend="|${#httpServletRequest.requestURI=='/evals'? 'active': ''} ${#httpServletRequest.requestURI!='/evals'? 'text-muted' : ''}|"><i class="fa fa-calendar-check-o fa-fw"></i> Zaliczenia</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-muted" href="#"><i class="fa fa-calendar fa-fw"></i> Kalendarz</a>
