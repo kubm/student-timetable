@@ -22,8 +22,8 @@ public class HomeworkServiceImpl implements HomeworkService {
     }
 
     @Override
-    public List<Homework> findByTytul(String tytul){
-        return homeworkRepository.findByTytul(tytul);
+    public List<Homework> findByTitle(String title){
+        return homeworkRepository.findByTitle(title);
     }
 
     @Override

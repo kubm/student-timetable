@@ -1,9 +1,15 @@
 package com.kubacki.domain;
 
+import com.google.common.primitives.Ints;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Created by KUBACM on 2017-07-16.
@@ -36,8 +42,17 @@ public class Evaluation implements DomainObject{
 
     private Integer ocena;
 
-    //-------------- Getters & Setters ---------------------------//
+    @Column(name = "daysLeft")
+    private Integer daysLeft;
 
+    //-------------- Getters & Setters ---------------------------//
+    public void calculateDaysLeft(){
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        long diff = dzien.getTime() - today.getTime();
+        long diffDays = diff/(1000 * 60 * 60 * 24);
+        this.daysLeft = Ints.checkedCast(diffDays);
+    }
 
     @Override
     public Integer getId() {
@@ -71,6 +86,7 @@ public class Evaluation implements DomainObject{
 
     public void setDzien(Date dzien) {
         this.dzien = dzien;
+        calculateDaysLeft();
     }
 
     public String getHour() {
@@ -95,5 +111,13 @@ public class Evaluation implements DomainObject{
 
     public void setEvaluationType(EvalType evaluationType) {
         this.evaluationType = evaluationType;
+    }
+
+    public Integer getDaysLeft() {
+        return daysLeft;
+    }
+
+    public void setDaysLeft(Integer daysLeft) {
+        this.daysLeft = daysLeft;
     }
 }

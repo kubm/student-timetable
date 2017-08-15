@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface HomeworkService extends CRUDService<Homework>{
 
-    List<Homework> findByTytul(String tytul);
+    List<Homework> findByTitle(String title);
     List<Homework> findByLesson(Lesson lesson);
 }

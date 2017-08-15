@@ -1,6 +1,9 @@
 package com.kubacki.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by KUBACM on 2017-07-16.
@@ -17,6 +20,10 @@ public class Note implements DomainObject{
     private Lesson lesson;
 
     private String text;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date date;
     //-------------- Getters & Setters ---------------------------//
 
 
@@ -44,5 +51,13 @@ public class Note implements DomainObject{
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

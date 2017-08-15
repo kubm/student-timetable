@@ -1,5 +1,7 @@
 package com.kubacki.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,13 +19,12 @@ public class Homework implements DomainObject{
     @JoinColumn(name = "lesson_id")
     private Lesson lesson;
 
-    private String tytul;
-    private String tresc;
+    private String title;
+    private String text;
 
-    @Column(name = "DZIEN", columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dzien;
-    private Integer ocena;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     //-------------- Getters & Setters ---------------------------//
 
@@ -45,35 +46,28 @@ public class Homework implements DomainObject{
         this.lesson = lesson;
     }
 
-    public String getTytul() {
-        return tytul;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTytul(String tytul) {
-        this.tytul = tytul;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getTresc() {
-        return tresc;
+    public String getText() {
+        return text;
     }
 
-    public void setTresc(String tresc) {
-        this.tresc = tresc;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public Date getDzien() {
-        return dzien;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDzien(Date dzien) {
-        this.dzien = dzien;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Integer getOcena() {
-        return ocena;
-    }
-
-    public void setOcena(Integer ocena) {
-        this.ocena = ocena;
-    }
 }

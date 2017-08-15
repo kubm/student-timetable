@@ -16,9 +16,9 @@
                         <div class="card-block text-white" th:classappend="'card-'+${evaluation.lesson.subject.colour.name}">
                             <span class="h4" th:text="${evaluation.evaluationType.nazwa}"></span>
                             <span class="float-right">
-                            <a href="#" th:href="${'/evaluation/edit/'+evaluation.id}"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
+                            <a href="#" th:href="${'/evaluation/edit/'+evaluation.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
                             <i>&nbsp;</i>
-                            <a href="#" th:href="${'/evaluation/delete/'+evaluation.id}"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
+                            <a href="#" th:href="${'/evaluation/delete/'+evaluation.id}" data-toggle="tooltip" data-placement="top" title="Usuń"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
                         </span>
                         </div>
                         <ul class="list-group list-group-flush" th:classappend="'text-'+${evaluation.lesson.subject.colour.name}">

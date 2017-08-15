@@ -10,6 +10,6 @@ import java.util.List;
  * Created by KUBACM on 2017-07-16.
  */
 public interface HomeworkRepository extends CrudRepository<Homework, Integer>{
-    List<Homework> findByTytul(String tytul);
+    List<Homework> findByTitle(String title);
     List<Homework> findByLesson(Lesson lesson);
 }

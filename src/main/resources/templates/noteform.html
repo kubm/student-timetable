@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
+            <h1><i class="fa fa-pencil fa-fw"></i><th:block th:text="'Edycja notatki: '+${note.lesson.subject.name}+' - '+${note.lesson.lessonType.nazwa}"></th:block></h1>
+            <div class="row" >
+                <form th:object="${note}" th:action="@{/note}" method="post">
+                    <div class="container">
+                        <div class="col-12">
+                            <input type="hidden" th:field="*{id}"/>
+                            <input type="hidden" th:field="*{lesson}"/>
+                            <input type="hidden" th:field="*{date}"/>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label th:attr="for='content_note'">Treść</label>
+                                    <textarea class="form-control" id="content_note" rows="4" th:field="*{text}"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-between">
+                                <div class="col-12 ">
+                                    <a th:href="${'/notes/subject/'+note.lesson.id}" href="#" class="btn btn-danger">Anuluj</a>
+                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+        <!-- Modal -->
+
+    </div>
+</div>
+</body>
+</html>

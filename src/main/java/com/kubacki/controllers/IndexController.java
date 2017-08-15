@@ -24,8 +24,10 @@ import static java.lang.Math.floor;
  */
 @Controller
 public class IndexController {
-    Calendar c = Calendar.getInstance();
-    int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+    private Calendar c = Calendar.getInstance();
+    private int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
 
 
     private SubjectService subjectService;
@@ -104,6 +106,11 @@ public class IndexController {
         model.addAttribute("lessonsWednesday",floor(lessonPrinterService.numOfMinutes(4)/5.4));
         model.addAttribute("lessonsThursday",floor(lessonPrinterService.numOfMinutes(5)/5.4));
         model.addAttribute("lessonsFriday",floor(lessonPrinterService.numOfMinutes(6)/5.4));
+        model.addAttribute("notes", noteService.listTop5OrderedByDate());
+        model.addAttribute("evals", evaluationService.listFirst4Evals());
+        model.addAttribute("homeworks",homeworkService.listAll());
+        model.addAttribute("homework", new Homework());
+        model.addAttribute("lessons", lessonService.listAll());
 
         return "index";
     }
@@ -136,6 +143,7 @@ public class IndexController {
     @RequestMapping("/notes/subject/{id}")
     public String notesByLesson(@PathVariable Integer id, Model model){
         model.addAttribute("notes", noteService.findByLesson(lessonService.getById(id)));
+        model.addAttribute("today_date", dateFormat.format(date));
         model.addAttribute("note", new Note());
         model.addAttribute("lesson", lessonService.getById(id));
         model.addAttribute("lessons",lessonService.listAll());
@@ -150,6 +158,13 @@ public class IndexController {
     }
 
     //------- Dodawanie --------//
+    @RequestMapping("/notes/new")
+    public String addNewNote(Model model){
+        model.addAttribute("note", new Note());
+        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("today_date", dateFormat.format(date));
+        return "noteformnew";
+    }
     @RequestMapping(value = "subject", method = RequestMethod.POST)
     public String saveSubject(Subject subject){
         subjectService.saveOrUpdate(subject);
@@ -172,6 +187,12 @@ public class IndexController {
     public String saveNote(Note note){
         noteService.saveOrUpdate(note);
         return "redirect:/notes/subject/"+note.getLesson().getId();
+    }
+
+    @RequestMapping(value = "notenew", method = RequestMethod.POST)
+    public String saveNoteNew(Note note){
+        noteService.saveOrUpdate(note);
+        return "redirect:/";
     }
 
     @RequestMapping(value = "evaluation", method = RequestMethod.POST)
@@ -208,14 +229,19 @@ public class IndexController {
         return "evalform";
     }
 
-//    @RequestMapping("evaluation/edit/{id}")
-//    public String editEval(@PathVariable Integer id, Model model){
-//        model.addAttribute("evaluation", evaluationService.getById(id));
-//        model.addAttribute("evalTypes", evalTypeService.listAll());
-//        model.addAttribute("lessons", lessonService.listAll());
-//        model.addAttribute("rooms", roomService.listAll());
-//        return "evalform";
-//    }
+    @RequestMapping("homework/edit/{id}")
+    public String editHomework(@PathVariable Integer id, Model model){
+        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("homework", homeworkService.getById(id));
+        return "homeworkform";
+    }
+
+    @RequestMapping("note/edit/{id}")
+    public String editNote(@PathVariable Integer id, Model model){
+        model.addAttribute("note", noteService.getById(id));
+
+        return "noteform";
+    }
 
 
 
@@ -223,6 +249,12 @@ public class IndexController {
 
     @RequestMapping("lesson/delete/{id}")
     public String deleteLesson(@PathVariable Integer id){
+        List<Note> notes = noteService.findByLesson(lessonService.getById(id));
+        notes.forEach(note -> noteService.delete(note.getId()));
+        List<Evaluation> evaluations = evaluationService.listAllByLesson(lessonService.getById(id));
+        evaluations.forEach(evaluation -> evaluationService.delete(evaluation.getId()));
+        List<Homework> homeworks = homeworkService.findByLesson(lessonService.getById(id));
+        homeworks.forEach(homework -> homeworkService.delete(homework.getId()));
         lessonService.delete(id);
         return "redirect:/subjects";
     }
@@ -235,16 +267,30 @@ public class IndexController {
         return "redirect:/subjects";
     }
 
+
     @RequestMapping("evaluation/delete/{id}")
     public String deleteEval(@PathVariable Integer id){
         evaluationService.delete(id);
         return "redirect:/evals";
     }
 
+    @RequestMapping("homework/delete/{id}")
+    public String deleteHomework(@PathVariable Integer id) {
+        homeworkService.delete(id);
+        return "redirect:/";
+    }
+
     @RequestMapping("note/delete/{id}")
     public String deleteNote(@PathVariable Integer id){
+        Integer lessonId = noteService.getById(id).getLesson().getId();
         noteService.delete(id);
-        return "redirect:/subjects";
+        return "redirect:/notes/subject/"+lessonId;
+    }
+
+    @RequestMapping("note/delete-toindex/{id}")
+    public String deleteNoteToIndex(@PathVariable Integer id){
+        noteService.delete(id);
+        return "redirect:/";
     }
 
 

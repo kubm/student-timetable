@@ -29,8 +29,14 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
     private RoomRepository roomRepository;
     private ColourRepository colourRepository;
     private EvaluationRepository evaluationRepository;
+    private NoteRepository noteRepository;
 
     private Logger log = Logger.getLogger(DataLoader.class);
+
+    @Autowired
+    public void setNoteRepository(NoteRepository noteRepository) {
+        this.noteRepository = noteRepository;
+    }
 
     @Autowired
     public void setEvaluationRepository(EvaluationRepository evaluationRepository) {
@@ -462,5 +468,263 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         evaluationRepository.save(dyskretna_egz);
 
 
+        //----------- notatki -------------//
+
+
+        Note am_w1 = new Note();
+        am_w1.setLesson(wyklad_a);
+        am_w1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            am_w1.setDate(format.parse("2017-02-07"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(am_w1);
+
+        Note am_w2 = new Note();
+        am_w2.setLesson(wyklad_a);
+        am_w2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            am_w2.setDate(format.parse("2017-02-14"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(am_w2);
+
+        Note am_w3 = new Note();
+        am_w3.setLesson(wyklad_a);
+        am_w3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            am_w3.setDate(format.parse("2017-02-21"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(am_w3);
+
+        Note am_c1 = new Note();
+        am_c1.setLesson(cwiczenia_a);
+        am_c1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            am_c1.setDate(format.parse("2017-02-08"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(am_c1);
+
+        Note am_c2 = new Note();
+        am_c2.setLesson(cwiczenia_a);
+        am_c2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            am_c2.setDate(format.parse("2017-02-15"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(am_c2);
+
+        Note alg_w1 = new Note();
+        alg_w1.setLesson(wyklad_alg);
+        alg_w1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            alg_w1.setDate(format.parse("2017-02-09"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(alg_w1);
+
+        Note alg_w2 = new Note();
+        alg_w2.setLesson(wyklad_alg);
+        alg_w2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            alg_w2.setDate(format.parse("2017-02-16"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(alg_w2);
+
+        Note alg_w3 = new Note();
+        alg_w3.setLesson(wyklad_alg);
+        alg_w3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            alg_w3.setDate(format.parse("2017-02-23"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(alg_w3);
+
+        Note alg_c1 = new Note();
+        alg_c1.setLesson(cwiczenia_alg);
+        alg_c1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            alg_c1.setDate(format.parse("2017-02-09"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(alg_c1);
+
+        Note alg_c2 = new Note();
+        alg_c2.setLesson(cwiczenia_alg);
+        alg_c2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            alg_c2.setDate(format.parse("2017-02-16"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(alg_c2);
+
+        Note md_w1 = new Note();
+        md_w1.setLesson(wyklad_dysk);
+        md_w1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            md_w1.setDate(format.parse("2017-02-08"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(md_w1);
+
+        Note md_w2 = new Note();
+        md_w2.setLesson(wyklad_alg);
+        md_w2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            md_w2.setDate(format.parse("2017-02-15"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(md_w2);
+
+        Note md_w3 = new Note();
+        md_w3.setLesson(wyklad_alg);
+        md_w3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            md_w3.setDate(format.parse("2017-02-22"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(md_w3);
+
+        Note md_c1 = new Note();
+        md_c1.setLesson(cwiczenia_alg);
+        md_c1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            md_c1.setDate(format.parse("2017-02-09"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(md_c1);
+
+        Note md_c2 = new Note();
+        md_c2.setLesson(cwiczenia_alg);
+        md_c2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
+        try{
+            md_c2.setDate(format.parse("2017-02-16"));
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+        noteRepository.save(md_c2);
+
+        //---------------- Prace domowe ----------//
+
+        Homework h1 = new Homework();
+        h1.setLesson(wyklad_a);
+        h1.setTitle("Doczytać na wykład");
+        h1.setText("Przykladowa treść pracy");
+        try {
+            h1.setDate(format.parse("2017-09-18"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        homeworkRepository.save(h1);
+
+        Homework h2 = new Homework();
+        h2.setLesson(cwiczenia_a);
+        h2.setTitle("Zrobić ćwiczenia");
+        h2.setText("Przykladowa treść pracy");
+        try {
+            h2.setDate(format.parse("2017-09-19"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        homeworkRepository.save(h2);
+
+        Homework h3 = new Homework();
+        h3.setLesson(cwiczenia_alg);
+        h3.setTitle("Schemat blokowy");
+        h3.setText("Przykladowa treść pracy");
+        try {
+            h3.setDate(format.parse("2017-09-20"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        homeworkRepository.save(h3);
+
+        Homework h4 = new Homework();
+        h4.setLesson(wyklad_alg);
+        h4.setTitle("Doczytać na wykład");
+        h4.setText("Przykladowa treść pracy");
+        try {
+            h4.setDate(format.parse("2017-09-21"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        homeworkRepository.save(h4);
+
+        Homework h5 = new Homework();
+        h5.setLesson(cwiczenia_dysk);
+        h5.setTitle("Zrobić ćwiczenia");
+        h5.setText("Przykladowa treść pracy");
+        try {
+            h5.setDate(format.parse("2017-09-21"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        homeworkRepository.save(h5);
+
+        Homework h6 = new Homework();
+        h6.setLesson(wyklad_dysk);
+        h6.setTitle("Doczytać na wykład");
+        h6.setText("Przykladowa treść pracy");
+        try {
+            h6.setDate(format.parse("2017-09-20"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        homeworkRepository.save(h6);
+
+//        Homework h7 = new Homework();
+//        h7.setLesson(wyklad_a);
+//        h7.setTitle("Doczytać na wykład");
+//        h7.setText("Przykladowa treść pracy");
+//        try {
+//            h7.setDate(format.parse("2017-09-18"));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        homeworkRepository.save(h7);
+//
+//        Homework h8 = new Homework();
+//        h8.setLesson(wyklad_a);
+//        h8.setTitle("Doczytać na wykład");
+//        h8.setText("Przykladowa treść pracy");
+//        try {
+//            h8.setDate(format.parse("2017-09-18"));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        homeworkRepository.save(h8);
+//
+//        Homework h9 = new Homework();
+//        h9.setLesson(wyklad_a);
+//        h9.setTitle("Doczytać na wykład");
+//        h9.setText("Przykladowa treść pracy");
+//        try {
+//            h9.setDate(format.parse("2017-09-18"));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        homeworkRepository.save(h9);
     }
+
+
+
+
+
 }

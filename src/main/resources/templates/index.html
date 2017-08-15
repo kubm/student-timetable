@@ -3,24 +3,49 @@
 <head>
     <title>Student Timetable</title>
     <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
-
+    <link href="../../static/css/timeline.css"
+          th:href="@{/css/timeline.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1><i class="fa fa-calendar fa-fw"></i>Nadchodzące Wydarzenia </h1>
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny</h1>
             <div class="row">
-                <!-- TODO: lista nadchodzących wydarzeń -->
+
+                <div class="col-lg-3 col-md-6" th:each="eval : ${evals}">
+                    <div class="card" th:classappend="'card-outline-'+${eval.lesson.subject.colour.name}">
+                        <div class="card-block" th:classappend="'card-'+${eval.lesson.subject.colour.name}">
+                            <div class="row">
+                                <div class="col-md-2" th:switch="${eval.evaluationType.nazwa}">
+                                    <i th:case="Egzamin" class="fa fa-pencil-square-o fa-5x text-white"></i>
+                                    <i th:case="Kolokwium" class="fa fa-check-square-o fa-5x text-white"></i>
+                                    <i th:case="*" class="fa fa-pencil-square fa-5x text-white"></i>
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="h2 text-right text-white" th:text="${eval.daysLeft}"></p>
+                                    <p class="text-right text-white">dni</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group list-group-flush text-warning">
+                            <div class="list-group-item justify-content-between">
+                                <h3 th:text="${eval.evaluationType.nazwa}" th:classappend="'text-'+${eval.lesson.subject.colour.name}"></h3>
+                                <p th:text="${eval.lesson.subject.name}+' - '+${eval.lesson.lessonType.nazwa}" th:classappend="'text-'+${eval.lesson.subject.colour.name}"></p>
+                                <small class="text-muted" th:text="${eval.dzien}+' '+${eval.hour}+' Sala: '+${eval.room.roomNumber}+'/'+${eval.room.building}"></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="row top-buffer">
             </div>
             <div class="row">
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-clock-o fa-fw"></i>Plan na dziś
+                            <i class="fa fa-clock-o fa-fw"></i>&nbsp;Plan na dziś
                         </div>
                         <ul class="list-group justify-content-between border" style="padding: 15px 15px 15px;">
                             <li class="list-group-item justify-content-between" th:each="lesson : ${todayLessons}">
@@ -31,11 +56,46 @@
                             <a href="#" th:href="@{/subjects}" class="btn btn-secondary btn-block">Wszystkie przedmioty</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-7">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-clock-o fa-fw"></i>Obłożenie tygodnia
+                            <i class="fa fa-sticky-note-o"></i>&nbsp;Notatki
+                        </div>
+                        <ul class="timeline" style="padding: 15px 15px 15px;">
+                            <li th:each="note,rowStat : ${notes}" th:class="${rowStat.odd}? 'timeline-inverted'" th:switch="${note.lesson.lessonType.nazwa}">
+                                <div class="timeline-badge" th:classappend="${note.lesson.subject.colour.name}">
+                                    <i th:case="wykłady" th:classappend="'fa fa-book'" aria-hidden="true"></i>
+                                    <i th:case="ćwiczenia" th:classappend="'fa fa-pencil-square-o'" aria-hidden="true"></i>
+                                    <i th:case="laboratoria" th:classappend="'fa fa-flask'" aria-hidden="true"></i>
+                                    <i th:case="*" th:classappend="'fa fa-check'" aria-hidden="true"></i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <span><h4 class="timeline-title" th:text="${note.lesson.subject.name}+' - '+${note.lesson.lessonType.nazwa}"></h4></span>
+                                        <span>
+                                            <a href="#" th:href="${'/note/edit/'+note.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil" th:classappend="'text-'+${note.lesson.subject.colour.name}" aria-hidden="true"></i></a>
+                                            <i>&nbsp;</i>
+                                            <a href="#" th:href="${'/note/delete-toindex/'+note.id}" data-toggle="tooltip" data-placement="top" title="Usuń"><i class="fa fa-trash-o" th:classappend="'text-'+${note.lesson.subject.colour.name}" aria-hidden="true"></i></a>
+                                        </span>
+                                        <p><small class="text-muted"><i class="fa fa-clock-o fa-fw"></i><th:block th:text="${note.date}"></th:block></small> </p>
+                                    </div>
+                                    <div class="timeline-body" th:text="${note.text}"></div>
+                                </div>
+                            </li>
+                            <li class="timeline-inverted">
+                                <a class="timeline-badge primary" href="#" th:href="@{notes/new}">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <div class="timeline-panel">
+                                    <h4 class="timeline-title text-center">Dodaj notatkę</h4>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-tasks"></i>&nbsp;Obłożenie tygodnia
                         </div>
                         <div class="card-block">
                             <div class="progress">
@@ -60,9 +120,77 @@
                             <div class="row top-buffer_small"></div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fa fa-bell fa-fw"></i>&nbsp;Prace domowe
+                        </div>
+                        <ul class="list-group justify-content-between border" style="padding: 15px 15px 15px;">
+                            <li class="list-group-item justify-content-between" th:each="homework : ${homeworks}">
+                                <span>
+                                    <th:block th:text="${homework.title}+' ('+${homework.lesson.subject.name}+' - '+${homework.lesson.lessonType.nazwa}+')'"></th:block>&nbsp;<i th:text="${homework.date}"></i>
+                                    <a href="#" th:href="${'/homework/edit/'+homework.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil text-amaranth" aria-hidden="true"></i></a>
+                                    <a href="#" th:href="${'/homework/delete/'+homework.id}" data-toggle="tooltip" data-placement="top" title="Zadanie wykonane"><i class="fa fa-check-square-o text-amaranth" aria-hidden="true"></i></a>
+                                </span>
+                                <button type="button" class="btn btn-danger" data-container="body" data-toggle="popover" data-placement="left" th:attr="data-content=${homework.text}, title=${homework.title}">
+                                    Szczegóły
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="card-block" style="padding-top:0px;padding-bottom: 15px;">
+                            <!--<a href="#" th:href="@{/subjects}" class="btn btn-secondary btn-block">Dodaj pracę domową</a>-->
+                            <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#homeworkModal">Dodaj pracę domową</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+
+            </div>
         </main>
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" th:attr="id='homeworkModal'">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:text="'Dodaj pracę domową'"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:object="${homework}" th:action="@{/homework}" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" th:field="*{id}"/>
+                            <div class="form-group">
+                                <label th:attr="for='homework-name'">Tytuł</label>
+                                <input class="form-control" type="text" value="Tytuł" th:field="*{title}" id="homework-name"/>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label th:attr="for='content_note'">Treść</label>
+                                    <textarea class="form-control" id="content_note" rows="4" th:field="*{text}"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label th:attr="for='lesson-select'">Zajęcia</label>
+                                <select class="form-control" id="lesson-select" th:field="*{lesson}" >
+                                    <option th:each="lesson : ${lessons}"
+                                            th:value="${lesson.id}"
+                                            th:text="${lesson.subject.name}+' - '+${lesson.lessonType.nazwa}">Wireframe</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="homework-date">Data</label>
+                                <input class="form-control" id="homework-date" type="date" th:field="*{date}"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-secondary btn" data-dismiss="modal">Zamknij</button>
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface NoteRepository extends CrudRepository<Note,Integer>{
     List<Note> findByLesson(Lesson lesson);
+    List<Note> findAllByOrderByDateDesc();
+    List<Note> findTop5ByOrderByDateDesc();
 }

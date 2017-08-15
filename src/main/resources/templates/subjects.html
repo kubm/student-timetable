@@ -16,9 +16,9 @@
                         <div class="card-block text-white" th:classappend="'card-'+${subject.colour.name}">
                             <span class="h4" th:text="${subject.name}"></span>
                             <span class="float-right">
-                            <a href="#" th:href="${'/subject/edit/'+subject.id}"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
+                            <a href="#" th:href="${'/subject/edit/'+subject.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
                             <i>&nbsp;</i>
-                            <a href="#" th:href="${'/subject/delete/'+subject.id}"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
+                            <a href="#" th:href="${'/subject/delete/'+subject.id}" data-toggle="tooltip" data-placement="top" title="Usuń"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
                         </span>
                         </div>
                         <ul class="list-group list-group-flush" th:classappend="'text-'+${subject.colour.name}">
@@ -32,11 +32,11 @@
                                     <small class="text-muted" th:case="*" th:text="'WTF? - '+${lesson.start_hour}+'/'+${lesson.teacher.name}+' '+${lesson.teacher.surname}+'/'+${lesson.room.roomNumber}+' ('+${lesson.room.building}+')'"></small>
                                 </span>
                                 <span class="float-right">
-                                    <a href="#" th:href="${'/notes/subject/'+lesson.id}"><i class="fa fa-sticky-note-o" aria-hidden="true" th:classappend="'text-'+${subject.colour.name}"></i></a>
+                                    <a href="#" th:href="${'/notes/subject/'+lesson.id}" data-toggle="tooltip" data-placement="top" title="Notatki"><i class="fa fa-sticky-note-o" aria-hidden="true" th:classappend="'text-'+${subject.colour.name}"></i></a>
                                     <i>&nbsp;</i>
-                                    <a href="#" th:href="${'/lesson/edit/'+lesson.id}"><i class="fa fa-pencil" th:classappend="'text-'+${subject.colour.name}" aria-hidden="true"></i></a>
+                                    <a href="#" th:href="${'/lesson/edit/'+lesson.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil" th:classappend="'text-'+${subject.colour.name}" aria-hidden="true"></i></a>
                                     <i>&nbsp;</i>
-                                    <a href="#" th:href="${'/lesson/delete/'+lesson.id}"><i class="fa fa-trash-o" th:classappend="'text-'+${subject.colour.name}" aria-hidden="true"></i></a>
+                                    <a href="#" th:href="${'/lesson/delete/'+lesson.id}" data-toggle="tooltip" data-placement="top" title="Usuń"><i class="fa fa-trash-o" th:classappend="'text-'+${subject.colour.name}" aria-hidden="true"></i></a>
                                 </span>
 
                             </li>

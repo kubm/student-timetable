@@ -45,4 +45,14 @@ public class NoteServiceImpl implements NoteService {
     public List<Note> findByLesson(Lesson lesson) {
         return noteRepository.findByLesson(lesson);
     }
+
+    @Override
+    public List<Note> listOrderedByDate() {
+        return noteRepository.findAllByOrderByDateDesc();
+    }
+
+    @Override
+    public List<Note> listTop5OrderedByDate() {
+        return noteRepository.findTop5ByOrderByDateDesc();
+    }
 }

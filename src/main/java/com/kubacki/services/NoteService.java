@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface NoteService extends CRUDService<Note>{
     List<Note> findByLesson(Lesson lesson);
+    List<Note> listOrderedByDate();
+    List<Note> listTop5OrderedByDate();
 }
