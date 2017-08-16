@@ -117,6 +117,7 @@ public class IndexController {
 
     @RequestMapping("/subjects")
     public String subjects(Model model){
+
         model.addAttribute("subjects", subjectService.listAll());
         model.addAttribute("subject", new Subject());
         model.addAttribute("lessons", lessonService.findAllByOrderByWeekDayAsc());
@@ -148,6 +149,20 @@ public class IndexController {
         model.addAttribute("lesson", lessonService.getById(id));
         model.addAttribute("lessons",lessonService.listAll());
         return "notes";
+    }
+
+    @RequestMapping("/rooms")
+    public String rooms(Model model){
+//        List<Room> rooms = roomService.findAll();
+//        List<Room> roomsModified = new ArrayList<>();
+//        rooms.forEach(room -> {
+//            if (room.getRoomNumber() != "" && room.getBuilding()!=""){
+//                roomsModified.add(room);
+//            }
+//        });
+        model.addAttribute("rooms",roomService.listAll());
+        model.addAttribute("room", new Room());
+        return "rooms";
     }
 
     //-------- JSONs ----------//
@@ -201,6 +216,12 @@ public class IndexController {
         return "redirect:/evals";
     }
 
+    @RequestMapping(value = "room", method = RequestMethod.POST)
+    public String saveRoom(Room room){
+        roomService.saveOrUpdate(room);
+        return "redirect:/rooms";
+    }
+
     //--------- Edycja ----------//
     @RequestMapping("subject/edit/{id}")
     public String editSubject(@PathVariable Integer id, Model model){
@@ -241,6 +262,12 @@ public class IndexController {
         model.addAttribute("note", noteService.getById(id));
 
         return "noteform";
+    }
+
+    @RequestMapping("room/edit/{id}")
+    public String editRoom(@PathVariable Integer id, Model model){
+        model.addAttribute("room", roomService.getById(id));
+        return "roomform";
     }
 
 
@@ -291,6 +318,25 @@ public class IndexController {
     public String deleteNoteToIndex(@PathVariable Integer id){
         noteService.delete(id);
         return "redirect:/";
+    }
+
+    @RequestMapping("/room/delete/{id}")
+    public String deleteRoom(@PathVariable Integer id){
+        //Integer newid = 0;
+        Integer newid;
+        Integer tmp;
+        if (roomService.getById(id+1)!=null){
+            tmp = id+1;
+        } else {
+            tmp = id-1;
+        }
+        newid = tmp;
+        List<Lesson> lessons = lessonService.findByRoom(roomService.getById(id));
+        List<Evaluation> evaluations = evaluationService.findByRoom(roomService.getById(id));
+        lessons.forEach(lesson -> lesson.setRoom(roomService.getById(newid)));
+        evaluations.forEach(evaluation -> evaluation.setRoom(roomService.getById(newid)));
+        roomService.delete(id);
+        return "redirect:/rooms";
     }
 
 

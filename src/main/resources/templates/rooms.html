@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
+            <h1><i class="fa fa-book fa-fw"></i> Pokoje</h1>
+            <div class="row" th:each="roomChunks : ${T(com.google.common.collect.Lists).partition(rooms,2)}">
+                <div class="col-lg-5 col-md-10" th:each="room : ${roomChunks}">
+                    <div class="card" th:classappend="'card-outline-primary'">
+                        <div class="card-block text-white" th:classappend="'card-primary'">
+                            <span class="h4" th:text="${room.roomNumber}"></span>
+                            <span class="float-right">
+                            <a href="#" th:href="${'/room/edit/'+room.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
+                            <i>&nbsp;</i>
+                            <a href="#" th:href="${'/room/delete/'+room.id}" data-toggle="tooltip" data-placement="top" title="Usuń"><i class="fa fa-trash-o text-white" aria-hidden="true"></i></a>
+                        </span>
+                        </div>
+                        <ul class="list-group list-group-flush" th:classappend="'text-primary'">
+                            <li class="list-group-item justify-content-between">
+                                <b>Numer pokoju: </b><th:block th:text="${room.roomNumber}"></th:block>
+                            </li>
+                            <li class="list-group-item justify-content-between">
+                                <b>Budynek</b><th:block th:text="${room.building}"></th:block>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-primary btn" type="button" data-toggle="modal" data-target="#roomModal">
+                Dodaj Pokój
+            </button>
+        </main>
+
+        <!--Modal (dodawanie przedmiotu)-->
+        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" th:attr="id='roomModal'">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" th:text="'Dodaj pokój'"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form th:object="${room}" th:action="@{/room}" method="post">
+                        <div class="modal-body">
+                            <input type="hidden" th:field="*{id}"/>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label th:attr="for='number'">Numer pokoju</label>
+                                    <input class="form-control" type="text" th:attr="id='number'" th:field="*{roomNumber}"/>
+                                </div>
+                                <div class="col-6">
+                                    <label th:attr="for='building'">Budynek</label>
+                                    <input class="form-control" type="text" th:attr="id='building'" th:field="*{building}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn-secondary btn" data-dismiss="modal">Zamknij</button>
+                            <button type="submit" class="btn btn-primary">Zapisz</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

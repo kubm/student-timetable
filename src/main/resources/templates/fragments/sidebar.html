@@ -41,7 +41,7 @@
                 <a class="nav-link text-muted" href="#"><i class="fa fa-calendar fa-fw"></i> Kalendarz</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted" href="#"><i class="fa fa-map-marker fa-fw"></i> Sale</a>
+                <a class="nav-link" href="#" th:href="@{/rooms}" th:classappend="|${#httpServletRequest.requestURI=='/rooms'? 'active': ''} ${#httpServletRequest.requestURI!='/rooms'? 'text-muted' : ''}|"><i class="fa fa-map-marker fa-fw"></i> Sale</a>
             </li>
         </ul>
     </nav>

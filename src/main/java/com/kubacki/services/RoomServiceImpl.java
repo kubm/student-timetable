@@ -5,6 +5,8 @@ import com.kubacki.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by KUBACM on 2017-07-16.
  */
@@ -35,5 +37,10 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public void delete(Integer id) {
         roomRepository.delete(id);
+    }
+
+    @Override
+    public List<Room> findAll() {
+        return roomRepository.findAllBy();
     }
 }
