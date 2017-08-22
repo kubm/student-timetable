@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+    <link href="../../static/css/timeline.css"
+          th:href="@{/css/timeline.css}" rel="stylesheet" type="text/css"/>
+</head>
+<link href="../static/vendor/scheduler/dhtmlxscheduler.css"
+      th:href="@{/vendor/scheduler/dhtmlxscheduler.css}" rel="stylesheet" type="text/css"/>
+
+<script src="../static/vendor/scheduler/dhtmlxscheduler.js"
+        th:src="@{/vendor/scheduler/dhtmlxscheduler.js}" type="text/javascript"></script>
+<script src="../static/vendor/scheduler/sources/ext/dhtmlxscheduler_recurring.js"
+        th:src="@{/vendor/scheduler/sources/ext/dhtmlxscheduler_recurring.js}" type="text/javascript"></script>
+<!-- TODO: add colours to events-->
+
+<script type="text/javascript" charset="utf-8">
+    function init() {
+        scheduler.init('scheduler_here', new Date(),"month");
+        scheduler.load("/lessonsJSON","json");
+//        scheduler.parse([{"id":1,"title":"Analiza Matematyczna - ćwiczenia","start_date":"01/03/2017 08:15","end_date":"06/20/2017 09:45","allDay":false},{"id":2,"title":"Analiza Matematyczna - wykłady","start_date":"01/02/2017 09:15","end_date":"06/19/2017 10:45","allDay":false},{"id":3,"title":"Algorytmy i struktury danych - ćwiczenia","start_date":"01/04/2017 08:15","end_date":"06/21/2017 09:45","allDay":false},{"id":4,"title":"Algorytmy i struktury danych - wykłady","start_date":"01/05/2017 12:15","end_date":"06/22/2017 13:45","allDay":false},{"id":5,"title":"Fizyka - laboratoria","start_date":"01/05/2017 08:15","end_date":"06/22/2017 09:45","allDay":false},{"id":6,"title":"Matematyka Dyskretna - wykłady","start_date":"01/04/2017 09:15","end_date":"06/21/2017 10:45","allDay":false},{"id":7,"title":"Matematyka Dyskretna - ćwiczenia","start_date":"01/05/2017 14:15","end_date":"06/22/2017 15:45","allDay":false},{"id":8,"title":"BHP - wykłady","start_date":"01/06/2017 08:15","end_date":"06/23/2017 09:45","allDay":false}],"json");
+    }
+</script>
+<body onload="init();"><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny</h1>
+            <div class="row"> <!-- top row -->
+            </div>
+
+            <div class="row top-buffer">
+            </div>
+            <div class="container-fluid"><!-- bottom row -->
+                <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:800px; padding:0px;'>
+                    <div class="dhx_cal_navline">
+                        <div class="dhx_cal_prev_button">&nbsp;</div>
+                        <div class="dhx_cal_next_button">&nbsp;</div>
+                        <div class="dhx_cal_today_button"></div>
+                        <div class="dhx_cal_date"></div>
+                        <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+                        <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
+                        <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+                    </div>
+                    <div class="dhx_cal_header">
+
+                    </div>
+                    <div class="dhx_cal_data">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+
+            </div>
+        </main>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,32 +1,55 @@
 package com.kubacki.domain;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LessonList implements Serializable{
     private Integer id;
-    private String title;
-    private String start;
-    private String end;
+    private String start_date;
+    private String end_date;
+    private String text;
+    private String details;
+    private String rec_type;
+    private Long event_length;
+    private Integer event_pid;
     private boolean allDay;
 
 
 
 
 
+
+
     public LessonList(Integer id, String subject, String type, Date start, Date end, String startTime, String endTime){
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        Date startTimeDate = new Date();
+        Date endTimeDate = new Date();
+        try {
+            startTimeDate = timeFormat.parse(startTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            endTimeDate = timeFormat.parse(endTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         this.id = id;
-        this.title = subject+" - "+type;
+        this.text = subject+" - "+type;
         String startDateString = df.format(start);
         String endDateString = df.format(end);
 
-        this.start = startDateString+" "+startTime;
-        this.end = endDateString+" "+endTime;
+        this.start_date = startDateString+" "+startTime;
+        this.end_date = endDateString+" "+endTime;
         this.allDay=false;
+        this.event_length=(endTimeDate.getTime()-startTimeDate.getTime())/1000;
+        this.details="";
+        this.event_pid=0;
+        this.rec_type="day_7___";
 
     }
 
@@ -38,28 +61,28 @@ public class LessonList implements Serializable{
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getText() {
+        return text;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getStart() {
-        return start;
+    public String getStart_date() {
+        return start_date;
     }
 
-    public void setStart(String start) {
-        this.start = start;
+    public void setStart_date(String start_date) {
+        this.start_date = start_date;
     }
 
-    public String getEnd() {
-        return end;
+    public String getEnd_date() {
+        return end_date;
     }
 
-    public void setEnd(String end) {
-        this.end = end;
+    public void setEnd_date(String end_date) {
+        this.end_date = end_date;
     }
 
     public boolean getAllDay() {
@@ -68,5 +91,37 @@ public class LessonList implements Serializable{
 
     public void setAllDay(boolean allDay) {
         this.allDay = allDay;
+    }
+
+    public String getRec_type() {
+        return rec_type;
+    }
+
+    public void setRec_type(String rec_type) {
+        this.rec_type = rec_type;
+    }
+
+    public Long getEvent_length() {
+        return event_length;
+    }
+
+    public void setEvent_length(Long event_length) {
+        this.event_length = event_length;
+    }
+
+    public Integer getEvent_pid() {
+        return event_pid;
+    }
+
+    public void setEvent_pid(Integer event_pid) {
+        this.event_pid = event_pid;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

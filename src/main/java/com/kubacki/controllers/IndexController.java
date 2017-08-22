@@ -97,6 +97,11 @@ public class IndexController {
         this.teacherService = teacherService;
     }
 
+    @RequestMapping("/calendar")
+    public String calendarView(Model model){
+        return "calendar";
+    }
+
     @RequestMapping("/")
     public String index(Model model)
     {
