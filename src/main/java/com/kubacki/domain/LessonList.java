@@ -15,6 +15,7 @@ public class LessonList implements Serializable{
     private String rec_type;
     private Long event_length;
     private Integer event_pid;
+    private String type;
     private boolean allDay;
 
 
@@ -23,7 +24,7 @@ public class LessonList implements Serializable{
 
 
 
-    public LessonList(Integer id, String subject, String type, Date start, Date end, String startTime, String endTime){
+    public LessonList(Integer id, String subject, String type, Date start, Date end, String startTime, String endTime, Colour colour){
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm");
         Date startTimeDate = new Date();
@@ -50,6 +51,7 @@ public class LessonList implements Serializable{
         this.details="";
         this.event_pid=0;
         this.rec_type="day_7___";
+        this.type=colour.getName();
 
     }
 
@@ -123,5 +125,13 @@ public class LessonList implements Serializable{
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

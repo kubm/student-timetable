@@ -17,6 +17,38 @@
 
 <script type="text/javascript" charset="utf-8">
     function init() {
+        scheduler.templates.event_class = function (start, end, event) {
+//            if(event.type == "pomegranate")return "pomegranate";
+//            TODO: add readonly
+//            TODO: add additional source - events
+            if(scheduler.getState().mode == 'month'){
+                if (event.type == "pomegranate") return "dhx_cal_event_line pomegranate"
+                if(event.type == "amaranth")return "dhx_cal_event_line amaranth";
+                if(event.type == "seance")return "dhx_cal_event_line seance";
+                if(event.type == "purpleheart")return "dhx_cal_event_line purpleheart";
+                if(event.type == "sanmarino")return "dhx_cal_event_line sanmarino";
+                if(event.type == "dodgerblue")return "dhx_cal_event_line dodgerblue";
+                if(event.type == "seagull")return "dhx_cal_event_line seagull";
+                if(event.type == "sushi")return "dhx_cal_event_line sushi";
+                if(event.type == "amber")return "dhx_cal_event_line amber";
+                if(event.type == "pizazz")return "dhx_cal_event_line pizazz";
+                if(event.type == "deep-orange")return "dhx_cal_event_line deep-orange";
+                if(event.type == "persiangreen")return "dhx_cal_event_line persiangreen";
+            }
+            if(event.type == "pomegranate")return "pomegranate";
+            if(event.type == "amaranth")return "amaranth";
+            if(event.type == "seance")return "seance";
+            if(event.type == "purpleheart")return "purpleheart";
+            if(event.type == "sanmarino")return "sanmarino";
+            if(event.type == "dodgerblue")return "dodgerblue";
+            if(event.type == "seagull")return "seagull";
+            if(event.type == "sushi")return "sushi";
+            if(event.type == "amber")return "amber";
+            if(event.type == "pizazz")return "pizazz";
+            if(event.type == "deep-orange")return "deep-orange";
+            if(event.type == "persiangreen")return "persiangreen";
+
+        };
         scheduler.init('scheduler_here', new Date(),"month");
         scheduler.load("/lessonsJSON","json");
 //        scheduler.parse([{"id":1,"title":"Analiza Matematyczna - ćwiczenia","start_date":"01/03/2017 08:15","end_date":"06/20/2017 09:45","allDay":false},{"id":2,"title":"Analiza Matematyczna - wykłady","start_date":"01/02/2017 09:15","end_date":"06/19/2017 10:45","allDay":false},{"id":3,"title":"Algorytmy i struktury danych - ćwiczenia","start_date":"01/04/2017 08:15","end_date":"06/21/2017 09:45","allDay":false},{"id":4,"title":"Algorytmy i struktury danych - wykłady","start_date":"01/05/2017 12:15","end_date":"06/22/2017 13:45","allDay":false},{"id":5,"title":"Fizyka - laboratoria","start_date":"01/05/2017 08:15","end_date":"06/22/2017 09:45","allDay":false},{"id":6,"title":"Matematyka Dyskretna - wykłady","start_date":"01/04/2017 09:15","end_date":"06/21/2017 10:45","allDay":false},{"id":7,"title":"Matematyka Dyskretna - ćwiczenia","start_date":"01/05/2017 14:15","end_date":"06/22/2017 15:45","allDay":false},{"id":8,"title":"BHP - wykłady","start_date":"01/06/2017 08:15","end_date":"06/23/2017 09:45","allDay":false}],"json");

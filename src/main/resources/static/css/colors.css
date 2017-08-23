@@ -358,3 +358,183 @@ a.bg-pizazz:focus, a.bg-pizazz:hover {
 a.bg-deep-orange:focus, a.bg-deep-orange:hover {
   background-color: #ee3900 !important;
 }
+
+.dhx_cal_event.pomegranate div{
+  background-color: #F44336!important;
+  color: white !important;
+}
+
+.dhx_cal_event.amaranth div{
+  background-color: #E91E63 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.seance div{
+  background-color: #9C27B0 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.purpleheart div{
+  background-color: #673AB7 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.sanmarino div{
+  background-color: #3F51B5 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.dodgerblue div{
+  background-color: #2196F3 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.seagull div{
+  background-color: #87CEEB !important;
+  color: white !important;
+}
+
+.dhx_cal_event.sushi div{
+  background-color: #8BC34A !important;
+  color: white !important;
+}
+
+.dhx_cal_event.amber div{
+  background-color: #FFC107 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.pizazz div{
+  background-color: #FF9800 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.deep-orange div{
+  background-color: #FF5722 !important;
+  color: white !important;
+}
+
+.dhx_cal_event.persiangreen div{
+  background-color: #009688 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.pomegranate{
+  background-color: #F44336!important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.amaranth{
+  background-color: #E91E63 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.seance{
+  background-color: #9C27B0 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.purpleheart{
+  background-color: #673AB7 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.sanmarino{
+  background-color: #3F51B5 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.dodgerblue{
+  background-color: #2196F3 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.seagull{
+  background-color: #87CEEB !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.sushi{
+  background-color: #8BC34A !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.amber{
+  background-color: #FFC107 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.pizazz{
+  background-color: #FF9800 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.deep-orange{
+  background-color: #FF5722 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_line.persiangreen{
+  background-color: #009688 !important;
+  color: white !important;
+}
+
+.dhx_cal_event_clear.pomegranate{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.amaranth{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.seance{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.purpleheart{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.sanmarino{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.dodgerblue{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.seagull{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.sushi{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.amber{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.pizazz{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.deep-orange{
+  color: white !important;
+
+}
+
+.dhx_cal_event_clear.persiangreen{
+  color: white !important;
+}
+
