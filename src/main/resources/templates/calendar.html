@@ -13,14 +13,21 @@
         th:src="@{/vendor/scheduler/dhtmlxscheduler.js}" type="text/javascript"></script>
 <script src="../static/vendor/scheduler/sources/ext/dhtmlxscheduler_recurring.js"
         th:src="@{/vendor/scheduler/sources/ext/dhtmlxscheduler_recurring.js}" type="text/javascript"></script>
-<!-- TODO: add colours to events-->
+<script src="../static/vendor/scheduler/ext/dhtmlxscheduler_tooltip.js"
+        th:src="@{/vendor/scheduler/ext/dhtmlxscheduler_tooltip.js}" type="text/javascript"></script>
+<script src="../static/vendor/scheduler/ext/dhtmlxscheduler_multisource.js"
+        th:src="@{/vendor/scheduler/ext/dhtmlxscheduler_multisource.js}" type="text/javascript"></script>
 
 <script type="text/javascript" charset="utf-8">
     function init() {
+        scheduler.config.first_hour=7;
+        scheduler.config.last_hour=21;
+        var format = scheduler.date.date_to_str("%Y-%m-%d %H:%i");
+        scheduler.templates.tooltip_text = function (start, end, event) {
+            return"<b>Wydarzenie:</b> "+event.text+"<br/><b>Data i godz. rozpoczęcia:</b> "+
+                    format(start)+"<br/><b>Data i godz. zakończenia:</b> "+format(end);
+        }
         scheduler.templates.event_class = function (start, end, event) {
-//            if(event.type == "pomegranate")return "pomegranate";
-//            TODO: add readonly
-//            TODO: add additional source - events
             if(scheduler.getState().mode == 'month'){
                 if (event.type == "pomegranate") return "dhx_cal_event_line pomegranate"
                 if(event.type == "amaranth")return "dhx_cal_event_line amaranth";
@@ -49,8 +56,9 @@
             if(event.type == "persiangreen")return "persiangreen";
 
         };
+        scheduler.config.readonly = true;
         scheduler.init('scheduler_here', new Date(),"month");
-        scheduler.load("/lessonsJSON","json");
+        scheduler.load(["/eventsJSON","/lessonsJSON"],"json");
 //        scheduler.parse([{"id":1,"title":"Analiza Matematyczna - ćwiczenia","start_date":"01/03/2017 08:15","end_date":"06/20/2017 09:45","allDay":false},{"id":2,"title":"Analiza Matematyczna - wykłady","start_date":"01/02/2017 09:15","end_date":"06/19/2017 10:45","allDay":false},{"id":3,"title":"Algorytmy i struktury danych - ćwiczenia","start_date":"01/04/2017 08:15","end_date":"06/21/2017 09:45","allDay":false},{"id":4,"title":"Algorytmy i struktury danych - wykłady","start_date":"01/05/2017 12:15","end_date":"06/22/2017 13:45","allDay":false},{"id":5,"title":"Fizyka - laboratoria","start_date":"01/05/2017 08:15","end_date":"06/22/2017 09:45","allDay":false},{"id":6,"title":"Matematyka Dyskretna - wykłady","start_date":"01/04/2017 09:15","end_date":"06/21/2017 10:45","allDay":false},{"id":7,"title":"Matematyka Dyskretna - ćwiczenia","start_date":"01/05/2017 14:15","end_date":"06/22/2017 15:45","allDay":false},{"id":8,"title":"BHP - wykłady","start_date":"01/06/2017 08:15","end_date":"06/23/2017 09:45","allDay":false}],"json");
     }
 </script>
@@ -58,7 +66,7 @@
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny</h1>
+            <h1><i class="fa fa-calendar fa-fw"></i>&nbsp;Kalendarz</h1>
             <div class="row"> <!-- top row -->
             </div>
 
@@ -71,7 +79,7 @@
                         <div class="dhx_cal_next_button">&nbsp;</div>
                         <div class="dhx_cal_today_button"></div>
                         <div class="dhx_cal_date"></div>
-                        <div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
+                        <!--<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>-->
                         <div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
                         <div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
                     </div>

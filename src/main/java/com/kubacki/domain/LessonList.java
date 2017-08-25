@@ -6,7 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class LessonList implements Serializable{
+public class LessonList implements Serializable, SchedulerEvent{
     private Integer id;
     private String start_date;
     private String end_date;
@@ -55,42 +55,52 @@ public class LessonList implements Serializable{
 
     }
 
+    @Override
     public Integer getId() {
         return id;
     }
 
+    @Override
     public void setId(Integer id) {
         this.id = id;
     }
 
+    @Override
     public String getText() {
         return text;
     }
 
+    @Override
     public void setText(String text) {
         this.text = text;
     }
 
+    @Override
     public String getStart_date() {
         return start_date;
     }
 
+    @Override
     public void setStart_date(String start_date) {
         this.start_date = start_date;
     }
 
+    @Override
     public String getEnd_date() {
         return end_date;
     }
 
+    @Override
     public void setEnd_date(String end_date) {
         this.end_date = end_date;
     }
 
+    @Override
     public boolean getAllDay() {
         return allDay;
     }
 
+    @Override
     public void setAllDay(boolean allDay) {
         this.allDay = allDay;
     }
@@ -119,18 +129,22 @@ public class LessonList implements Serializable{
         this.event_pid = event_pid;
     }
 
+    @Override
     public String getDetails() {
         return details;
     }
 
+    @Override
     public void setDetails(String details) {
         this.details = details;
     }
 
+    @Override
     public String getType() {
         return type;
     }
 
+    @Override
     public void setType(String type) {
         this.type = type;
     }

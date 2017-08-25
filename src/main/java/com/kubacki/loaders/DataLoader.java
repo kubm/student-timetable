@@ -441,6 +441,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
             e.printStackTrace();
         }
         analiza_eg.setHour("08:15");
+        analiza_eg.setEndHour("09:00");
         evaluationRepository.save(analiza_eg);
 
         Evaluation algorytmy_kol = new Evaluation();
@@ -453,6 +454,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
             e.printStackTrace();
         }
         algorytmy_kol.setHour("08:15");
+        algorytmy_kol.setEndHour("08:45");
         evaluationRepository.save(algorytmy_kol);
 
         Evaluation dyskretna_egz = new Evaluation();
@@ -465,6 +467,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
             e.printStackTrace();
         }
         dyskretna_egz.setHour("10:15");
+        dyskretna_egz.setEndHour("11:15");
         evaluationRepository.save(dyskretna_egz);
 
 

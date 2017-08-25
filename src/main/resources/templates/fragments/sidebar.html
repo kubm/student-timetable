@@ -38,11 +38,10 @@
                 <a class="nav-link" href="#" th:href="@{/evals}" th:classappend="|${#httpServletRequest.requestURI=='/evals'? 'active': ''} ${#httpServletRequest.requestURI!='/evals'? 'text-muted' : ''}|"><i class="fa fa-calendar-check-o fa-fw"></i> Zaliczenia</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-muted" href="#"><i class="fa fa-calendar fa-fw"></i> Kalendarz</a>
+                <a class="nav-link" href="#" th:href="@{/calendar}" th:classappend="|${#httpServletRequest.requestURI=='/calendar'? 'active': ''} ${#httpServletRequest.requestURI!='/calendar'? 'text-muted' : ''}|"><i class="fa fa-calendar fa-fw"></i> Kalendarz</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/rooms}" th:classappend="|${#httpServletRequest.requestURI=='/rooms'? 'active': ''} ${#httpServletRequest.requestURI!='/rooms'? 'text-muted' : ''}|"><i class="fa fa-map-marker fa-fw"></i> Sale</a>
-                <!-- TODO: Add link to calendar-->
             </li>
         </ul>
     </nav>
