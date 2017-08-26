@@ -115,6 +115,12 @@ public class IndexController {
         return "index";
     }
 
+    @RequestMapping("/calendar")
+    public String calendar(Model model)
+    {
+        return "calendar";
+    }
+
     @RequestMapping("/subjects")
     public String subjects(Model model){
 

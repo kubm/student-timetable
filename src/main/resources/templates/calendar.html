@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+    <link href="../../static/css/timeline.css"
+          th:href="@{/css/timeline.css}" rel="stylesheet" type="text/css"/>
+    <link href="../static/bower_components/fullcalendar/dist/fullcalendar.css"
+          th:href="@{/bower_components/fullcalendar/dist/fullcalendar.css}" rel="stylesheet" type="text/css"/>
+
+    <script src="../static/bower_components/moment/min/moment.min.js"
+            th:src="@{/bower_components/moment/min/moment.min.js}"></script>
+    <script src="../static/bower_components/fullcalendar/dist/fullcalendar.js"
+            th:src="@{/bower_components/fullcalendar/dist/fullcalendar.js}"></script>
+</head>
+<body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny</h1>
+            <div class="row">
+
+            </div>
+
+            <div class="row top-buffer">
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+        </main>
+
+    </div>
+</div>
+</body>
+</html>
