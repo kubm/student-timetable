@@ -320,8 +320,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        wyklad_a.setStart_hour("09:15");
-        wyklad_a.setEnd_hour("10:45");
+        wyklad_a.setStart_hour("10:15");
+        wyklad_a.setEnd_hour("11:45");
         wyklad_a.setLessonType(lectures);
         wyklad_a.setTeacher(apietrzak);
         wyklad_a.setRoom(e2);
@@ -388,8 +388,8 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         } catch (ParseException e){
             e.printStackTrace();
         }
-        wyklad_dysk.setStart_hour("09:15");
-        wyklad_dysk.setEnd_hour("10:45");
+        wyklad_dysk.setStart_hour("10:15");
+        wyklad_dysk.setEnd_hour("11:45");
         wyklad_dysk.setLessonType(lectures);
         wyklad_dysk.setTeacher(kwojcik);
         wyklad_dysk.setRoom(e1);

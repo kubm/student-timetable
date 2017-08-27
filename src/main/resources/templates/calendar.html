@@ -12,6 +12,34 @@
             th:src="@{/bower_components/moment/min/moment.min.js}"></script>
     <script src="../static/bower_components/fullcalendar/dist/fullcalendar.js"
             th:src="@{/bower_components/fullcalendar/dist/fullcalendar.js}"></script>
+    <script src="../static/bower_components/fullcalendar/dist/locale/pl.js"
+            th:src="@{/bower_components/fullcalendar/dist/locale/pl.js}"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+
+            $('#calendar').fullCalendar({
+                locale: 'pl',
+                defaultDate: moment(),
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'month',
+                eventRender: function(event, element, view){
+                    console.log(event.start.format());
+                    /*<![CDATA[*/
+                    return (event.ranges.filter(function(range){
+                        return (event.start.isBefore(range.end) &&
+                            event.end.isAfter(range.start));
+                    }).length)>0;
+                    /*]]>*/
+                },
+                events:'/lessonsJSON'
+            })
+        });
+    </script>
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
@@ -24,8 +52,8 @@
 
             <div class="row top-buffer">
             </div>
-            <div class="row">
-
+            <div class="row container-fluid">
+                <div id="calendar"></div>
             </div>
             <div class="row">
 
