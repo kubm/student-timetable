@@ -90,50 +90,62 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         //--------- Kolory -------------//
         Colour pomegranate = new Colour();
         pomegranate.setName("pomegranate");
+        pomegranate.setHex("#F44336");
         colourRepository.save(pomegranate);
 
         Colour amaranth = new Colour();
         amaranth.setName("amaranth");
+        amaranth.setHex("#E91E63");
         colourRepository.save(amaranth);
 
         Colour seance = new Colour();
         seance.setName("seance");
+        seance.setHex("#9C27B0");
         colourRepository.save(seance);
 
         Colour purpleheart = new Colour();
         purpleheart.setName("purpleheart");
+        purpleheart.setHex("#673AB7");
         colourRepository.save(purpleheart);
 
         Colour sanmarino = new Colour();
         sanmarino.setName("sanmarino");
+        sanmarino.setHex("#3F51B5");
         colourRepository.save(sanmarino);
 
         Colour dodgerblue = new Colour();
         dodgerblue.setName("dodgerblue");
+        dodgerblue.setHex("#2196F3");
         colourRepository.save(dodgerblue);
 
         Colour seagull = new Colour();
         seagull.setName("seagull");
+        seagull.setHex("#87CEEB");
         colourRepository.save(seagull);
 
         Colour sushi = new Colour();
         sushi.setName("sushi");
+        sushi.setHex("#8BC34A");
         colourRepository.save(sushi);
 
         Colour amber = new Colour();
         amber.setName("amber");
+        amber.setHex("#FFC107");
         colourRepository.save(amber);
 
         Colour pizazz = new Colour();
         pizazz.setName("pizazz");
+        pizazz.setHex("#FF9800");
         colourRepository.save(pizazz);
 
         Colour deepOrange = new Colour();
         deepOrange.setName("deep-orange");
+        deepOrange.setHex("#FF5722");
         colourRepository.save(deepOrange);
 
         Colour persiangreen = new Colour();
         persiangreen.setName("persiangreen");
+        persiangreen.setHex("#009688");
         colourRepository.save(persiangreen);
 
 
@@ -441,6 +453,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
             e.printStackTrace();
         }
         analiza_eg.setHour("08:15");
+        analiza_eg.setEndHour("09:45");
         evaluationRepository.save(analiza_eg);
 
         Evaluation algorytmy_kol = new Evaluation();
@@ -453,6 +466,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
             e.printStackTrace();
         }
         algorytmy_kol.setHour("08:15");
+        algorytmy_kol.setEndHour("08:45");
         evaluationRepository.save(algorytmy_kol);
 
         Evaluation dyskretna_egz = new Evaluation();
@@ -465,6 +479,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
             e.printStackTrace();
         }
         dyskretna_egz.setHour("10:15");
+        dyskretna_egz.setEndHour("11:30");
         evaluationRepository.save(dyskretna_egz);
 
 

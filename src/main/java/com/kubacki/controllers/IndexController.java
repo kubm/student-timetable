@@ -41,6 +41,12 @@ public class IndexController {
     private ColourService colourService;
     private EvaluationService evaluationService;
     private EvalTypeService evalTypeService;
+    private EventPrinterService eventPrinterService;
+
+    @Autowired
+    public void setEventPrinterService(EventPrinterService eventPrinterService) {
+        this.eventPrinterService = eventPrinterService;
+    }
 
     @Autowired
     public void setEvaluationService(EvaluationService evaluationService) {
@@ -176,6 +182,12 @@ public class IndexController {
     @ResponseBody
     List<LessonList> lessonsList(){
         return lessonPrinterService.findByQuery();
+    }
+
+    @RequestMapping(value="/eventsJSON", method = RequestMethod.GET,produces = "application/json")
+    @ResponseBody
+    List<EventList> eventList(){
+        return eventPrinterService.findByQuery();
     }
 
     //------- Dodawanie --------//

@@ -11,6 +11,8 @@ public class Colour implements DomainObject{
 
     private String name;
 
+    private String hex;
+
     @OneToMany(mappedBy = "colour")
     private Set<Subject> subjects;
 
@@ -43,5 +45,13 @@ public class Colour implements DomainObject{
         if(subject.getColour()!=this){
             subject.setColour(this);
         }
+    }
+
+    public String getHex() {
+        return hex;
+    }
+
+    public void setHex(String hex) {
+        this.hex = hex;
     }
 }

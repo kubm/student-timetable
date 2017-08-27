@@ -6,9 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -39,6 +37,8 @@ public class Evaluation implements DomainObject{
     private Date dzien;
 
     private String hour;
+
+    private String endHour;
 
     private Integer ocena;
 
@@ -119,5 +119,13 @@ public class Evaluation implements DomainObject{
 
     public void setDaysLeft(Integer daysLeft) {
         this.daysLeft = daysLeft;
+    }
+
+    public String getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour(String endHour) {
+        this.endHour = endHour;
     }
 }
