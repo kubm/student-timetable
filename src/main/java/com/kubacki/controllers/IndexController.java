@@ -270,6 +270,7 @@ public class IndexController {
 
     @RequestMapping("homework/edit/{id}")
     public String editHomework(@PathVariable Integer id, Model model){
+        model.addAttribute("note",noteService.getById(id));
         model.addAttribute("lessons", lessonService.listAll());
         model.addAttribute("homework", homeworkService.getById(id));
         return "homeworkform";

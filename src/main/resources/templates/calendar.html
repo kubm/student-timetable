@@ -19,6 +19,8 @@
         $(document).ready(function () {
 
             $('#calendar').fullCalendar({
+                minTime: "07:00:00",
+                maxTime: "21:00:00",
                 locale: 'pl',
                 defaultDate: moment(),
                 header: {
@@ -26,14 +28,17 @@
                     center: 'title',
                     right: 'month,agendaWeek,agendaDay'
                 },
+
                 defaultView: 'month',
                 eventRender: function(event, element, view){
+                    $(element).tooltip({title: event.title});
                     console.log(event.start.format());
                     /*<![CDATA[*/
                     return (event.ranges.filter(function(range){
                         return (event.start.isBefore(range.end) &&
                             event.end.isAfter(range.start));
                     }).length)>0;
+
                     /*]]>*/
                 },
                 eventSources:[
