@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Student Timetable</title>
     <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
 
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
-<div class="container-fluid">
+<div class="container-fluid" sec:authorize="isAuthenticated()">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
             <h1><i class="fa fa-book fa-fw"></i> Wszystkie przedmioty</h1>
@@ -157,5 +157,11 @@
         </div>
     </div>
 </div>
+<script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
+        th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+<script src="http://cdn.jsdelivr.net/webjars/tether/1.4.0/js/tether.min.js"
+        th:src="@{/webjars/tether/1.4.0/js/tether.min.js}"></script>
+<script src="http://cdn.jsdelivr.net/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/4.0.0-alpha.6-1/js/bootstrap.min.js}"></script>
 </body>
 </html>

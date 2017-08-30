@@ -389,6 +389,10 @@ public class IndexController {
         return "redirect:/teachers";
     }
 
+    //------------- Login ---------//
 
-
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "login";
+    }
 }
