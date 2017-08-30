@@ -1,9 +1,6 @@
 package com.kubacki.services;
 
-import com.kubacki.domain.Lesson;
-import com.kubacki.domain.LessonType;
-import com.kubacki.domain.Room;
-import com.kubacki.domain.Subject;
+import com.kubacki.domain.*;
 import com.kubacki.repositories.LessonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,5 +64,10 @@ public class LessonServiceImpl implements LessonService {
     @Override
     public List<Lesson> findByRoom(Room room) {
         return lessonRepository.findByRoom(room);
+    }
+
+    @Override
+    public List<Lesson> findByTeacher(Teacher teacher) {
+        return lessonRepository.findByTeacher(teacher);
     }
 }

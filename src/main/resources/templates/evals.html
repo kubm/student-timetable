@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
-            <h1><i class="fa fa-book fa-fw"></i> Zaliczenia</h1>
+            <h1><i class="fa fa-calendar-check-o fa-fw"></i> Zaliczenia</h1>
             <div class="row" th:each="evalChunks : ${T(com.google.common.collect.Lists).partition(evals,2)}">
                 <div class="col-lg-5 col-md-10" th:each="evaluation : ${evalChunks}">
                     <div class="card" th:classappend="'card-outline-'+${evaluation.lesson.subject.colour.name}">

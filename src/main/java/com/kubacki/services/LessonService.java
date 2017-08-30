@@ -1,9 +1,6 @@
 package com.kubacki.services;
 
-import com.kubacki.domain.Lesson;
-import com.kubacki.domain.LessonType;
-import com.kubacki.domain.Room;
-import com.kubacki.domain.Subject;
+import com.kubacki.domain.*;
 
 import java.util.List;
 
@@ -17,4 +14,5 @@ public interface LessonService extends CRUDService<Lesson>{
     List<Lesson> findAllByOrderByWeekDayAsc();
     List<Lesson> findByWeekDay(Integer weekDay);
     List<Lesson> findByRoom(Room room);
+    List<Lesson> findByTeacher(Teacher teacher);
 }

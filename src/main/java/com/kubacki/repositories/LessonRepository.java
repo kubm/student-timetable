@@ -1,9 +1,6 @@
 package com.kubacki.repositories;
 
-import com.kubacki.domain.Lesson;
-import com.kubacki.domain.LessonType;
-import com.kubacki.domain.Room;
-import com.kubacki.domain.Subject;
+import com.kubacki.domain.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 
@@ -18,5 +15,6 @@ public interface LessonRepository extends CrudRepository<Lesson,Integer>, JpaRep
     List<Lesson> findAllByOrderByWeekDayAsc();
     List<Lesson> findByWeekDay(Integer weekDay);
     List<Lesson> findByRoom(Room room);
+    List<Lesson> findByTeacher(Teacher teacher);
 
 }

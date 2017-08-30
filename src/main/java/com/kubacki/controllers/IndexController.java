@@ -177,6 +177,13 @@ public class IndexController {
         return "rooms";
     }
 
+    @RequestMapping("/teachers")
+    public String teachers(Model model){
+        model.addAttribute("teachers",teacherService.listAll());
+        model.addAttribute("teacher",new Teacher());
+        return "teachers";
+    }
+
     //-------- JSONs ----------//
     @RequestMapping(value="/lessonsJSON",method=RequestMethod.GET, produces = "application/json")
     @ResponseBody
@@ -289,6 +296,12 @@ public class IndexController {
         return "roomform";
     }
 
+    @RequestMapping("teacher/edit/{id}")
+    public String editTeacher(@PathVariable Integer id, Model model){
+        model.addAttribute("teacher", teacherService.getById(id));
+        return "teacherform";
+    }
+
 
 
     //------------- Usuwanie ---------//
@@ -356,6 +369,24 @@ public class IndexController {
         evaluations.forEach(evaluation -> evaluation.setRoom(roomService.getById(newid)));
         roomService.delete(id);
         return "redirect:/rooms";
+    }
+
+    @RequestMapping("/teacher/delete/{id}")
+    public String deleteTeacher(@PathVariable Integer id){
+        //Integer newid = 0;
+        Integer newid;
+        Integer tmp;
+        if (teacherService.getById(id+1)!=null){
+            tmp = id+1;
+        } else if (teacherService.getById(id-1)!= null) {
+            tmp = id-1;
+        }
+        else tmp=null;
+        newid = tmp;
+        List<Lesson> lessons = lessonService.findByTeacher(teacherService.getById(id));
+        lessons.forEach(lesson -> lesson.setTeacher(teacherService.getById(newid)));
+        teacherService.delete(id);
+        return "redirect:/teachers";
     }
 
 

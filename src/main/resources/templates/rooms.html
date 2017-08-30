@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
-            <h1><i class="fa fa-book fa-fw"></i> Pokoje</h1>
+            <h1><i class="fa fa-map-marker fa-fw"></i> Sale</h1>
             <div class="row" th:each="roomChunks : ${T(com.google.common.collect.Lists).partition(rooms,2)}">
                 <div class="col-lg-5 col-md-10" th:each="room : ${roomChunks}">
                     <div class="card" th:classappend="'card-outline-primary'">
