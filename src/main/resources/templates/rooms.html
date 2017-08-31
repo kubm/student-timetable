@@ -8,12 +8,12 @@
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main" >
             <h1><i class="fa fa-map-marker fa-fw"></i> Sale</h1>
             <div class="row" th:each="roomChunks : ${T(com.google.common.collect.Lists).partition(rooms,2)}">
                 <div class="col-lg-5 col-md-10" th:each="room : ${roomChunks}">
-                    <div class="card" th:classappend="'card-outline-primary'">
-                        <div class="card-block text-white" th:classappend="'card-primary'">
+                    <div class="card" th:classappend="'border-primary'">
+                        <div class="card-body text-white" th:classappend="'bg-primary'">
                             <span class="h4" th:text="${room.roomNumber}"></span>
                             <span class="float-right">
                             <a href="#" th:href="${'/room/edit/'+room.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil text-white" aria-hidden="true"></i></a>
@@ -72,5 +72,6 @@
         </div>
     </div>
 </div>
+<!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
 </body>
 </html>

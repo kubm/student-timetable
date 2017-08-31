@@ -8,7 +8,7 @@
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3" >
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main" >
             <h1><i class="fa fa-pencil fa-fw"></i><th:block th:text="'Nowa notatka'"></th:block></h1>
             <div class="row" >
                 <form th:object="${note}" th:action="@{/notenew}" method="post">
@@ -46,5 +46,6 @@
 
     </div>
 </div>
+<!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
 </body>
 </html>
