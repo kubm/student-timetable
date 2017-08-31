@@ -9,13 +9,13 @@
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
     <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
-        <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
             <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny</h1>
             <div class="row">
 
                 <div class="col-lg-3 col-md-6" th:each="eval : ${evals}">
-                    <div class="card" th:classappend="'card-outline-'+${eval.lesson.subject.colour.name}">
-                        <div class="card-block" th:classappend="'card-'+${eval.lesson.subject.colour.name}">
+                    <div class="card text-white" th:classappend="'border-'+${eval.lesson.subject.colour.name}">
+                        <div class="card-body" th:classappend="'bg-'+${eval.lesson.subject.colour.name}">
                             <div class="row">
                                 <div class="col-md-2" th:switch="${eval.evaluationType.nazwa}">
                                     <i th:case="Egzamin" class="fa fa-pencil-square-o fa-5x text-white"></i>
@@ -47,13 +47,13 @@
                         <div class="card-header">
                             <i class="fa fa-clock-o fa-fw"></i>&nbsp;Plan na dziś
                         </div>
-                        <ul class="list-group justify-content-between border" style="padding: 15px 15px 15px;">
-                            <li class="list-group-item justify-content-between" th:each="lesson : ${todayLessons}">
+                        <ul class="list-group d-flex justify-content-between" style="padding: 15px 15px 15px;">
+                            <li class="d-flex list-group-item justify-content-between" th:each="lesson : ${todayLessons}">
                                 <th:block th:text="${lesson.subject.name}+' - '+${lesson.lessonType.nazwa}"></th:block><i th:text="${lesson.start_hour}"></i>
                             </li>
                         </ul>
-                        <div class="card-block" style="padding-top:0px;padding-bottom: 15px;">
-                            <a href="#" th:href="@{/subjects}" class="btn btn-secondary btn-block">Wszystkie przedmioty</a>
+                        <div class="card-body" style="padding-top:0px;padding-bottom: 15px;">
+                            <a href="#" th:href="@{/subjects}" class="btn btn-secondary btn-lg btn-block">Wszystkie przedmioty</a>
                         </div>
                     </div>
                     <div class="card">
@@ -97,25 +97,25 @@
                         <div class="card-header">
                             <i class="fa fa-tasks"></i>&nbsp;Obłożenie tygodnia
                         </div>
-                        <div class="card-block">
+                        <div class="card-body">
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" th:attr="style='width: '+${lessonsMonday}+'%', aria-valuenow=${lessonsMonday}" aria-valuemin="0" aria-valuemax="100">Poniedziałek</div>
+                                <div class="progress-bar bg-success" role="progressbar" th:attr="style='height: 1.5rem;font-size: 1rem; width: '+${lessonsMonday}+'%', aria-valuenow=${lessonsMonday}" aria-valuemin="0" aria-valuemax="100" ><span class="align-middle">Poniedziałek</span></div>
                             </div>
                             <div class="row top-buffer_small"></div>
                             <div class="progress">
-                                <div class="progress-bar bg-info" role="progressbar" th:attr="style='width: '+${lessonsTuesday}+'%', aria-valuenow=${lessonsTuesday}" aria-valuemin="0" aria-valuemax="100">Wtorek</div>
+                                <div class="progress-bar bg-info" role="progressbar" th:attr="style='height: 1.5rem;font-size: 1rem; width: '+${lessonsTuesday}+'%', aria-valuenow=${lessonsTuesday}" aria-valuemin="0" aria-valuemax="100"><span class="align-middle">Wtorek</span></div>
                             </div>
                             <div class="row top-buffer_small"></div>
                             <div class="progress">
-                                <div class="progress-bar bg-warning" role="progressbar" th:attr="style='width: '+${lessonsWednesday}+'%', aria-valuenow=${lessonsWednesday}" aria-valuemin="0" aria-valuemax="100">Środa</div>
+                                <div class="progress-bar bg-warning" role="progressbar" th:attr="style='height: 1.5rem;font-size: 1rem; width: '+${lessonsWednesday}+'%', aria-valuenow=${lessonsWednesday}" aria-valuemin="0" aria-valuemax="100"><span class="align-middle">Środa</span></div>
                             </div>
                             <div class="row top-buffer_small"></div>
                             <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" th:attr="style='width: '+${lessonsThursday}+'%', aria-valuenow=${lessonsThursday}" aria-valuemin="0" aria-valuemax="100">Czwartek</div>
+                                <div class="progress-bar bg-danger" role="progressbar" th:attr="style='height: 1.5rem;font-size: 1rem; width: '+${lessonsThursday}+'%', aria-valuenow=${lessonsThursday}" aria-valuemin="0" aria-valuemax="100"><span class="align-middle">Czwartek</span></div>
                             </div>
                             <div class="row top-buffer_small"></div>
                             <div class="progress">
-                                <div class="progress-bar bg-seance" role="progressbar" th:attr="style='width: '+${lessonsFriday}+'%', aria-valuenow=${lessonsFriday}" aria-valuemin="0" aria-valuemax="100">Piątek</div>
+                                <div class="progress-bar bg-seance" role="progressbar" th:attr="style='height: 1.5rem;font-size: 1rem; width: '+${lessonsFriday}+'%', aria-valuenow=${lessonsFriday}" aria-valuemin="0" aria-valuemax="100"><span class="align-middle">Piątek</span></div>
                             </div>
                             <div class="row top-buffer_small"></div>
                         </div>
@@ -124,8 +124,8 @@
                         <div class="card-header">
                             <i class="fa fa-bell fa-fw"></i>&nbsp;Prace domowe
                         </div>
-                        <ul class="list-group justify-content-between border" style="padding: 15px 15px 15px;">
-                            <li class="list-group-item justify-content-between" th:each="homework : ${homeworks}">
+                        <ul class="list-group d-flex justify-content-between" style="padding: 15px 15px 15px;">
+                            <li class="list-group-item d-flex justify-content-between" th:each="homework : ${homeworks}">
                                 <span>
                                     <th:block th:text="${homework.title}+' ('+${homework.lesson.subject.name}+' - '+${homework.lesson.lessonType.nazwa}+')'"></th:block>&nbsp;<i th:text="${homework.date}"></i>
                                     <a href="#" th:href="${'/homework/edit/'+homework.id}" data-toggle="tooltip" data-placement="top" title="Edytuj"><i class="fa fa-pencil text-amaranth" aria-hidden="true"></i></a>
@@ -136,9 +136,9 @@
                                 </button>
                             </li>
                         </ul>
-                        <div class="card-block" style="padding-top:0px;padding-bottom: 15px;">
+                        <div class="card-body" style="padding-top:0px;padding-bottom: 15px;">
                             <!--<a href="#" th:href="@{/subjects}" class="btn btn-secondary btn-block">Dodaj pracę domową</a>-->
-                            <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#homeworkModal">Dodaj pracę domową</button>
+                            <button type="button" class="btn btn-secondary btn-lg btn-block" data-toggle="modal" data-target="#homeworkModal">Dodaj pracę domową</button>
                         </div>
                     </div>
                 </div>
@@ -193,5 +193,6 @@
         </div>
     </div>
 </div>
+<!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
 </body>
 </html>

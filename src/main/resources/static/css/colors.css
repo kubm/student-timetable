@@ -358,3 +358,51 @@ a.bg-pizazz:focus, a.bg-pizazz:hover {
 a.bg-deep-orange:focus, a.bg-deep-orange:hover {
   background-color: #ee3900 !important;
 }
+
+.border-pomegranate {
+  border-color: #F44336 !important
+}
+
+.border-amaranth {
+  border-color: #E91E63 !important;
+}
+
+.border-seance {
+  border-color: #9C27B0 !important;
+}
+
+.border-purpleheart {
+  border-color: #673AB7 !important;
+}
+
+.border-sanmarino {
+  border-color: #3F51B5 !important;
+}
+
+.border-dodgerblue {
+  border-color: #2196F3 !important;
+}
+
+.border-seagull {
+  border-color: #87CEEB !important;
+}
+
+.border-sushi {
+  border-color: #8BC34A !important;
+}
+
+.border-amber {
+  border-color: #FFC107 !important;
+}
+
+.border-pizazz {
+  border-color: #FF9800 !important;
+}
+
+.border-deep-orange {
+  border-color: #FF5722 !important;
+}
+
+.border-persiangreen {
+  border-color: #009688 !important;
+}

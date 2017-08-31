@@ -2,9 +2,9 @@
  * Base structure
  */
 
-/* Move down content because we have a fixed navbar that is 50px tall */
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
 body {
-  padding-top: 50px;
+  padding-top: 3.5rem;
 }
 
 /*
@@ -22,7 +22,6 @@ h1 {
  */
 
 .sidebar {
-  color: #fff;      
   position: fixed;
   top: 51px;
   bottom: 0;
@@ -60,7 +59,7 @@ h1 {
  * Dashboard
  */
 
- /* Placeholders */
+/* Placeholders */
 .placeholders {
   padding-bottom: 3rem;
 }
@@ -69,18 +68,3 @@ h1 {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
-
-.bg-light-grey {
-    background-color: #f1f1f1;
-}
-
-.top-buffer {
-    margin-top: 20px;
-}
-.top-buffer_small {
-    margin-top: 10px;
-}
-.card{
-  margin-bottom: 2rem;
-}
-
