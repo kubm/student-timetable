@@ -21,6 +21,10 @@ public class Room implements DomainObject{
     @OneToMany(mappedBy = "room")
     private Set<Evaluation> evaluations;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     //-------------- Getters & Setters ---------------------------//
 
 
@@ -70,5 +74,13 @@ public class Room implements DomainObject{
         if(evaluation.getRoom() != this){
             evaluation.setRoom(this);
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

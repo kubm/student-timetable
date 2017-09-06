@@ -3,6 +3,7 @@ package com.kubacki.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User extends AbstractDomainClass{
@@ -15,11 +16,20 @@ public class User extends AbstractDomainClass{
     private String encryptedPassword;
     private boolean enabled = true;
 
+    @OneToMany (mappedBy = "user")
+    private Set<Room> rooms;
+
+    @OneToMany (mappedBy = "user")
+    private Set<Subject> subjects;
+
+    @OneToMany (mappedBy = "user")
+    private Set<Teacher> teachers;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable
     private List<Role> roles = new ArrayList<>();
     private Integer failedLoginAttempts = 0;
-
+//---------------- Getters abd Setters ----------------//
     public String getUsername() {
         return username;
     }
@@ -85,5 +95,29 @@ public class User extends AbstractDomainClass{
 
     public void setFailedLoginAttempts(Integer failedLoginAttempts) {
         this.failedLoginAttempts = failedLoginAttempts;
+    }
+
+    public Set<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Set<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(Set<Teacher> teachers) {
+        this.teachers = teachers;
     }
 }

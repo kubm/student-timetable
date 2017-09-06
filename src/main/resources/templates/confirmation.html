@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc_bootstrap :: head"></th:block> /*/-->
+    <link href="../static/css/signin.css"
+          th:href="@{/css/signin.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="row justify-content-center">
+
+        <div class="card" style="margin-top: 25%">
+            <div class="card-header text-center">
+                <p class="h4">Rejestracja powiodła się</p>
+            </div>
+            <div class="card-body">
+                <a class="btn btn-primary" th:href="@{/}">Powrót do Logowania</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
+</body>
+</html>

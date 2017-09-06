@@ -22,6 +22,10 @@ public class Subject implements DomainObject{
     @JoinColumn(name = "colour_id")
     private Colour colour;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     //-------------- Getters & Setters ---------------------------//
 
     @Override
@@ -68,5 +72,13 @@ public class Subject implements DomainObject{
         if(lesson.getSubject() != this){
             lesson.setSubject(this);
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

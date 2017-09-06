@@ -99,10 +99,21 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         this.homeworkRepository = homeworkRepository;
     }
 
+//    private void loadUsers(){
+//        User user1 = new User();
+//        user1.setUsername("user");
+//        user1.setPassword("user");
+//        userService.saveOrUpdate(user1);
+//    }
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
 
-        loadUsers();
+        User user1 = new User();
+        user1.setUsername("user");
+        user1.setPassword("user");
+        userService.saveOrUpdate(user1);
+
         loadRoles();
         assignUsersToUserRole();
 
@@ -175,41 +186,49 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Room e1 = new Room();
         e1.setRoomNumber("E1");
         e1.setBuilding("A2");
+        e1.setUser(user1);
         roomRepository.save(e1);
 
         Room e2 = new Room();
         e2.setBuilding("A2");
         e2.setRoomNumber("E2");
+        e2.setUser(user1);
         roomRepository.save(e2);
 
         Room e5 = new Room();
         e5.setRoomNumber("E5");
         e5.setBuilding("A2");
+        e5.setUser(user1);
         roomRepository.save(e5);
 
         Room e6 = new Room();
         e6.setRoomNumber("E6");
         e6.setBuilding("A2");
+        e6.setUser(user1);
         roomRepository.save(e6);
 
         Room e101 = new Room();
         e101.setRoomNumber("E101");
         e101.setBuilding("A2");
+        e101.setUser(user1);
         roomRepository.save(e101);
 
         Room e102 = new Room();
         e102.setRoomNumber("E102");
         e102.setBuilding("A2");
+        e102.setUser(user1);
         roomRepository.save(e102);
 
         Room e105 = new Room();
         e105.setRoomNumber("E105");
         e105.setBuilding("A2");
+        e105.setUser(user1);
         roomRepository.save(e105);
 
         Room e106 = new Room();
         e106.setRoomNumber("E106");
         e106.setBuilding("A2");
+        e106.setUser(user1);
         roomRepository.save(e106);
 
 
@@ -222,6 +241,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         mmarian.setSurname("Marianowski");
         mmarian.setEmail("mmarian@p.lodz.pl");
         mmarian.setPhone("6543217");
+        mmarian.setUser(user1);
         teacherRepository.save(mmarian);
 
         Teacher jkowalska = new Teacher();
@@ -229,6 +249,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         jkowalska.setSurname("Kowalska");
         jkowalska.setEmail("jkowalska@p.lodz.pl");
         jkowalska.setPhone("65432118");
+        jkowalska.setUser(user1);
         teacherRepository.save(jkowalska);
 
         Teacher apietrzak = new Teacher();
@@ -236,6 +257,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         apietrzak.setSurname("Pietrzak");
         apietrzak.setEmail("apietrzak@p.lodz.pl");
         apietrzak.setPhone("6543219");
+        apietrzak.setUser(user1);
         teacherRepository.save(apietrzak);
 
         Teacher pnowak = new Teacher();
@@ -243,6 +265,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         pnowak.setSurname("Nowak");
         pnowak.setEmail("pnowak@p.lodz.pl");
         pnowak.setPhone("6543220");
+        pnowak.setUser(user1);
         teacherRepository.save(pnowak);
 
         Teacher kwojcik = new Teacher();
@@ -250,6 +273,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         kwojcik.setSurname("Wójcik");
         kwojcik.setEmail("kwojcik@p.lodz.pl");
         kwojcik.setPhone("6543221");
+        kwojcik.setUser(user1);
         teacherRepository.save(kwojcik);
 
         Teacher jstepien = new Teacher();
@@ -257,6 +281,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         jstepien.setSurname("Stępień");
         jstepien.setEmail("jstepien@p.lodz.pl");
         jstepien.setPhone("6543222");
+        jstepien.setUser(user1);
         teacherRepository.save(jstepien);
 
         Teacher hkwiecien = new Teacher();
@@ -264,6 +289,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         hkwiecien.setSurname("Kwiecień");
         hkwiecien.setEmail("hkwiecien@p.lodz.pl");
         hkwiecien.setPhone("6543223");
+        hkwiecien.setUser(user1);
         teacherRepository.save(hkwiecien);
 
         //----------- Typy Zajęć --------//
@@ -297,30 +323,35 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Subject analiza = new Subject();
         analiza.setName("Analiza Matematyczna");
         analiza.setColour(pomegranate);
+        analiza.setUser(user1);
         subjectRepository.save(analiza);
         log.info("Saved Analiza Matematyczna");
 
         Subject algorytmy = new Subject();
         algorytmy.setName("Algorytmy i struktury danych");
         algorytmy.setColour(amaranth);
+        algorytmy.setUser(user1);
         subjectRepository.save(algorytmy);
         log.info("Saved Algorytmy");
 
         Subject fizyka = new Subject();
         fizyka.setName("Fizyka");
         fizyka.setColour(seance);
+        fizyka.setUser(user1);
         subjectRepository.save(fizyka);
         log.info("Saved Fizyka");
 
         Subject dyskretna = new Subject();
         dyskretna.setName("Matematyka Dyskretna");
         dyskretna.setColour(sanmarino);
+        dyskretna.setUser(user1);
         subjectRepository.save(dyskretna);
         log.info("Saved Matematyka Dyskretna");
 
         Subject bhp = new Subject();
         bhp.setName("BHP");
         bhp.setColour(sushi);
+        bhp.setUser(user1);
         subjectRepository.save(bhp);
         log.info("Saved BHP");
 
@@ -758,12 +789,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 //        homeworkRepository.save(h9);
     }
 
-    private void loadUsers(){
-        User user1 = new User();
-        user1.setUsername("user");
-        user1.setPassword("user");
-        userService.saveOrUpdate(user1);
-    }
+
 
     private void loadRoles(){
         Role role = new Role();

@@ -70,4 +70,14 @@ public class LessonServiceImpl implements LessonService {
     public List<Lesson> findByTeacher(Teacher teacher) {
         return lessonRepository.findByTeacher(teacher);
     }
+
+    @Override
+    public List<Lesson> findBySubject_User_Id(Integer id) {
+        return lessonRepository.findBySubject_User_Id(id);
+    }
+
+    @Override
+    public List<Lesson> findByWeekDayAndSubject_User_Id(Integer weekDay, Integer id) {
+        return lessonRepository.findByWeekDayAndSubject_User_Id(weekDay,id);
+    }
 }

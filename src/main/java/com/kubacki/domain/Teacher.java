@@ -20,6 +20,10 @@ public class Teacher implements DomainObject{
     @OneToMany(mappedBy = "teacher")
     private Set<Lesson> lessons;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     //-------------- Getters & Setters ---------------------------//
 
 
@@ -74,5 +78,13 @@ public class Teacher implements DomainObject{
         if(lesson.getTeacher() != this){
             lesson.setTeacher(this);
         }
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

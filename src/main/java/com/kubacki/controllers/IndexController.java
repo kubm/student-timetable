@@ -3,6 +3,8 @@ package com.kubacki.controllers;
 import com.kubacki.domain.*;
 import com.kubacki.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -42,6 +45,18 @@ public class IndexController {
     private EvaluationService evaluationService;
     private EvalTypeService evalTypeService;
     private EventPrinterService eventPrinterService;
+    private UserService userService;
+    private RoleService roleService;
+
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired
     public void setEventPrinterService(EventPrinterService eventPrinterService) {
@@ -103,10 +118,18 @@ public class IndexController {
         this.teacherService = teacherService;
     }
 
+    @RequestMapping("/confirmation")
+    public String confirmation(Model model){
+        return "confirmation";
+    }
+
     @RequestMapping("/")
     public String index(Model model)
     {
-        model.addAttribute("todayLessons", lessonService.findByWeekDay(dayOfWeek));
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        model.addAttribute("todayLessons", lessonService.findByWeekDayAndSubject_User_Id(dayOfWeek,userId));
         model.addAttribute("lessonsMonday",floor(lessonPrinterService.numOfMinutes(2)/5.4));//minuty/45/12*100
         model.addAttribute("lessonsTuesday", floor(lessonPrinterService.numOfMinutes(3)/5.4));
         model.addAttribute("lessonsWednesday",floor(lessonPrinterService.numOfMinutes(4)/5.4));
@@ -117,6 +140,8 @@ public class IndexController {
         model.addAttribute("homeworks",homeworkService.listAll());
         model.addAttribute("homework", new Homework());
         model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
 
         return "index";
     }
@@ -198,6 +223,21 @@ public class IndexController {
     }
 
     //------- Dodawanie --------//
+
+    @RequestMapping("/register")
+    public String register(Model model){
+        model.addAttribute("user", new User());
+        return "register";
+    }
+
+    @RequestMapping(value = "registration", method = RequestMethod.POST)
+    public String registration(User user){
+//        List<Role> roles = roleService.findByRole("USER");
+//        user.setRoles(roles);
+        userService.saveOrUpdate(user);
+        return "redirect:/confirmation";
+    }
+
     @RequestMapping("/notes/new")
     public String addNewNote(Model model){
         model.addAttribute("note", new Note());
