@@ -2,6 +2,8 @@ package com.kubacki.loaders;
 
 import com.kubacki.domain.*;
 import com.kubacki.repositories.*;
+import com.kubacki.services.RoleService;
+import com.kubacki.services.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by KUBACM on 2017-07-15.
@@ -30,8 +33,20 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
     private ColourRepository colourRepository;
     private EvaluationRepository evaluationRepository;
     private NoteRepository noteRepository;
+    private UserService userService;
+    private RoleService roleService;
 
     private Logger log = Logger.getLogger(DataLoader.class);
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @Autowired
     public void setNoteRepository(NoteRepository noteRepository) {
@@ -86,6 +101,11 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
+
+        loadUsers();
+        loadRoles();
+        assignUsersToUserRole();
+
 
         //--------- Kolory -------------//
         Colour pomegranate = new Colour();
@@ -738,6 +758,34 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 //        homeworkRepository.save(h9);
     }
 
+    private void loadUsers(){
+        User user1 = new User();
+        user1.setUsername("user");
+        user1.setPassword("user");
+        userService.saveOrUpdate(user1);
+    }
+
+    private void loadRoles(){
+        Role role = new Role();
+        role.setRole("USER");
+        roleService.saveOrUpdate(role);
+    }
+
+    private void assignUsersToUserRole(){
+        List<Role> roles = (List<Role>)roleService.listAll();
+        List<User> users = (List<User>)userService.listAll();
+
+        roles.forEach(role -> {
+            if (role.getRole().equalsIgnoreCase("USER")) {
+                users.forEach(user -> {
+                    if(user.getUsername().equals("user")){
+                        user.addRole(role);
+                        userService.saveOrUpdate(user);
+                    }
+                });
+            }
+        });
+    }
 
 
 
