@@ -25,19 +25,19 @@
             <li class="nav-item">
                 <a class="nav-link" href="index.html" th:href="@{/}" th:classappend="|${#httpServletRequest.requestURI=='/'? 'active': ''} ${#httpServletRequest.requestURI!='/'? 'text-muted' : ''}|"><i class="fa fa-dashboard fa-fw"></i> Widok główny</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+            <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/subjects}" th:classappend="|${#httpServletRequest.requestURI=='/subjects'? 'active': ''} ${#httpServletRequest.requestURI!='/subjects'? 'text-muted' : ''}|"><i class="fa fa-book fa-fw"></i><span class="sr-only"></span> Przedmioty</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+            <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/evals}" th:classappend="|${#httpServletRequest.requestURI=='/evals'? 'active': ''} ${#httpServletRequest.requestURI!='/evals'? 'text-muted' : ''}|"><i class="fa fa-calendar-check-o fa-fw"></i> Zaliczenia</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+            <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/calendar}" th:classappend="|${#httpServletRequest.requestURI=='/calendar'? 'active': ''} ${#httpServletRequest.requestURI!='/calendar'? 'text-muted' : ''}|"><i class="fa fa-calendar fa-fw"></i> Kalendarz</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+            <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/rooms}" th:classappend="|${#httpServletRequest.requestURI=='/rooms'? 'active': ''} ${#httpServletRequest.requestURI!='/rooms'? 'text-muted' : ''}|"><i class="fa fa-map-marker fa-fw"></i> Sale</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAuthority('USER')">
+            <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/teachers}" th:classappend="|${#httpServletRequest.requestURI=='/teachers'? 'active': ''} ${#httpServletRequest.requestURI!='/teachers'? 'text-muted' : ''}|"><i class="fa fa-address-card fa-fw"></i> Nauczyciele</a>
             </li>
         </ul>

@@ -7,7 +7,7 @@
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid" sec:authorize="isAuthenticated()">
-    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+    <div class="row" sec:authorize="hasAuthority('USER')"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main" >
             <h1><i class="fa fa-book fa-fw"></i> Wszystkie przedmioty</h1>
             <div class="row" th:each="subjectChunks : ${T(com.google.common.collect.Lists).partition(subjects,2)}">
@@ -156,6 +156,60 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row" sec:authorize="hasAuthority('ADMIN')"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny: <th:block th:text="'Witaj administratorze'"></th:block></h1>
+            <div class="row" style="margin-top: 2rem">
+                <h2>Przedmioty</h2>
+                <table class="table table-responsive">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Nazwa</th>
+                        <th>Kolor</th>
+                        <th>Użytkownik</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="subject:${subjectsAll}" >
+                        <tr >
+                            <th scope="row" th:text="${subject.id}"></th>
+                            <!--<td><a data-toggle="collapse" th:attr="data-target='#lessons'+${subject.id}" th:text="${subject.name}" aria-expanded="false" th:attrappend="href='#lessons'+${subject.id}"></a> </td>-->
+                            <td th:text="${subject.name}"></td>
+                            <td th:classappend="'bg-'+${subject.colour.name}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td th:text="${subject.user.username}"></td>
+                            <td><a href="#" th:href="${'/subject/edit/'+subject.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                            <td><a href="#" th:href="${'/subject/delete/'+subject.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td th:attr="id='lessons'+${subject.id}" colspan="6">
+                                <table class="table" colspan="6">
+                                    <thead class="thead-inverse" colspan="6">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Rodzaj</th>
+                                    </tr>
+                                    </thead>
+                                    <!--TODO: Poprawić wygląd wewn. tabeli-->
+                                    <tbody>
+                                    <tr th:each="lesson : ${subject.lessons}">
+                                        <th scope="row" th:text="${lesson.id}"></th>
+                                        <td th:text="${lesson.lessonType.nazwa}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+
+                    <a class="btn btn-primary" href="#" th:href="${'subject/new'}">Dodaj użytkownika</a>
+            </div>
+        </main>
     </div>
 </div>
 <!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->

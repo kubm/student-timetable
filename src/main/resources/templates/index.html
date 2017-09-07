@@ -192,12 +192,12 @@
             </div>
         </div>
     </div>
-    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+    <div class="row" sec:authorize="hasAuthority('ADMIN')"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
             <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny: <th:block th:text="'Witaj administratorze'"></th:block></h1>
             <div class="row" style="margin-top: 2rem">
                 <h2>Użytkownicy</h2>
-                <table class="table">
+                <table class="table table-responsive">
                     <thead class="thead-inverse">
                     <tr>
                         <th>#</th>

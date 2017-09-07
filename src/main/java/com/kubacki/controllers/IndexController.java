@@ -194,6 +194,7 @@ public class IndexController {
         User currentUser = userService.getById(userId);
 
         model.addAttribute("subjects", subjectService.findByUser(currentUser));
+        model.addAttribute("subjectsAll",subjectService.listAll());
         model.addAttribute("subject", new Subject());
         model.addAttribute("lessons", lessonService.findAllBySubject_UserOrderByWeekDayAsc(currentUser));
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
