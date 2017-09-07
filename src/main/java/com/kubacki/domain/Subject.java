@@ -26,6 +26,7 @@ public class Subject implements DomainObject{
     @JoinColumn(name = "user_id")
     private User user;
 
+
     //-------------- Getters & Setters ---------------------------//
 
     @Override

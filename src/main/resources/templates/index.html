@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Student Timetable</title>
     <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
@@ -8,9 +8,9 @@
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
-    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+    <div class="row" sec:authorize="hasAuthority('USER')"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny<th:block th:text="' '+${username}+' ID: '+${userId}"></th:block></h1>
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny</h1>
             <div class="row">
 
                 <div class="col-lg-3 col-md-6" th:each="eval : ${evals}">
@@ -191,6 +191,43 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny: <th:block th:text="'Witaj administratorze'"></th:block></h1>
+            <div class="row" style="margin-top: 2rem">
+                <h2>Użytkownicy</h2>
+                <table class="table">
+                    <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Rola</th>
+                        <th>Data utworzenia</th>
+                        <th>Nieudane logowania</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="user:${users}">
+                        <th scope="row" th:text="${user.id}"></th>
+                        <td th:text="${user.username}"></td>
+                        <td th:text="${user.password}"></td>
+                        <td>
+                            <th:block th:each="role: ${user.roles}" th:text="${role.role}">&nbsp;</th:block>
+                        </td>
+                        <td th:text="${user.dateCreated}"></td>
+                        <td th:text="${user.failedLoginAttempts}"></td>
+                        <td><a href="#" th:href="${'/user/edit/'+user.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                        <td><a href="#" th:href="${'/user/delete/'+user.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a class="btn btn-primary" href="#" th:href="${'user/new'}">Dodaj użytkownika</a>
+            </div>
+        </main>
     </div>
 </div>
 <!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->

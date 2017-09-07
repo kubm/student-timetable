@@ -1,16 +1,27 @@
 package com.kubacki.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class User extends AbstractDomainClass{
+public class User{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer id;
 
+    @NotNull
+    @NotEmpty
     private String username;
 
 //    @Transient
+    @NotNull
+    @NotEmpty
     private String password;
 
     private String encryptedPassword;
@@ -119,5 +130,33 @@ public class User extends AbstractDomainClass{
 
     public void setTeachers(Set<Teacher> teachers) {
         this.teachers = teachers;
+    }
+
+    private Date dateCreated;
+    private Date lastUpdated;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    @PreUpdate
+    @PrePersist
+    public void updateTimeStamps(){
+        lastUpdated = new Date();
+        if (dateCreated == null){
+            dateCreated = new Date();
+        }
     }
 }

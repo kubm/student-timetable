@@ -20,12 +20,12 @@
                     <div class="form-group">
                         <!--<label for="loginInput">Login</label>-->
                         <input type="text" class="form-control" id="loginInput" placeholder="Podaj login" th:field="*{username}" required="required" autofocus="autofocus"/>
-                        <!--<small th:if="${param.error}" class="text-danger">Podaj prawidłowy login</small>-->
+                        <small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</small>
                     </div>
                     <div class="form-group">
                         <!--<label for="inputPassword1">Password</label>-->
                         <input type="password" class="form-control" id="inputPassword1" placeholder="Hasło" required="required" th:field="*{password}"/>
-                        <!--<small th:if="${param.error}" class="text-danger">Podaj prawidłowe hasło</small>-->
+                        <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{username}">Password error</small>
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </form>

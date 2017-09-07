@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Timetable</title>
+    <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+
+</head>
+<body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
+<div class="container-fluid">
+    <div class="row"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
+        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main" >
+            <h1><i class="fa fa-pencil fa-fw"></i><th:block th:text="'Edycja użytkownika'"></th:block></h1>
+            <div class="row" >
+                <form th:object="${user}" th:action="@{/user}" method="post">
+                    <div class="container-fluid">
+                        <div class="col-12">
+                            <input type="hidden" th:field="*{id}"/>
+                            <!--<input type="text" th:value="${version}" th:attr="name='version'"/>-->
+                            <div class="form-check" th:each="role,stat : ${roles}">
+                                <input type="checkbox" th:field="*{roles[__${stat.index}__]}" th:value="${role.id}"/>
+                                <label th:for="|roles${stat.index}|+1" th:text="${role.role}">
+                                    name
+                                </label>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-6">
+                                    <label th:attr="for='number'">Nazwa użytkownika</label>
+                                    <input class="form-control" type="text" th:attr="id='number'" th:field="*{username}"/>
+                                    <small class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username error</small>
+                                </div>
+                                <div class="col-6">
+                                    <label th:attr="for='password'">Hasło</label>
+                                    <input class="form-control" type="text" th:attr="id='password'" th:field="*{password}"/>
+                                    <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{username}">Password error</small>
+                                </div>
+                            </div>
+                            <div class="form-group row justify-content-between">
+                                <div class="col-12 ">
+                                    <a th:href="@{/}" href="#" class="btn btn-danger">Anuluj</a>
+                                    <button type="submit" class="btn btn-primary">Zapisz</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </main>
+        <!-- Modal -->
+
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
+</body>
+</html>

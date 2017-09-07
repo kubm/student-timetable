@@ -7,11 +7,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -175,6 +174,8 @@ public class IndexController {
         model.addAttribute("lessons", lessonService.findBySubject_User(currentUser));
         model.addAttribute("username",username);
         model.addAttribute("userId",userId);
+        model.addAttribute("users",userService.listAll());
+        model.addAttribute("roles",roleService.listAll());
 
         return "index";
     }
@@ -305,7 +306,10 @@ public class IndexController {
     }
 
     @RequestMapping(value = "registration", method = RequestMethod.POST)
-    public String registration(User user){
+    public String registration(@Valid User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "register";
+        }
         user.addRole(roleService.findAllByRole("USER").get(0));
 //        List<Role> roles = roleService.findAllByRole("USER");
 //        user.setRoles(roles);
@@ -327,6 +331,15 @@ public class IndexController {
         model.addAttribute("userId",userId);
         return "noteformnew";
     }
+
+    @RequestMapping("/user/new")
+    public String addNewUser(Model model){
+        model.addAttribute("user",new User());
+        model.addAttribute("roles", roleService.listAll());
+
+        return "admin/userform";
+    }
+
     @RequestMapping(value = "subject", method = RequestMethod.POST)
     public String saveSubject(Subject subject){
         subjectService.saveOrUpdate(subject);
@@ -375,7 +388,21 @@ public class IndexController {
         return "redirect:/rooms";
     }
 
+    @RequestMapping(value = "user", method = RequestMethod.POST)
+    public String saveUser(@ModelAttribute("user")@Valid User user, BindingResult bindingResult,Model model){
+        model.addAttribute("roles",roleService.listAll());
+        if (bindingResult.hasErrors()){
+            return "admin/userform";
+        }
+        else {
+            userService.saveOrUpdate(user);
+            return "redirect:/";
+        }
+    }
+
     //--------- Edycja ----------//
+
+
     @RequestMapping("subject/edit/{id}")
     public String editSubject(@PathVariable Integer id, Model model){
         Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -444,6 +471,14 @@ public class IndexController {
         return "noteform";
     }
 
+    @RequestMapping("user/edit/{id}")
+    public String editUser(@PathVariable Integer id, Model model){
+        model.addAttribute("user",userService.getById(id));
+        model.addAttribute("roles",roleService.listAll());
+//        model.addAttribute("version",userService.getById(id).getVersion()+1);
+        return "admin/userform";
+    }
+
     @RequestMapping("room/edit/{id}")
     public String editRoom(@PathVariable Integer id, Model model){
         Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -500,6 +535,26 @@ public class IndexController {
     @RequestMapping("homework/delete/{id}")
     public String deleteHomework(@PathVariable Integer id) {
         homeworkService.delete(id);
+        return "redirect:/";
+    }
+
+    @RequestMapping("user/delete/{id}")
+    public String deleteUser(@PathVariable Integer id) {
+        User myUser = userService.getById(id);
+        for (Subject s: myUser.getSubjects()){
+            s.setUser(null);
+        }
+        for (Teacher t: myUser.getTeachers()){
+            t.setUser(null);
+        }
+        for (Room r: myUser.getRooms()){
+            r.setUser(null);
+        }
+        for (Role r: myUser.getRoles()){
+            r.getUsers().remove(myUser);
+        }
+
+        userService.delete(id);
         return "redirect:/";
     }
 

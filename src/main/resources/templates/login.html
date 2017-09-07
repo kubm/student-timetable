@@ -19,14 +19,13 @@
                     <div class="form-group">
                         <!--<label for="loginInput">Login</label>-->
                         <input type="text" class="form-control" id="loginInput" aria-describedby="emailHelp" placeholder="Podaj login" name="username" required="required" autofocus="autofocus"/>
-                        <!--<small th:if="${param.error}" class="text-danger">Podaj prawidłowy login</small>-->
                     </div>
                     <div class="form-group">
                         <!--<label for="inputPassword1">Password</label>-->
                         <input type="password" class="form-control" id="inputPassword1" placeholder="Hasło" name="password"/>
-                        <!--<small th:if="${param.error}" class="text-danger">Podaj prawidłowe hasło</small>-->
                     </div>
-                    <small th:if="${param.logout}" class="text-success">wylogowano</small>
+                    <small th:if="${param.logout}" class="text-success">wylogowano</small><br th:if="${param.logout}"/>
+                    <small th:if="${param.error}" class="text-danger">Nieprawidłowy login lub hasło</small><br th:if="${param.error}" class="text-danger"/>
                     <small><a th:href="@{/register}">Nie masz konta? Zarejestruj się.</a></small>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
                 </form>
