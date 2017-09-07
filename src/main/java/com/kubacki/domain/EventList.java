@@ -29,7 +29,7 @@ public class EventList implements Serializable, CalendarObject{
         this.end = endHour;
         Calendar cal = Calendar.getInstance();
         cal.setTime(day);
-        cal.add(Calendar.DATE,5);
+        cal.add(Calendar.DATE,6);
         Date endDate = cal.getTime();
         String rangeStart = df.format(day);
         String rangeEnd = df.format(endDate);

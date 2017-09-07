@@ -13,7 +13,7 @@
             <div class="row" >
                 <form th:object="${note}" th:action="@{/notenew}" method="post">
                     <div class="container">
-                        <div class="col-12">
+                        <div class="col-12" style="width: 50rem">
                             <input type="hidden" th:field="*{id}"/>
                             <input type="hidden" th:value="${today_date}" th:attr="name='date'"/>
                             <div class="form-group">

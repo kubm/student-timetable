@@ -17,7 +17,7 @@ public class EventPrinterServiceImpl implements EventPrinterService{
     }
 
     @Override
-    public List<EventList> findByQuery() {
-        return eventPrinterRepository.findEventsQuery();
+    public List<EventList> findByQuery(Integer id) {
+        return eventPrinterRepository.findEventsQuery(id);
     }
 }

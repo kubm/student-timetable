@@ -1,9 +1,12 @@
 package com.kubacki.services;
 
 import com.kubacki.domain.Teacher;
+import com.kubacki.domain.User;
 import com.kubacki.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by KUBACM on 2017-07-16.
@@ -35,5 +38,10 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     public void delete(Integer id) {
         teacherRepository.delete(id);
+    }
+
+    @Override
+    public List<Teacher> findByUser(User user) {
+        return teacherRepository.findByUser(user);
     }
 }

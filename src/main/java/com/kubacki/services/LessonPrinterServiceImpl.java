@@ -19,12 +19,12 @@ public class LessonPrinterServiceImpl implements LessonPrinterService{
     }
 
     @Override
-    public List<LessonList> findByQuery(){
-        return lessonPrinterRepository.findLessonsQuery();
+    public List<LessonList> findByQuery(Integer id){
+        return lessonPrinterRepository.findLessonsQuery(id);
     }
 
     @Override
-    public Integer numOfMinutes(Integer weekDay) {
-        return lessonPrinterRepository.numOfMinutes(weekDay);
+    public Integer numOfMinutes(Integer weekDay, Integer id) {
+        return lessonPrinterRepository.numOfMinutes(weekDay, id);
     }
 }

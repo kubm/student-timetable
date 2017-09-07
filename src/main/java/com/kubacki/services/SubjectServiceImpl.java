@@ -1,9 +1,12 @@
 package com.kubacki.services;
 
 import com.kubacki.domain.Subject;
+import com.kubacki.domain.User;
 import com.kubacki.repositories.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -43,5 +46,8 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectRepository.findByName(name);
     }
 
-
+    @Override
+    public List<Subject> findByUser(User user) {
+        return subjectRepository.findByUser(user);
+    }
 }

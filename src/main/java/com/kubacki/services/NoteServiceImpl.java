@@ -2,6 +2,7 @@ package com.kubacki.services;
 
 import com.kubacki.domain.Lesson;
 import com.kubacki.domain.Note;
+import com.kubacki.domain.User;
 import com.kubacki.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,10 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public List<Note> listTop5OrderedByDate() {
         return noteRepository.findTop5ByOrderByDateDesc();
+    }
+
+    @Override
+    public List<Note> findTop5ByLesson_Subject_UserOrderByDateDesc(User user) {
+        return noteRepository.findTop5ByLesson_Subject_UserOrderByDateDesc(user);
     }
 }

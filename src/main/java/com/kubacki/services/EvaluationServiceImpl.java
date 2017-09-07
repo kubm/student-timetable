@@ -3,6 +3,7 @@ package com.kubacki.services;
 import com.kubacki.domain.Evaluation;
 import com.kubacki.domain.Lesson;
 import com.kubacki.domain.Room;
+import com.kubacki.domain.User;
 import com.kubacki.repositories.EvaluationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,15 @@ public class EvaluationServiceImpl implements EvaluationService{
     @Override
     public List<Evaluation> findByRoom(Room room) {
         return evaluationRepository.findByRoom(room);
+    }
+
+    @Override
+    public List<Evaluation> findAllByLesson_Subject_UserOrderByDzienAsc(User user) {
+        return evaluationRepository.findAllByLesson_Subject_UserOrderByDzienAsc(user);
+    }
+
+    @Override
+    public List<Evaluation> findTop4ByLesson_Subject_UserOrderByDzienDesc(User user) {
+        return evaluationRepository.findTop4ByLesson_Subject_UserOrderByDzienDesc(user);
     }
 }

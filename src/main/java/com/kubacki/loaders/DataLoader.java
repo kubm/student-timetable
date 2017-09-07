@@ -109,13 +109,34 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event){
 
+        Role role = new Role();
+        role.setRole("USER");
+        roleService.saveOrUpdate(role);
+
+        Role adminRole = new Role();
+        adminRole.setRole("ADMIN");
+        roleService.saveOrUpdate(adminRole);
+
         User user1 = new User();
         user1.setUsername("user");
         user1.setPassword("user");
+        user1.addRole(role);
         userService.saveOrUpdate(user1);
 
-        loadRoles();
-        assignUsersToUserRole();
+        User user2 = new User();
+        user2.setUsername("user2");
+        user2.setPassword("user2");
+        user2.addRole(role);
+        userService.saveOrUpdate(user2);
+
+        User admin = new User();
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        admin.addRole(adminRole);
+        userService.saveOrUpdate(admin);
+
+
+//        assignUsersToUserRole();
 
 
         //--------- Kolory -------------//
@@ -791,27 +812,22 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
 
 
-    private void loadRoles(){
-        Role role = new Role();
-        role.setRole("USER");
-        roleService.saveOrUpdate(role);
-    }
-
-    private void assignUsersToUserRole(){
-        List<Role> roles = (List<Role>)roleService.listAll();
-        List<User> users = (List<User>)userService.listAll();
-
-        roles.forEach(role -> {
-            if (role.getRole().equalsIgnoreCase("USER")) {
-                users.forEach(user -> {
-                    if(user.getUsername().equals("user")){
-                        user.addRole(role);
-                        userService.saveOrUpdate(user);
-                    }
-                });
-            }
-        });
-    }
+//
+//    private void assignUsersToUserRole(){
+//        List<Role> roles = (List<Role>)roleService.listAll();
+//        List<User> users = (List<User>)userService.listAll();
+//
+//        roles.forEach(role -> {
+//            if (role.getRole().equalsIgnoreCase("USER")) {
+//                users.forEach(user -> {
+//                    if(user.getUsername().equals("user")){
+//                        user.addRole(role);
+//                        userService.saveOrUpdate(user);
+//                    }
+//                });
+//            }
+//        });
+//    }
 
 
 

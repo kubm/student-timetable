@@ -129,17 +129,50 @@ public class IndexController {
         Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = ((UserDetails)pri).getUsername();
         Integer userId = userService.findByUsername(username).getId();
-        model.addAttribute("todayLessons", lessonService.findByWeekDayAndSubject_User_Id(dayOfWeek,userId));
-        model.addAttribute("lessonsMonday",floor(lessonPrinterService.numOfMinutes(2)/5.4));//minuty/45/12*100
-        model.addAttribute("lessonsTuesday", floor(lessonPrinterService.numOfMinutes(3)/5.4));
-        model.addAttribute("lessonsWednesday",floor(lessonPrinterService.numOfMinutes(4)/5.4));
-        model.addAttribute("lessonsThursday",floor(lessonPrinterService.numOfMinutes(5)/5.4));
-        model.addAttribute("lessonsFriday",floor(lessonPrinterService.numOfMinutes(6)/5.4));
-        model.addAttribute("notes", noteService.listTop5OrderedByDate());
-        model.addAttribute("evals", evaluationService.listFirst4Evals());
-        model.addAttribute("homeworks",homeworkService.listAll());
+        User currentUser = userService.getById(userId);
+
+        if(!lessonPrinterService.findByQuery(userId).isEmpty()){
+            Integer lessonsMonday = lessonPrinterService.numOfMinutes(2,userId);
+            Integer lessonsTuesday = lessonPrinterService.numOfMinutes(3,userId);
+            Integer lessonsWednesday = lessonPrinterService.numOfMinutes(4,userId);
+            Integer lessonsThursday = lessonPrinterService.numOfMinutes(5,userId);
+            Integer lessonsFriday = lessonPrinterService.numOfMinutes(6,userId);
+
+            if(lessonsMonday != null){
+                model.addAttribute("lessonsMonday",floor(lessonsMonday/5.4));//minuty/45/12*100
+            } else model.addAttribute("lessonsMonday",0);
+
+            if (lessonsTuesday != null){
+                model.addAttribute("lessonsTuesday",floor(lessonsTuesday/5.4));
+            } else  model.addAttribute("lessonsTuesday", 0);
+
+            if (lessonsWednesday != null){
+                model.addAttribute("lessonsWednesday",floor(lessonsWednesday/5.4));
+            } else model.addAttribute("lessonsWednesday",0);
+
+            if (lessonsThursday != null){
+                model.addAttribute("lessonsThursday",floor(lessonsThursday/5.4));
+            } else model.addAttribute("lessonsThursday",0);
+
+            if (lessonsFriday != null){
+                model.addAttribute("lessonsFriday",floor(lessonsFriday/5.4));
+            } else model.addAttribute("lessonsFriday",0);
+
+        }else {
+            model.addAttribute("lessonsMonday",0);//minuty/45/12*100
+            model.addAttribute("lessonsTuesday", 0);
+            model.addAttribute("lessonsWednesday",0);
+            model.addAttribute("lessonsThursday",0);
+            model.addAttribute("lessonsFriday",0);
+        }
+
+        model.addAttribute("todayLessons", lessonService.findByWeekDayAndSubject_User(dayOfWeek,currentUser));
+
+        model.addAttribute("notes", noteService.findTop5ByLesson_Subject_UserOrderByDateDesc(currentUser));
+        model.addAttribute("evals", evaluationService.findTop4ByLesson_Subject_UserOrderByDzienDesc(currentUser));
+        model.addAttribute("homeworks",homeworkService.findByLesson_Subject_User(currentUser));
         model.addAttribute("homework", new Homework());
-        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("lessons", lessonService.findBySubject_User(currentUser));
         model.addAttribute("username",username);
         model.addAttribute("userId",userId);
 
@@ -154,42 +187,66 @@ public class IndexController {
 
     @RequestMapping("/subjects")
     public String subjects(Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
 
-        model.addAttribute("subjects", subjectService.listAll());
+        model.addAttribute("subjects", subjectService.findByUser(currentUser));
         model.addAttribute("subject", new Subject());
-        model.addAttribute("lessons", lessonService.findAllByOrderByWeekDayAsc());
+        model.addAttribute("lessons", lessonService.findAllBySubject_UserOrderByWeekDayAsc(currentUser));
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
-        model.addAttribute("teachers", teacherService.listAll());
+        model.addAttribute("teachers", teacherService.findByUser(currentUser));
         model.addAttribute("lesson", new Lesson());
-        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("rooms", roomService.findByUser(currentUser));
         model.addAttribute("colours",colourService.listAll());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
 
         return "subjects";
     }
 
     @RequestMapping("/evals")
     public String evaluations(Model model){
-        model.addAttribute("evals", evaluationService.listAllOrderedByDate());
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
+        model.addAttribute("evals", evaluationService.findAllByLesson_Subject_UserOrderByDzienAsc(currentUser));
         model.addAttribute("evaluation",new Evaluation());
         model.addAttribute("evalTypes", evalTypeService.listAll());
-        model.addAttribute("lessons", lessonService.findAllByOrderByWeekDayAsc());
-        model.addAttribute("rooms", roomService.listAll());
-
+        model.addAttribute("lessons", lessonService.findAllBySubject_UserOrderByWeekDayAsc(currentUser));
+        model.addAttribute("rooms", roomService.findByUser(currentUser));
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "evals";
     }
 
     @RequestMapping("/notes/subject/{id}")
     public String notesByLesson(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
         model.addAttribute("notes", noteService.findByLesson(lessonService.getById(id)));
         model.addAttribute("today_date", dateFormat.format(date));
         model.addAttribute("note", new Note());
         model.addAttribute("lesson", lessonService.getById(id));
-        model.addAttribute("lessons",lessonService.listAll());
+        model.addAttribute("lessons",lessonService.findBySubject_User(currentUser));
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "notes";
     }
 
     @RequestMapping("/rooms")
     public String rooms(Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
 //        List<Room> rooms = roomService.findAll();
 //        List<Room> roomsModified = new ArrayList<>();
 //        rooms.forEach(room -> {
@@ -197,15 +254,24 @@ public class IndexController {
 //                roomsModified.add(room);
 //            }
 //        });
-        model.addAttribute("rooms",roomService.listAll());
+        model.addAttribute("rooms",roomService.findByUser(currentUser));
         model.addAttribute("room", new Room());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "rooms";
     }
 
     @RequestMapping("/teachers")
     public String teachers(Model model){
-        model.addAttribute("teachers",teacherService.listAll());
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
+        model.addAttribute("teachers",teacherService.findByUser(currentUser));
         model.addAttribute("teacher",new Teacher());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "teachers";
     }
 
@@ -213,13 +279,21 @@ public class IndexController {
     @RequestMapping(value="/lessonsJSON",method=RequestMethod.GET, produces = "application/json")
     @ResponseBody
     List<LessonList> lessonsList(){
-        return lessonPrinterService.findByQuery();
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+
+        return lessonPrinterService.findByQuery(userId);
     }
 
     @RequestMapping(value="/eventsJSON", method = RequestMethod.GET,produces = "application/json")
     @ResponseBody
     List<EventList> eventList(){
-        return eventPrinterService.findByQuery();
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+
+        return eventPrinterService.findByQuery(userId);
     }
 
     //------- Dodawanie --------//
@@ -232,7 +306,8 @@ public class IndexController {
 
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public String registration(User user){
-//        List<Role> roles = roleService.findByRole("USER");
+        user.addRole(roleService.findAllByRole("USER").get(0));
+//        List<Role> roles = roleService.findAllByRole("USER");
 //        user.setRoles(roles);
         userService.saveOrUpdate(user);
         return "redirect:/confirmation";
@@ -240,9 +315,16 @@ public class IndexController {
 
     @RequestMapping("/notes/new")
     public String addNewNote(Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
         model.addAttribute("note", new Note());
-        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("lessons", lessonService.findBySubject_User(currentUser));
         model.addAttribute("today_date", dateFormat.format(date));
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "noteformnew";
     }
     @RequestMapping(value = "subject", method = RequestMethod.POST)
@@ -281,6 +363,12 @@ public class IndexController {
         return "redirect:/evals";
     }
 
+    @RequestMapping(value = "teacher", method = RequestMethod.POST)
+    public String saveTeacher(Teacher teacher){
+        teacherService.saveOrUpdate(teacher);
+        return "redirect:/teachers";
+    }
+
     @RequestMapping(value = "room", method = RequestMethod.POST)
     public String saveRoom(Room room){
         roomService.saveOrUpdate(room);
@@ -290,6 +378,11 @@ public class IndexController {
     //--------- Edycja ----------//
     @RequestMapping("subject/edit/{id}")
     public String editSubject(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+
+        model.addAttribute("userId", userId);
         model.addAttribute("subject", subjectService.getById(id));
         model.addAttribute("colours",colourService.listAll());
         return "subjectform";
@@ -297,29 +390,50 @@ public class IndexController {
 
     @RequestMapping("lesson/edit/{id}")
     public String editLesson(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
         model.addAttribute("lesson", lessonService.getById(id));
-        model.addAttribute("teachers", teacherService.listAll());
-        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("teachers", teacherService.findByUser(currentUser));
+        model.addAttribute("rooms", roomService.findByUser(currentUser));
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "lessonform";
     }
 
     @RequestMapping("evaluation/edit/{id}")
     public String editEvaluation(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
         model.addAttribute("evaluation", evaluationService.getById(id));
         model.addAttribute("evalTypes", evalTypeService.listAll());
-        model.addAttribute("lessons", lessonService.listAll());
-        model.addAttribute("teachers", teacherService.listAll());
-        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("lessons", lessonService.findBySubject_User(currentUser));
+        model.addAttribute("teachers", teacherService.findByUser(currentUser));
+        model.addAttribute("rooms", roomService.findByUser(currentUser));
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "evalform";
     }
 
     @RequestMapping("homework/edit/{id}")
     public String editHomework(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
         model.addAttribute("note",noteService.getById(id));
-        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("lessons", lessonService.findBySubject_User(currentUser));
         model.addAttribute("homework", homeworkService.getById(id));
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
         return "homeworkform";
     }
 
@@ -332,12 +446,22 @@ public class IndexController {
 
     @RequestMapping("room/edit/{id}")
     public String editRoom(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+
+        model.addAttribute("userId", userId);
         model.addAttribute("room", roomService.getById(id));
         return "roomform";
     }
 
     @RequestMapping("teacher/edit/{id}")
     public String editTeacher(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+
+        model.addAttribute("userId", userId);
         model.addAttribute("teacher", teacherService.getById(id));
         return "teacherform";
     }

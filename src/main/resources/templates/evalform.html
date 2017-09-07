@@ -40,13 +40,19 @@
                                 </select>
                             </div>
                             <div class="row">
-                                <div class="col-7 form-group">
+                                <div class="col-12 form-group">
                                     <label th:attr="for='date_'+${evaluation.id}">Data zaliczenia</label>
                                     <input class="form-control" type="date" th:attr="id='date_'+${evaluation.id}" th:field="*{dzien}"/>
                                 </div>
-                                <div class="col-5 form-group">
-                                    <label th:attr="for='hour_'+${evaluation.id}">Godzina</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label th:attr="for='hour_'+${evaluation.id}">Godzina zaliczenia</label>
                                     <input class="form-control" type="time" th:attr="id='hour_'+${evaluation.id}" th:field="*{hour}"/>
+                                </div>
+                                <div class="col-6">
+                                    <label th:attr="for='endhour_'+${evaluation.id}">Godzina zaliczenia</label>
+                                    <input class="form-control" type="time" th:attr="id='endhour_'+${evaluation.id}" th:field="*{endHour}"/>
                                 </div>
                             </div>
 

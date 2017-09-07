@@ -1,6 +1,7 @@
 package com.kubacki.services;
 
 import com.kubacki.domain.Room;
+import com.kubacki.domain.User;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ import java.util.List;
  */
 public interface RoomService extends CRUDService<Room>{
     List<Room> findAll();
+    List<Room> findByUser(User user);
 }

@@ -2,6 +2,7 @@ package com.kubacki.services;
 
 import com.kubacki.domain.Lesson;
 import com.kubacki.domain.Homework;
+import com.kubacki.domain.User;
 import com.kubacki.repositories.HomeworkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,10 @@ public class HomeworkServiceImpl implements HomeworkService {
     @Override
     public Iterable<Homework> listAll(){
         return homeworkRepository.findAll();
+    }
+
+    @Override
+    public List<Homework> findByLesson_Subject_User(User user) {
+        return homeworkRepository.findByLesson_Subject_User(user);
     }
 }

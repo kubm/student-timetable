@@ -1,6 +1,7 @@
 package com.kubacki.services;
 
 import com.kubacki.domain.Room;
+import com.kubacki.domain.User;
 import com.kubacki.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public List<Room> findAll() {
         return roomRepository.findAllBy();
+    }
+
+    @Override
+    public List<Room> findByUser(User user) {
+        return roomRepository.findByUser(user);
     }
 }

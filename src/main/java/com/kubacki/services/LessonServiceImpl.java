@@ -72,12 +72,17 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public List<Lesson> findBySubject_User_Id(Integer id) {
-        return lessonRepository.findBySubject_User_Id(id);
+    public List<Lesson> findBySubject_User(User user) {
+        return lessonRepository.findBySubject_User(user);
     }
 
     @Override
-    public List<Lesson> findByWeekDayAndSubject_User_Id(Integer weekDay, Integer id) {
-        return lessonRepository.findByWeekDayAndSubject_User_Id(weekDay,id);
+    public List<Lesson> findByWeekDayAndSubject_User(Integer weekDay, User user) {
+        return lessonRepository.findByWeekDayAndSubject_User(weekDay,user);
+    }
+
+    @Override
+    public List<Lesson> findAllBySubject_UserOrderByWeekDayAsc(User user) {
+        return lessonRepository.findAllBySubject_UserOrderByWeekDayAsc(user);
     }
 }
