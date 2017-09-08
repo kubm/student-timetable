@@ -341,6 +341,14 @@ public class IndexController {
         return "admin/userform";
     }
 
+    @RequestMapping("/subject/new")
+    public String addNewSubject(Model model){
+        model.addAttribute("subject", new Subject());
+        model.addAttribute("colours",colourService.listAll());
+
+        return "subjectform";
+    }
+
     @RequestMapping(value = "subject", method = RequestMethod.POST)
     public String saveSubject(Subject subject){
         subjectService.saveOrUpdate(subject);
@@ -425,7 +433,9 @@ public class IndexController {
 
         model.addAttribute("lesson", lessonService.getById(id));
         model.addAttribute("teachers", teacherService.findByUser(currentUser));
+        model.addAttribute("allTeachers",teacherService.listAll());
         model.addAttribute("rooms", roomService.findByUser(currentUser));
+        model.addAttribute("allRooms",roomService.listAll());
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
         model.addAttribute("username",username);
         model.addAttribute("userId",userId);

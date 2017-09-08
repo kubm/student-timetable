@@ -159,10 +159,10 @@
     </div>
     <div class="row" sec:authorize="hasAuthority('ADMIN')"><!--/*/ <th:block th:include="fragments/sidebar :: sidebar"></th:block> /*/-->
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny: <th:block th:text="'Witaj administratorze'"></th:block></h1>
+            <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Przedmioty i zajęcia: <th:block th:text="'Witaj administratorze'"></th:block></h1>
             <div class="row" style="margin-top: 2rem">
                 <h2>Przedmioty</h2>
-                <table class="table table-responsive">
+                <table class="table table-responsive table-bordered">
                     <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
@@ -186,18 +186,34 @@
                         </tr>
                         <tr>
                             <td th:attr="id='lessons'+${subject.id}" colspan="6">
-                                <table class="table" colspan="6">
-                                    <thead class="thead-inverse" colspan="6">
+                                <table class="table table-sm table-hover table-dark" colspan="6">
+                                    <thead colspan="6">
                                     <tr>
                                         <th>#</th>
                                         <th>Rodzaj</th>
+                                        <th>Sala</th>
+                                        <th>Wykładowca</th>
+                                        <th>Data Rozpoczęcia</th>
+                                        <th>Data Zakończenia</th>
+                                        <th>Godzina rozpoczęcia</th>
+                                        <th>Godzina zakończenia</th>
+                                        <th>Edytuj</th>
+                                        <th>Usuń</th>
                                     </tr>
                                     </thead>
                                     <!--TODO: Poprawić wygląd wewn. tabeli-->
                                     <tbody>
-                                    <tr th:each="lesson : ${subject.lessons}">
+                                    <tr th:each="lesson : ${#lists.sort(subject.lessons, lesson.id)}">
                                         <th scope="row" th:text="${lesson.id}"></th>
                                         <td th:text="${lesson.lessonType.nazwa}"></td>
+                                        <td th:text="${lesson.room.roomNumber}+'/'+${lesson.room.building}"></td>
+                                        <td th:text="${lesson.teacher.name}+' '+${lesson.teacher.surname}"></td>
+                                        <td th:text="${lesson.start_date}"></td>
+                                        <td th:text="${lesson.end_date}"></td>
+                                        <td th:text="${lesson.start_hour}"></td>
+                                        <td th:text="${lesson.end_hour}"></td>
+                                        <td><a href="#" th:href="${'/lesson/edit/'+lesson.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                        <td><a href="#" th:href="${'/lesson/delete/'+lesson.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -207,7 +223,7 @@
                     </tbody>
                 </table>
 
-                    <a class="btn btn-primary" href="#" th:href="${'subject/new'}">Dodaj użytkownika</a>
+                    <a class="btn btn-primary" href="#" th:href="${'subject/new'}">Dodaj przedmiot</a>
             </div>
         </main>
     </div>

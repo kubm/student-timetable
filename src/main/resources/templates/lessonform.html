@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Student Timetable</title>
     <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
@@ -24,7 +24,7 @@
                                             th:text="${lessonType.nazwa}">Wireframe</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" sec:authorize="hasAuthority('USER')">
                                 <label th:attr="for='teacher-select'+${lesson.id}">Wykładowca</label>
                                 <select class="form-control" th:attr="id='teacher-select'+${lesson.id}" th:field="*{teacher}" >
                                     <option th:each="teacher : ${teachers}"
@@ -32,7 +32,17 @@
                                             th:text="${teacher.name}+' '+${teacher.surname}">Wireframe</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+
+                            <div class="form-group" sec:authorize="hasAuthority('ADMIN')"  th:with="user_id=${lesson.subject.user.id}">
+                                <label th:attr="for='teacher-select'+${lesson.id}">Wykładowca</label>
+                                <select class="form-control" th:attr="id='teacher-select'+${lesson.id}" th:field="*{teacher}" >
+                                    <option th:each="teacher : ${allTeachers}" th:if="${teacher.user.id} == ${lesson.subject.user.id}"
+                                            th:value="${teacher.id}"
+                                            th:text="${teacher.name}+' '+${teacher.surname}">Wireframe</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" sec:authorize="hasAuthority('USER')">
                                 <label th:attr="for='room-select'+${lesson.id}">Sala</label>
                                 <select class="form-control" th:attr="id='room-select'+${lesson.id}" th:field="*{room}">
                                     <option th:each="room : ${rooms}"
@@ -40,6 +50,16 @@
                                             th:text="${room.roomNumber}+'/'+${room.building}"></option>
                                 </select>
                             </div>
+
+                            <div class="form-group" sec:authorize="hasAuthority('ADMIN')">
+                                <label th:attr="for='room-select'+${lesson.id}">Sala</label>
+                                <select class="form-control" th:attr="id='room-select'+${lesson.id}" th:field="*{room}">
+                                    <option th:each="room : ${allRooms}" th:if="${room.user.id} == ${lesson.subject.user.id}"
+                                            th:value="${room.id}"
+                                            th:text="${room.roomNumber}+'/'+${room.building}"></option>
+                                </select>
+                            </div>
+
                             <div class="row">
                                 <div class="col-6 form-group">
                                     <label th:attr="for='start_date_'+${lesson.id}">Data rozpoczęcia</label>

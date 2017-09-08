@@ -19,5 +19,6 @@ public interface LessonRepository extends CrudRepository<Lesson,Integer>, JpaRep
     List<Lesson> findByTeacher(Teacher teacher);
     List<Lesson> findBySubject_User(User user);
     List<Lesson> findByWeekDayAndSubject_User(Integer weekDay, User user);
+    List<Lesson> findAllByOrderById();
 
 }

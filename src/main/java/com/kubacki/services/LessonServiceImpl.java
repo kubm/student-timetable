@@ -85,4 +85,9 @@ public class LessonServiceImpl implements LessonService {
     public List<Lesson> findAllBySubject_UserOrderByWeekDayAsc(User user) {
         return lessonRepository.findAllBySubject_UserOrderByWeekDayAsc(user);
     }
+
+    @Override
+    public List<Lesson> findAllByOrderById() {
+        return lessonRepository.findAllByOrderById();
+    }
 }
