@@ -3,8 +3,18 @@
 <head>
     <title>Student Timetable</title>
     <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
+    <!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
     <link href="../../static/css/timeline.css"
           th:href="@{/css/timeline.css}" rel="stylesheet" type="text/css"/>
+    <!--<link sec:authorize="hasAuthority('ADMIN')" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />-->
+    <link sec:authorize="hasAuthority('ADMIN')" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <script sec:authorize="hasAuthority('ADMIN')" type="text/javascript" language="JavaScript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script sec:authorize="hasAuthority('ADMIN')" type="text/javascript" language="JavaScript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script sec:authorize="hasAuthority('ADMIN')" type="text/javascript" class="init">
+        $(document).ready(function () {
+            $('#userTable').DataTable();
+        });
+    </script>
 </head>
 <body><!--/*/ <th:block th:include="fragments/navbar :: nav"></th:block> /*/-->
 <div class="container-fluid">
@@ -197,7 +207,7 @@
             <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny: <th:block th:text="'Witaj administratorze'"></th:block></h1>
             <div class="row" style="margin-top: 2rem">
                 <h2>Użytkownicy</h2>
-                <table class="table table-responsive">
+                <table class="table table-responsive display" id="userTable" cellspacing="0" width="100%">
                     <thead class="thead-inverse">
                     <tr>
                         <th>#</th>
@@ -230,6 +240,6 @@
         </main>
     </div>
 </div>
-<!--/*/ <th:block th:include="fragments/bottominc :: body"></th:block> /*/-->
+
 </body>
 </html>
