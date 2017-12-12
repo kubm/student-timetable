@@ -54,11 +54,11 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label th:attr="for='number'">Imię</label>
-                                    <input class="form-control" type="text" th:attr="id='number'" th:field="*{name}"/>
+                                    <input class="form-control" type="text" th:attr="id='number'" th:field="*{name}" required="required"/>
                                 </div>
                                 <div class="col-6">
                                     <label th:attr="for='email'">Nazwisko</label>
-                                    <input class="form-control" type="text" th:attr="id='building'" th:field="*{surname}"/>
+                                    <input class="form-control" type="text" th:attr="id='building'" th:field="*{surname}" required="required"/>
                                 </div>
                             </div>
                             <div class="row">

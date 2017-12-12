@@ -197,6 +197,7 @@ public class IndexController {
         model.addAttribute("subjectsAll",subjectService.listAll());
         model.addAttribute("subject", new Subject());
         model.addAttribute("lessons", lessonService.findAllBySubject_UserOrderByWeekDayAsc(currentUser));
+        model.addAttribute("allLessons",lessonService.listAll());
         model.addAttribute("lessonTypes", lessonTypeService.listAll());
         model.addAttribute("teachers", teacherService.findByUser(currentUser));
         model.addAttribute("lesson", new Lesson());
@@ -339,6 +340,18 @@ public class IndexController {
         model.addAttribute("roles", roleService.listAll());
 
         return "admin/userform";
+    }
+
+    @RequestMapping("lesson/new")
+    public String addNewLesson(Model model){
+        model.addAttribute("subjects", subjectService.listAll());
+        model.addAttribute("lesson", new Lesson());
+        model.addAttribute("teachers", teacherService.listAll());
+        model.addAttribute("allTeachers",teacherService.listAll());
+        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("allRooms",roomService.listAll());
+        model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        return "lessonform";
     }
 
     @RequestMapping("/subject/new")
