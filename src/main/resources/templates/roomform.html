@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Student Timetable</title>
     <!--/*/ <th:block th:include="fragments/headinc :: head"></th:block> /*/-->
@@ -15,7 +15,8 @@
                     <div class="container-fluid">
                         <div class="col-12">
                             <input type="hidden" th:field="*{id}"/>
-                            <input type="hidden" th:field="*{user.id}"/>
+                            <input  sec:authorize="hasAuthority('USER')" type="hidden" th:field="*{user.id}"/>
+                            <!--<input  sec:authorize="hasAuthority('ADMIN')" type="hidden" th:value="${userId}" th:attr="name='user'"/>-->
                             <div class="form-group row">
                                 <div class="col-6">
                                     <label th:attr="for='number'">Numer pokoju</label>
@@ -25,6 +26,14 @@
                                     <label th:attr="for='building'">Budynek</label>
                                     <input class="form-control" type="text" th:attr="id='building'" th:field="*{building}"/>
                                 </div>
+                            </div>
+                            <div class="form-group" sec:authorize="hasAuthority('ADMIN')">
+                                <label th:attr="for='user-select'+${room.id}">Użytkownik</label>
+                                <select class="form-control" th:attr="id='user-select'+${room.id}" th:field="*{user.id}">
+                                    <option th:each="user : ${users}"
+                                            th:value="${user.id}"
+                                            th:text="${user.username}">Wireframe</option>
+                                </select>
                             </div>
                             <div class="form-group row justify-content-between">
                                 <div class="col-12 ">

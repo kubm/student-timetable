@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--TODO: Dodać takie tabele dla pozostałych podstron-->
 <html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Student Timetable</title>
@@ -211,36 +210,38 @@
         <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
             <h1><i class="fa fa-dashboard fa-fw"></i>&nbsp;Widok Główny: <th:block th:text="'Witaj administratorze'"></th:block></h1>
             <div class="row" style="margin-top: 2rem">
-                <h2>Użytkownicy</h2>
-                <table class="table table-responsive" id="userTable" cellspacing="0" width="100%">
-                    <thead class="thead-inverse">
-                    <tr>
-                        <th>#</th>
-                        <th>Username</th>
-                        <th>Password</th>
-                        <th>Rola</th>
-                        <th>Data utworzenia</th>
-                        <th>Nieudane logowania</th>
-                        <th>Edytuj</th>
-                        <th>Usuń</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="user:${users}">
-                        <th scope="row" th:text="${user.id}"></th>
-                        <td th:text="${user.username}"></td>
-                        <td th:text="${user.password}"></td>
-                        <td>
-                            <th:block th:each="role: ${user.roles}" th:text="${role.role}">&nbsp;</th:block>
-                        </td>
-                        <td th:text="${user.dateCreated}"></td>
-                        <td th:text="${user.failedLoginAttempts}"></td>
-                        <td><a href="#" th:href="${'/user/edit/'+user.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
-                        <td><a href="#" th:href="${'/user/delete/'+user.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <a class="btn btn-primary" href="#" th:href="${'user/new'}">Dodaj użytkownika</a>
+                <div class="col-sm">
+                    <h2>Użytkownicy</h2>
+                    <table class="table table-responsive" id="userTable" cellspacing="0" width="100%">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>#</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Rola</th>
+                            <th>Data utworzenia</th>
+                            <th>Nieudane logowania</th>
+                            <th>Edytuj</th>
+                            <th>Usuń</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user:${users}">
+                            <th scope="row" th:text="${user.id}"></th>
+                            <td th:text="${user.username}"></td>
+                            <td th:text="${user.password}"></td>
+                            <td>
+                                <th:block th:each="role: ${user.roles}" th:text="${role.role}">&nbsp;</th:block>
+                            </td>
+                            <td th:text="${user.dateCreated}"></td>
+                            <td th:text="${user.failedLoginAttempts}"></td>
+                            <td><a href="#" th:href="${'/user/edit/'+user.id}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                            <td><a href="#" th:href="${'/user/delete/'+user.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a class="btn btn-primary" href="#" th:href="${'user/new'}">Dodaj użytkownika</a>
+                </div>
             </div>
         </main>
     </div>

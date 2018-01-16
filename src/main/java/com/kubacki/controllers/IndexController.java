@@ -217,6 +217,7 @@ public class IndexController {
         User currentUser = userService.getById(userId);
 
         model.addAttribute("evals", evaluationService.findAllByLesson_Subject_UserOrderByDzienAsc(currentUser));
+        model.addAttribute("evalsAll", evaluationService.listAll());
         model.addAttribute("evaluation",new Evaluation());
         model.addAttribute("evalTypes", evalTypeService.listAll());
         model.addAttribute("lessons", lessonService.findAllBySubject_UserOrderByWeekDayAsc(currentUser));
@@ -258,6 +259,7 @@ public class IndexController {
 //            }
 //        });
         model.addAttribute("rooms",roomService.findByUser(currentUser));
+        model.addAttribute("roomsAll",roomService.listAll());
         model.addAttribute("room", new Room());
         model.addAttribute("username",username);
         model.addAttribute("userId",userId);
@@ -272,6 +274,7 @@ public class IndexController {
         User currentUser = userService.getById(userId);
 
         model.addAttribute("teachers",teacherService.findByUser(currentUser));
+        model.addAttribute("teachersAll", teacherService.listAll());
         model.addAttribute("teacher",new Teacher());
         model.addAttribute("username",username);
         model.addAttribute("userId",userId);
@@ -342,6 +345,21 @@ public class IndexController {
         return "admin/userform";
     }
 
+    @RequestMapping("/eval/new")
+    public String addNewEval(Model model){
+        model.addAttribute("evaluation", new Evaluation());
+        model.addAttribute("evalTypes", evalTypeService.listAll());
+        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("teachers", teacherService.listAll());
+        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("lessonTypes", lessonTypeService.listAll());
+
+//        model.addAttribute("username",username);
+//        model.addAttribute("userId",userId);
+
+        return "evalform";
+    }
+
     @RequestMapping("lesson/new")
     public String addNewLesson(Model model){
         model.addAttribute("subjects", subjectService.listAll());
@@ -354,12 +372,33 @@ public class IndexController {
         return "lessonform";
     }
 
+    @RequestMapping("/room/new")
+    public String addNewRoom(Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
+        model.addAttribute("users",userService.listAll());
+        model.addAttribute("room", new Room());
+        model.addAttribute("userId",userId);
+        return "roomform";
+    }
+
     @RequestMapping("/subject/new")
     public String addNewSubject(Model model){
         model.addAttribute("subject", new Subject());
         model.addAttribute("colours",colourService.listAll());
 
         return "subjectform";
+    }
+
+    @RequestMapping("/teacher/new")
+    public String addNewTeacher(Model model){
+        model.addAttribute("teacher", new Teacher());
+        model.addAttribute("users",userService.listAll());
+
+        return "teacherform";
     }
 
     @RequestMapping(value = "subject", method = RequestMethod.POST)
@@ -473,6 +512,24 @@ public class IndexController {
         return "evalform";
     }
 
+    @RequestMapping("evaluation/edit_admin/{id}")
+    public String editEvaluationAdmin(@PathVariable Integer id, Model model){
+        Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)pri).getUsername();
+        Integer userId = userService.findByUsername(username).getId();
+        User currentUser = userService.getById(userId);
+
+        model.addAttribute("evaluation", evaluationService.getById(id));
+        model.addAttribute("evalTypes", evalTypeService.listAll());
+        model.addAttribute("lessons", lessonService.listAll());
+        model.addAttribute("teachers", teacherService.listAll());
+        model.addAttribute("rooms", roomService.listAll());
+        model.addAttribute("lessonTypes", lessonTypeService.listAll());
+        model.addAttribute("username",username);
+        model.addAttribute("userId",userId);
+        return "evalform";
+    }
+
     @RequestMapping("homework/edit/{id}")
     public String editHomework(@PathVariable Integer id, Model model){
         Object pri = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -509,10 +566,12 @@ public class IndexController {
         String username = ((UserDetails)pri).getUsername();
         Integer userId = userService.findByUsername(username).getId();
 
+        model.addAttribute("users", userService.listAll());
         model.addAttribute("userId", userId);
         model.addAttribute("room", roomService.getById(id));
         return "roomform";
     }
+
 
     @RequestMapping("teacher/edit/{id}")
     public String editTeacher(@PathVariable Integer id, Model model){

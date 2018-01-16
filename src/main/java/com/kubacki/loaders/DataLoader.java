@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Created by KUBACM on 2017-07-15.
+ * Created by KUBACM on 2018-07-15.
  */
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
@@ -381,9 +381,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson cwiczenia_a = new Lesson();
         cwiczenia_a.setSubject(analiza);
         try {
-            cwiczenia_a.setStart_date(format.parse("2017-01-03"));
-            cwiczenia_a.setEnd_date(format.parse("2017-06-20"));
-            //cwiczenia_a.setMyWeekDay(format.parse("2017-01-03"));
+            cwiczenia_a.setStart_date(format.parse("2018-01-03"));
+            cwiczenia_a.setEnd_date(format.parse("2018-06-20"));
+            //cwiczenia_a.setMyWeekDay(format.parse("2018-01-03"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -398,9 +398,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson wyklad_a = new Lesson();
         wyklad_a.setSubject(analiza);
         try {
-            wyklad_a.setStart_date(format.parse("2017-01-02"));
-            wyklad_a.setEnd_date(format.parse("2017-06-19"));
-            //wyklad_a.setMyWeekDay(format.parse("2017-01-02"));
+            wyklad_a.setStart_date(format.parse("2018-01-02"));
+            wyklad_a.setEnd_date(format.parse("2018-06-19"));
+            //wyklad_a.setMyWeekDay(format.parse("2018-01-02"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -415,9 +415,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson cwiczenia_alg = new Lesson();
         cwiczenia_alg.setSubject(algorytmy);
         try {
-            cwiczenia_alg.setStart_date(format.parse("2017-01-04"));
-            cwiczenia_alg.setEnd_date(format.parse("2017-06-21"));
-            //cwiczenia_alg.setMyWeekDay(format.parse("2017-01-04"));
+            cwiczenia_alg.setStart_date(format.parse("2018-01-04"));
+            cwiczenia_alg.setEnd_date(format.parse("2018-06-21"));
+            //cwiczenia_alg.setMyWeekDay(format.parse("2018-01-04"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -433,9 +433,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         wyklad_alg.setSubject(algorytmy);
         wyklad_alg.setLessonType(lectures);
         try{
-            wyklad_alg.setStart_date(format.parse("2017-01-05"));
-            wyklad_alg.setEnd_date(format.parse("2017-06-22"));
-           //wyklad_alg.setMyWeekDay(format.parse("2017-01-05"));
+            wyklad_alg.setStart_date(format.parse("2018-01-05"));
+            wyklad_alg.setEnd_date(format.parse("2018-06-22"));
+           //wyklad_alg.setMyWeekDay(format.parse("2018-01-05"));
         } catch (ParseException e){
             e.printStackTrace();
         }
@@ -449,9 +449,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson lab_fizyka = new Lesson();
         lab_fizyka.setLessonType(labs);
         try{
-            lab_fizyka.setStart_date(format.parse("2017-01-05"));
-            lab_fizyka.setEnd_date(format.parse("2017-06-22"));
-            //lab_fizyka.setMyWeekDay(format.parse("2017-01-05"));
+            lab_fizyka.setStart_date(format.parse("2018-01-05"));
+            lab_fizyka.setEnd_date(format.parse("2018-06-22"));
+            //lab_fizyka.setMyWeekDay(format.parse("2018-01-05"));
         } catch (ParseException e){
             e.printStackTrace();
         }
@@ -466,9 +466,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         Lesson wyklad_dysk = new Lesson();
         wyklad_dysk.setSubject(dyskretna);
         try{
-            wyklad_dysk.setStart_date(format.parse("2017-01-04"));
-            wyklad_dysk.setEnd_date(format.parse("2017-06-21"));
-            //wyklad_dysk.setMyWeekDay(format.parse("2017-01-04"));
+            wyklad_dysk.setStart_date(format.parse("2018-01-04"));
+            wyklad_dysk.setEnd_date(format.parse("2018-06-21"));
+            //wyklad_dysk.setMyWeekDay(format.parse("2018-01-04"));
         } catch (ParseException e){
             e.printStackTrace();
         }
@@ -482,9 +482,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 
         Lesson cwiczenia_dysk = new Lesson();
         try{
-            cwiczenia_dysk.setStart_date(format.parse("2017-01-05"));
-            cwiczenia_dysk.setEnd_date(format.parse("2017-06-22"));
-            //cwiczenia_dysk.setMyWeekDay(format.parse("2017-01-05"));
+            cwiczenia_dysk.setStart_date(format.parse("2018-01-05"));
+            cwiczenia_dysk.setEnd_date(format.parse("2018-06-22"));
+            //cwiczenia_dysk.setMyWeekDay(format.parse("2018-01-05"));
         } catch (ParseException e){
             e.printStackTrace();
         }
@@ -501,9 +501,9 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         wyklad_bhp.setLessonType(lectures);
         wyklad_bhp.setSubject(bhp);
         try{
-            wyklad_bhp.setStart_date(format.parse("2017-01-06"));
-            wyklad_bhp.setEnd_date(format.parse("2017-06-23"));
-            //wyklad_bhp.setMyWeekDay(format.parse("2017-01-06"));
+            wyklad_bhp.setStart_date(format.parse("2018-01-08"));
+            wyklad_bhp.setEnd_date(format.parse("2018-06-25"));
+            //wyklad_bhp.setMyWeekDay(format.parse("2018-01-06"));
         } catch (ParseException e){
             e.printStackTrace();
         }
@@ -520,7 +520,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         analiza_eg.setLesson(wyklad_a);
         analiza_eg.setRoom(e1);
         try{
-            analiza_eg.setDzien(format.parse("2017-09-04"));
+            analiza_eg.setDzien(format.parse("2018-06-04"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -533,7 +533,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         algorytmy_kol.setLesson(cwiczenia_alg);
         algorytmy_kol.setRoom(e101);
         try{
-            algorytmy_kol.setDzien(format.parse("2017-09-05"));
+            algorytmy_kol.setDzien(format.parse("2018-06-05"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -546,7 +546,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         dyskretna_egz.setLesson(wyklad_dysk);
         dyskretna_egz.setRoom(e2);
         try{
-            dyskretna_egz.setDzien(format.parse("2017-09-06"));
+            dyskretna_egz.setDzien(format.parse("2018-06-06"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -562,7 +562,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         am_w1.setLesson(wyklad_a);
         am_w1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            am_w1.setDate(format.parse("2017-02-07"));
+            am_w1.setDate(format.parse("2018-02-07"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -572,7 +572,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         am_w2.setLesson(wyklad_a);
         am_w2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            am_w2.setDate(format.parse("2017-02-14"));
+            am_w2.setDate(format.parse("2018-02-14"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -582,7 +582,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         am_w3.setLesson(wyklad_a);
         am_w3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            am_w3.setDate(format.parse("2017-02-21"));
+            am_w3.setDate(format.parse("2018-02-21"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -592,7 +592,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         am_c1.setLesson(cwiczenia_a);
         am_c1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            am_c1.setDate(format.parse("2017-02-08"));
+            am_c1.setDate(format.parse("2018-02-08"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -602,7 +602,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         am_c2.setLesson(cwiczenia_a);
         am_c2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            am_c2.setDate(format.parse("2017-02-15"));
+            am_c2.setDate(format.parse("2018-02-15"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -612,7 +612,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         alg_w1.setLesson(wyklad_alg);
         alg_w1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            alg_w1.setDate(format.parse("2017-02-09"));
+            alg_w1.setDate(format.parse("2018-02-09"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -622,7 +622,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         alg_w2.setLesson(wyklad_alg);
         alg_w2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            alg_w2.setDate(format.parse("2017-02-16"));
+            alg_w2.setDate(format.parse("2018-02-16"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -632,7 +632,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         alg_w3.setLesson(wyklad_alg);
         alg_w3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            alg_w3.setDate(format.parse("2017-02-23"));
+            alg_w3.setDate(format.parse("2018-02-23"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -642,7 +642,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         alg_c1.setLesson(cwiczenia_alg);
         alg_c1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            alg_c1.setDate(format.parse("2017-02-09"));
+            alg_c1.setDate(format.parse("2018-02-09"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -652,7 +652,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         alg_c2.setLesson(cwiczenia_alg);
         alg_c2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            alg_c2.setDate(format.parse("2017-02-16"));
+            alg_c2.setDate(format.parse("2018-02-16"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -662,7 +662,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         md_w1.setLesson(wyklad_dysk);
         md_w1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            md_w1.setDate(format.parse("2017-02-08"));
+            md_w1.setDate(format.parse("2018-02-08"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -672,7 +672,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         md_w2.setLesson(wyklad_alg);
         md_w2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            md_w2.setDate(format.parse("2017-02-15"));
+            md_w2.setDate(format.parse("2018-02-15"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -682,7 +682,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         md_w3.setLesson(wyklad_alg);
         md_w3.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            md_w3.setDate(format.parse("2017-02-22"));
+            md_w3.setDate(format.parse("2018-02-22"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -692,7 +692,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         md_c1.setLesson(cwiczenia_alg);
         md_c1.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            md_c1.setDate(format.parse("2017-02-09"));
+            md_c1.setDate(format.parse("2018-02-09"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -702,7 +702,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         md_c2.setLesson(cwiczenia_alg);
         md_c2.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum porttitor mattis. Orci varius natoque penatibus et magnis dis parturient.");
         try{
-            md_c2.setDate(format.parse("2017-02-16"));
+            md_c2.setDate(format.parse("2018-02-16"));
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -715,7 +715,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         h1.setTitle("Doczytać na wykład");
         h1.setText("Przykladowa treść pracy");
         try {
-            h1.setDate(format.parse("2017-09-18"));
+            h1.setDate(format.parse("2018-02-19"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -726,7 +726,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         h2.setTitle("Zrobić ćwiczenia");
         h2.setText("Przykladowa treść pracy");
         try {
-            h2.setDate(format.parse("2017-09-19"));
+            h2.setDate(format.parse("2018-02-20"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -737,7 +737,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         h3.setTitle("Schemat blokowy");
         h3.setText("Przykladowa treść pracy");
         try {
-            h3.setDate(format.parse("2017-09-20"));
+            h3.setDate(format.parse("2018-02-21"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -748,7 +748,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         h4.setTitle("Doczytać na wykład");
         h4.setText("Przykladowa treść pracy");
         try {
-            h4.setDate(format.parse("2017-09-21"));
+            h4.setDate(format.parse("2018-02-22"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -759,7 +759,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         h5.setTitle("Zrobić ćwiczenia");
         h5.setText("Przykladowa treść pracy");
         try {
-            h5.setDate(format.parse("2017-09-21"));
+            h5.setDate(format.parse("2018-02-22"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -770,7 +770,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
         h6.setTitle("Doczytać na wykład");
         h6.setText("Przykladowa treść pracy");
         try {
-            h6.setDate(format.parse("2017-09-20"));
+            h6.setDate(format.parse("2018-02-21"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -781,7 +781,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 //        h7.setTitle("Doczytać na wykład");
 //        h7.setText("Przykladowa treść pracy");
 //        try {
-//            h7.setDate(format.parse("2017-09-18"));
+//            h7.setDate(format.parse("2018-09-18"));
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
@@ -792,7 +792,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 //        h8.setTitle("Doczytać na wykład");
 //        h8.setText("Przykladowa treść pracy");
 //        try {
-//            h8.setDate(format.parse("2017-09-18"));
+//            h8.setDate(format.parse("2018-09-18"));
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
@@ -803,7 +803,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent>{
 //        h9.setTitle("Doczytać na wykład");
 //        h9.setText("Przykladowa treść pracy");
 //        try {
-//            h9.setDate(format.parse("2017-09-18"));
+//            h9.setDate(format.parse("2018-09-18"));
 //        } catch (ParseException e) {
 //            e.printStackTrace();
 //        }
